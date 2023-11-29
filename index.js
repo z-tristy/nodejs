@@ -15,7 +15,7 @@ ws.on('connection', function connection(socket) {
   console.log('服务端接收到信号')
   socket.on('message', (data)=>{
     console.log(data)
-    socketMessageHandler({ data, ws, socket });
+    // socketMessageHandler({ data, ws, socket });
   });
 
   socket.send('Socket connected asdasdasdasd');
