@@ -1,5 +1,7 @@
-const http = require('http');
+import http from "http";
 const PORT = 3000;
+
+// import { WebSocketServer } from "ws";
 
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
