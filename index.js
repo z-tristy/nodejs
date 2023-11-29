@@ -7,7 +7,7 @@ import { WebSocketServer } from "ws";
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World!');
+  res.end('Hello World! 1');
 });
 
 const ws = new WebSocketServer({ server })
