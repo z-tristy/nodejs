@@ -1,0 +1,24 @@
+// Responsive containers padding & grid columns padding
+//
+@if $enable-grid-classes {
+  // Responsive containers  padding
+  @each $breakpoint, $container-padding-x in $containers-padding-x {
+    @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+      %responsive-container-#{$breakpoint} {
+        padding-left: $container-padding-x;
+        padding-right: $container-padding-x;
+      }
+    }
+  }
+  @each $breakpoint, $column-gutter in $columns-gutter {
+    @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+      .row {
+        --#{$variable-prefix}gutter-x: #{$column-gutter};
+      }
+    }
+  }
+}
+
+@if $enable-grid-classes {
+  @include make-grid-columns();
+}

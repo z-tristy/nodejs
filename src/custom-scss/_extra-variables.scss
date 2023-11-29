@@ -1,0 +1,31 @@
+$header-h: 4rem!default;
+$header-h-sm: 3.5rem!default;
+
+$height-increment: 5rem!default;
+
+$ellipsis-numbers: (
+  "1": 1,
+  "2": 2,
+  "3": 3
+)!default;
+
+$icon-sizes: (
+  "sm": 16,
+  "md": 24,
+  "lg": 32,
+  "xl": 48
+)!default;
+
+$big-icon-sizes: (
+  "sm": 3rem,
+  "md": 4rem,
+  "lg": 6rem
+)!default;
+
+$enable-animation: true !default;
+$animation-transform-distance: 60px !default;
+$animation-transform-duration: .6s !default;
+$animation-transform-timing-function: cubic-bezier(0.26, 0.67, 0.48, 0.91) !default;
+
+$animation-opacity-duration: .6s !default;
+$animation-opacity-timing-function: linear !default;

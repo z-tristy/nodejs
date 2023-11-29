@@ -5,6 +5,7 @@ const PORT = 3000;
 import { fileURLToPath } from 'url';
 import path,{ dirname } from 'path';
 import { WebSocketServer } from "ws";
+import { insertBeforeLine, insertAfterLine } from './src/service/fileService.js';
 
 const __filename = fileURLToPath(import.meta.url); // 将文件URL解码为路径字符串
 const __dirname = dirname(__filename); 
@@ -25,6 +26,23 @@ cpSync(path.resolve(nodeModulesPath, "bootstrap"), srcPath, {
   recursive: true,
   force: true,
 })
+
+console.log('bootstrap 文件被写入的位置')
+console.log(path.resolve(srcPath, "scss/bootstrap.scss"))
+
+insertBeforeLine( 
+  path.resolve(srcPath, "scss/bootstrap.scss"), 
+  `@import "functions";
+@import "../../custom-scss/functions";
+@import "custom-variables";
+@import "../../custom-scss/variables";
+@import "../../custom-scss/extra-variables";`
+);
+
+insertAfterLine(
+  path.resolve(srcPath, "scss/bootstrap.scss"), 
+  '@import "../../custom-scss/index";'
+)
 
 const server = http.createServer((req, res) => {
   res.statusCode = 200;

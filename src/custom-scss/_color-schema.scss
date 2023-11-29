@@ -1,0 +1,55 @@
+
+$color-schema: (
+  'default': (
+    'bg-color': $white,
+    'on-bg-color': $black,
+    'surface-color': #F5F5F5,
+    'on-surface-color': $black,
+    'btn-variant': 'dark'
+  ),
+  'light': (
+    'bg-color': #F5F5F5,
+    'on-bg-color': $black,
+    'card-bg-color': $white,
+    'on-card-color': $black,
+    'btn-variant': 'dark'
+  ),
+  'dark': (
+    'bg-color': #262626,
+    'on-bg-color': $white,
+    'card-bg-color': $black,
+    'on-card-color': $white,
+    'btn-variant': 'light'
+  ),
+  'customized': (
+    'bg-color': #F5F5F5,
+    'on-bg-color': $black,
+    'card-bg-color': #B398D3,
+    'on-card-color': $black,
+    'btn-variant': 'dark'
+  )
+)!default;
+
+@each $key, $value in $color-schema {
+  .global-color-#{$key} .bg-color,
+  .global-color-#{$key}.bg-color {
+    background-color: map-get($value, 'bg-color');
+  }
+  .global-color-#{$key} .on-bg-color,
+  .global-color-#{$key}.on-bg-color {
+    color: map-get($value, 'on-bg-color');
+  }
+  .global-color-#{$key} .card {
+    background-color: map-get($value, 'card-bg-color');
+    color: map-get($value, 'on-card-color');
+  }
+  .global-color-#{$key} .btn-customized {
+    @extend .btn-#{map-get($value, 'btn-variant')};
+  }
+  .global-color-#{$key} .link-customized {
+    @extend .link-#{map-get($value, 'btn-variant')};
+  }
+  .global-color-#{$key} .outline-customized {
+    @extend .btn-outline-#{map-get($value, 'btn-variant')};
+  }
+}

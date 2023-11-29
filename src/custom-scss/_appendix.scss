@@ -1,0 +1,441 @@
+// image-with-text 和 image-with-text-overlay section
+.container-topic {
+  @include make-container;
+  max-width: add(1920px, $grid-gutter-width * 2);
+}
+// 处理如果 stretched link 和普通按钮在一起时热区的情况
+.stretched-link + .card-link,
+.stretched-link + .link,
+.with-stretched-link {
+  position: relative;
+  z-index: $stretched-link-z-index;
+}
+
+.img-wrapper {
+  display: block;
+  position: relative;
+  &>img,
+  &>picture>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+  &.rigid-wrapper {
+    overflow: hidden;
+  }
+}
+.object-fit-cover {
+  object-fit: cover;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.min-h-100 {
+  min-height: 100%;
+}
+
+// 官方占位图样式
+.img-placeholder {
+  fill: var(--se-gray-400);
+  color: transparent;
+}
+
+// 按钮最小宽度,特殊处理button的padding
+.btn-mw {
+  min-width: 9.375rem;
+  &.btn-link{
+    min-width: auto;
+  }
+}
+.btn-mw-sm {
+  min-width: 6.875rem;
+}
+.btn-mw-lg {
+  min-width: 11.125rem;
+}
+
+//链接按钮样式重新调整
+.btn-link{
+  position: relative;
+  text-decoration: none;
+  border: none;
+  border-radius: 0;
+  padding: 0 !important;
+  font-weight: $btn-font-weight;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: currentColor;
+    border-radius: $border-radius-pill;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.py-section {
+  @extend .py-6;
+  @extend .py-lg-9;
+}
+.pt-section {
+  @extend .pt-6;
+  @extend .pt-lg-9;
+}
+.pb-section {
+  @extend .pb-6;
+  @extend .pb-lg-9;
+}
+.my-section {
+  @extend .my-6;
+  @extend .my-lg-9;
+}
+.mt-section {
+  @extend .mt-6;
+  @extend .mt-lg-9;
+}
+.mb-section {
+  @extend .mb-6;
+  @extend .mb-lg-9;
+}
+.mt-nsection {
+  @extend .mt-n6;
+  @extend .mt-lg-n9;
+}
+
+// checkbox报错样式
+.was-validated .form-check-input:invalid,
+.form-check-input.is-invalid {
+  border-color: $body-color;
+}
+.was-validated .form-check-input:invalid ~ .form-check-label,
+.form-check-input.is-invalid ~ .form-check-label {
+  color: $body-color;
+}
+
+.was-validated .form-control:invalid, .form-control.is-invalid {
+  background-image: none;
+}
+.form-check {
+  cursor: pointer;
+}
+input {
+  &[type="checkbox"] {
+    cursor: pointer;
+  }
+  & + label {
+    cursor: pointer;
+  }
+}
+select {
+  cursor: pointer;
+}
+
+.fs-footnote{
+  font-size: 12px;
+}
+
+.bg-default {
+  --se-bg-opacity: 1;
+  background-color: rgba($body-bg, var(--se-bg-opacity));
+}
+
+.text-star {
+  color: #f9cc00;
+}
+
+.rounded-top-2 {
+  border-radius: $border-radius $border-radius 0 0;
+}
+
+// 解决ios样式兼容性问题
+.form-check-input {
+  -webkit-appearance: none;
+}
+button, .btn, .dropdown {
+  &:active {
+    outline: none;
+    -webkit-outline: none;
+  }
+  &:focus {
+    outline: none;
+    -webkit-outline: none;
+  }
+}
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+.video-control {
+  @extend .position-absolute;
+  z-index: 10;
+  cursor: pointer;
+  bottom: 2rem;
+  right: 2rem;
+  svg {
+    width: 2.25rem;
+    height: 2.25rem;
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.7));
+  }
+  .play {
+    display: none;
+  }
+  &.play {
+    .pause {
+      display: none;
+    }
+    .play {
+      display: block;
+    }
+  }
+}
+
+// modal 关闭弹窗
+.btn-close {
+  min-width: auto;
+  &.close-outside {
+    position: absolute;
+    top: -1.5rem;
+    right: -1.5rem;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtMCAwaDI0djI0aC0yNHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJtMTguMyA1LjcxYy0uMzktLjM5LTEuMDItLjM5LTEuNDEgMGwtNC44OSA0Ljg4LTQuODktNC44OWMtLjM5LS4zOS0xLjAyLS4zOS0xLjQxIDBzLS4zOSAxLjAyIDAgMS40MWw0Ljg5IDQuODktNC44OSA0Ljg5Yy0uMzkuMzktLjM5IDEuMDIgMCAxLjQxczEuMDIuMzkgMS40MSAwbDQuODktNC44OSA0Ljg5IDQuODljLjM5LjM5IDEuMDIuMzkgMS40MSAwcy4zOS0xLjAyIDAtMS40MWwtNC44OS00Ljg5IDQuODktNC44OWMuMzgtLjM4LjM4LTEuMDIgMC0xLjR6Ii8+PC9zdmc+);
+    @include media-breakpoint-down(md) {
+      top: -1.2rem;
+      right: -1rem;
+    }
+  }
+}
+// TODO: 确定icon常见尺寸，使用类名控制icon大小
+
+.break-word {
+  word-wrap: break-word;
+}
+.badge {
+  line-height: 1.5;
+} 
+.accordion-button {
+  @include font-size($font-size-lg);
+}
+.position-horizontal-vertical-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btn-overlay {
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.7));
+}
+
+
+.mw-auto {
+  min-width: auto;
+}
+
+
+.btn-loading {
+  .loading {
+    display: none;
+  }
+  .btn-text {
+    display: inline-block;
+  }
+  .success {
+    display: none;
+  }
+  .error {
+    display: none;
+  }
+  &.loading {
+    .loading {
+      display: inline-block;
+    }
+    .btn-text {
+      display: none;
+    }
+  }
+  &.success {
+    .btn-text {
+      display: none;
+    }
+    .success {
+      display: inline-block;
+    }
+  }
+  &.error {
+    .btn-text {
+      display: none;
+    }
+    .error {
+      display: inline-block;
+    }
+  }
+}
+
+// 处理全屏宽模块
+.full-banner {
+  & + .full-banner {
+    @extend .mt-2;
+    @extend .mt-md-3;
+  }
+}
+
+// 富文本内a标签字重
+.richtext-with-link {
+  a {
+    font-weight: $font-weight-bold;
+  }
+}
+
+// 在Firefox浏览器下隐藏上/下箭头
+input[type=number] {
+  -moz-appearance: textfield!important;
+}
+
+// a, button {
+//   &:empty {
+//     display: none;
+//   }
+// }
+
+// Cart & Product Page Dynamic Button
+.additional-checkout-buttons {
+  div {
+    [data-testid] {
+      height: auto !important;
+      min-height: auto !important;
+      > iframe {
+        border-radius: $border-radius-pill !important;
+      }
+    }
+    &[role="button"] {
+      // @include button-size($btn-padding-y, $btn-padding-x !important, $btn-font-size !important, $border-radius-pill !important);
+      padding: $btn-padding-y $btn-padding-x !important;
+      font-size: $btn-font-size !important;
+      border-radius: $border-radius-pill !important;
+      // 当$enable-rounded:false时，阻止按钮圆角发生变化
+      border-radius: $border-radius-pill !important;
+      border-width: $btn-border-width !important;
+      height: auto !important;
+      min-height: auto!important;
+      svg {
+        min-height: $btn-font-size * $btn-line-height;
+      }
+    }
+  }
+  &.additional-checkout-buttons-lg {
+    div {
+      &[role="button"] {
+        // @include button-size($btn-padding-y-lg, $btn-padding-x-lg !important, $btn-font-size-lg !important, $border-radius-pill !important);
+        padding: $btn-padding-y-lg $btn-padding-x-lg !important;
+        font-size: $btn-font-size-lg !important;
+        border-radius: $border-radius-pill !important;
+        svg {
+          min-height: $btn-font-size-lg * $btn-line-height;
+        }
+      }
+    }
+  }
+  [data-shopify-buttoncontainer] {
+    justify-content: flex-end;
+  }
+}
+
+.text-content {
+  h1, h2, h3, h4, h6, p {
+    @extend .break-word;
+  }
+}
+
+// .rmin-h-medium {
+//   @extend .h-xxl-8;
+//   @extend .h-xl-6;
+//   @extend .h-lg-5;
+//   @extend .h-md-5;
+//   @extend .h-6;
+// }
+
+.h-fits-viewport {
+  height: 100vh;
+  // @extend .rmin-h-medium;
+  // max-height
+}
+
+// 处理shopify后台富文本编辑器返回的内容
+.richtext-description {
+  // @extend .no-last-margin;
+  img,
+  table,
+  iframe,
+  figure,
+  svg {
+    max-width: 100%;
+  }
+  p {
+    word-break: break-word;
+  }
+  a {
+    @extend .fw-bold;
+  }
+  figure,
+  img {
+    height: auto;
+    vertical-align: middle;
+  }
+  iframe {
+    width: 100%;
+    border: 0;
+  }
+}
+
+// 处理全屏图片
+.container-fits-viewport {
+  min-height: calc(var(--vh, 1vh) * 100);
+  max-height: calc(var(--vh, 1vh) * 100);
+}
+
+body {
+  max-width: 1920px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+//报错文案12px
+.invalid-feedback {
+  font-size: 0.75rem;
+}
+
+// .rmin-h-large {
+//   @extend .h-xxl-11;
+//   @extend .h-xl-8;
+//   @extend .h-lg-7;
+//   @extend .h-md-7;
+//   @extend .h-8;
+// }
+
+// .rmin-h-medium {
+//   @extend .h-xxl-8;
+//   @extend .h-xl-6;
+//   @extend .h-lg-5;
+//   @extend .h-md-5;
+//   @extend .h-6;
+// }
+
+// .rmin-h-small {
+//   @extend .h-xxl-6;
+//   @extend .h-xl-5;
+//   @extend .h-lg-4;
+//   @extend .h-md-4;
+//   @extend .h-5;
+// }

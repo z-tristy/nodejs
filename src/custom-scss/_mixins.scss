@@ -1,0 +1,60 @@
+@mixin render-outline-dynamic-btn(
+  $color,
+  $color-hover: color-contrast($color),
+  $active-background: $color,
+  $active-border: $color,
+  $active-color: color-contrast($active-background)
+) {
+  @include button-outline-variant($color);
+  &:hover {
+    &:not([disabled]) {
+      color: $color-hover;
+      background-color: $active-background;
+      border-color: $active-border;
+    }
+  }
+}
+
+@mixin render-solid-dynamic-btn(
+  $background,
+  $border,
+  $color: color-contrast($background),
+  $hover-background: if($color == $color-contrast-light, shade-color($background, $btn-hover-bg-shade-amount), tint-color($background, $btn-hover-bg-tint-amount)),
+  $hover-border: if($color == $color-contrast-light, shade-color($border, $btn-hover-border-shade-amount), tint-color($border, $btn-hover-border-tint-amount)),
+  $hover-color: color-contrast($hover-background),
+  $active-background: if($color == $color-contrast-light, shade-color($background, $btn-active-bg-shade-amount), tint-color($background, $btn-active-bg-tint-amount)),
+  $active-border: if($color == $color-contrast-light, shade-color($border, $btn-active-border-shade-amount), tint-color($border, $btn-active-border-tint-amount)),
+  $active-color: color-contrast($active-background),
+  $disabled-background: $background,
+  $disabled-border: $border,
+  $disabled-color: color-contrast($disabled-background)
+) {
+  @include button-variant($background, $border);
+  &:hover {
+    &:not([disabled]) {
+      color: $hover-color;
+      @include gradient-bg($hover-background);
+      border-color: $hover-border;
+    }
+  }
+}
+
+@mixin render-dynamic-btn($btn-theme-color, $is-outline-btn) {
+  @if $is-outline-btn {
+    @include render-outline-dynamic-btn($btn-theme-color);
+  } @else {
+    @include render-solid-dynamic-btn($btn-theme-color, $btn-theme-color);
+  }
+}
+
+// Detect a touch device with only CSS https://ferie.medium.com/detect-a-touch-device-with-only-css-9f8e30fa1134
+@mixin not-touch-device {
+  @media (hover: hover) {
+    @content;
+  }
+}
+@mixin is-touch-device {
+  @media (hover: none) and (pointer: coarse) {
+    @content;
+  }
+}
