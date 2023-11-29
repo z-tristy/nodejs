@@ -5,7 +5,9 @@
   "main": "index.js",
   "author": "alphasec",
   "license": "MIT",
-   "dependencies": {
+  "type": "module",
+  "dependencies": {
+    "ws": "^8.14.2"
   },
   "scripts": {
     "start": "node index.js"
