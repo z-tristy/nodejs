@@ -1,4 +1,5 @@
 import http from "http";
+import { cpSync } from "fs";
 const PORT = 3000;
 
 import { fileURLToPath } from 'url';
@@ -13,13 +14,17 @@ console.log(__filename)
 console.log('__dirname')
 console.log(__dirname)
 
-const nodeModulesPath = path.resolve(__dirname,"../node_modules");
+const nodeModulesPath = path.resolve(__dirname,"./node_modules");
 console.log('nodeModulesPath')
 console.log(nodeModulesPath)
 
-// copy bootstrap to workspace from node_modules
+const srcPath = path.resolve(__dirname, "./src/bootstrap");
 
-const srcPath = path.resolve(__dirname, "../src/bootstrap");
+// copy bootstrap to workspace from node_modules
+cpSync(path.resolve(nodeModulesPath, "bootstrap"), srcPath, {
+  recursive: true,
+  force: true,
+})
 
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
