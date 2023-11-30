@@ -51,7 +51,9 @@ insertAfterLine(
 // 创建一个 Express 应用程序实例
 const app = express()
 
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')))
+console.log('static')
+console.log(path.join(__dirname, 'public'))
 
 // 修改服务器的路由处理部分，使用 Express 的路由方法（如 app.get）来处理请求和响应：
 app.get('/', (req, res) => {
