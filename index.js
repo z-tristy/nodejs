@@ -51,6 +51,8 @@ insertAfterLine(
 // 创建一个 Express 应用程序实例
 const app = express()
 
+app.use(express.static('public'))
+
 // 修改服务器的路由处理部分，使用 Express 的路由方法（如 app.get）来处理请求和响应：
 app.get('/', (req, res) => {
   const shopSite = "https://iplayground.myshopify.com"
@@ -80,8 +82,8 @@ app.get('/', (req, res) => {
       const htmlInit = data.join("")
       const _html = htmlInit.split("</head>")
 
-      const scriptStr = `<script src="${proxyConnectorJs}"></script>
-      <script src="/proxy/javascripts/connector.js"></script>
+      const scriptStr = `<script type="text/javascript" src="${proxyConnectorJs}"></script>
+      <script type="text/javascript" src="./public/proxy/javascripts/connector.js"></script>
       </head>`
 
       _html.splice(1, 0, scriptStr)
