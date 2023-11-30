@@ -70,14 +70,19 @@ app.get('/', (req, res) => {
 
     response.on('end', () => {
       const proxyHtmlPath = path.resolve(__dirname, "./src/views/proxy.html")
+      const proxyConnectorJs = path.resolve(__dirname, "./public/proxy/javascripts/connector.js")
 
       console.log('proxyHtmlPath')
       console.log(proxyHtmlPath)
+      console.log('proxyConnectorJs')
+      console.log(proxyConnectorJs)
 
       const htmlInit = data.join("")
       const _html = htmlInit.split("</head>")
 
-      const scriptStr = `<script type="application/json" src="/proxy/javascripts/connector.js"></script></head>`
+      const scriptStr = `<script src="${proxyConnectorJs}"></script>
+      <script src="/proxy/javascripts/connector.js"></script>
+      </head>`
 
       _html.splice(1, 0, scriptStr)
 
