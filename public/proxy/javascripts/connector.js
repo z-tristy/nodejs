@@ -48,13 +48,11 @@ console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
     }
 
     // console.log(bootstrap);
-    window.__bootstraplink__ && (window.__bootstraplink__.href = `/proxy/stylesheets/bootstrap/bootstrap.mini.css?v=${new Date().getTime()}`)
+    window.__bootstraplink__ && (window.__bootstraplink__.href = '/proxy/stylesheets/bootstrap/bootstrap.mini.css?v=' + new Date().getTime())
 
     console.log("Customed bootstrap flushed 1");
   }
 
-};
+}
 
-
-// new EditorConnector("ws://192.168.8.55:8001");
 new EditorConnector("wss://nodejs-production-89c8.up.railway.app")
