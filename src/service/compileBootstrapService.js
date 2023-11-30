@@ -6,7 +6,7 @@
  * @Description: 
  */
 
-import * as sass from 'sass'
+import sass from "sass"
 import CleanCSS from "clean-css"
 import { writeFileSync } from "fs"
 
