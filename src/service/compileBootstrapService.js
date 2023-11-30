@@ -21,7 +21,7 @@ console.log(cssFilePath)
 console.log(typeof color)
   let colorData = ''
   for (let key in color) {
-    colorData += `$${key}: ${color[key]}`
+    colorData += `$${key}: ${color[key]};`
   }
   writeFileSync(customVariablesPath, colorData)
   
