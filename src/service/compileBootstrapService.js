@@ -11,9 +11,9 @@ const __dirname = dirname(__filename);
 export function compileBootstrap(cssFilePath, param) {
   const startStamp = new Date().getTime();
   
-  const { color } = param;
+  const { _custom_variables } = param;
   console.log('========================')
-  console.log(color);
+  console.log(_custom_variables);
 console.log(cssFilePath)
 
   // 处理 custom-variables
@@ -23,7 +23,7 @@ console.log(cssFilePath)
 //   for (let key in color) {
 //     colorData += `$${key}: ${color[key]}`
 //   }
-  writeFileSync(customVariablesPath, `$primary: ${color};`)
+  writeFileSync(customVariablesPath, _custom_variables)
   
   const bootstrapSourceCodePath = path.resolve(__dirname, "../bootstrap/scss/bootstrap.scss");
   console.log('sass.compile')
