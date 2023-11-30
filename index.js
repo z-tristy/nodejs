@@ -149,18 +149,11 @@ app.get('/', (req, res) => {
 
       const html = _html.join("")
 
-      writeFileSync(proxyHtmlPath, html);
+      writeFileSync(proxyHtmlPath, html)
 
-      res.sendFile(proxyHtmlPath);
+      res.sendFile(proxyHtmlPath)
 
-      // const template = readFileSync(proxyHtmlPath)
-      // const render = ejs.render(template, { content: data })
-
-      // res.writeHead(200, { 'Content-Type': 'text/html' });
-      // res.write(rendered);
-      // res.end();
-
-    });
+    })
   }).on('error', (err) => {
     console.error(err)
   })
@@ -174,12 +167,12 @@ ws.on('connection', function connection(socket) {
   console.log('服务端接收到信号')
   socket.on('message', (data)=>{
     console.log(data)
-    socketMessageHandler({ data, ws, socket });
-  });
+    socketMessageHandler({ data, ws, socket })
+  })
 
-  socket.send('Socket connected asdasdasdasd');
-});
+  socket.send('Socket connected asdasdasdasd')
+})
 
 server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
-});
+  console.log(`Server running at http://localhost:${PORT}/`)
+})

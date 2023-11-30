@@ -11,10 +11,12 @@ const __dirname = dirname(__filename);
 export function compileBootstrap(cssFilePath, param) {
   const startStamp = new Date().getTime();
   
-  const { colorChange } = param;
+  const { color } = param;
   console.log('========================')
-  console.log(colorChange);
+  console.log(color);
 console.log(cssFilePath)
+
+  // 处理 custom-variables
   const customVariablesPath = path.resolve(__dirname, "../bootstrap/scss/_custom-variables.scss");
   writeFileSync(customVariablesPath, `$primary: ${colorChange};`)
   
