@@ -18,12 +18,12 @@ console.log(cssFilePath)
 
   // 处理 custom-variables
   const customVariablesPath = path.resolve(__dirname, "../bootstrap/scss/_custom-variables.scss");
-console.log(typeof color)
-  let colorData = ''
-  for (let key in color) {
-    colorData += `$${key}: ${color[key]}`
-  }
-  writeFileSync(customVariablesPath, `$primary: cyan;`)
+// console.log(typeof color)
+//   let colorData = ''
+//   for (let key in color) {
+//     colorData += `$${key}: ${color[key]}`
+//   }
+  writeFileSync(customVariablesPath, `$primary: ${color};`)
   
   const bootstrapSourceCodePath = path.resolve(__dirname, "../bootstrap/scss/bootstrap.scss");
   console.log('sass.compile')
