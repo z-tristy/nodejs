@@ -141,7 +141,8 @@ app.get('/', (req, res) => {
       
       }
       
-      new EditorConnector("wss://nodejs-production-89c8.up.railway.app")
+      // new EditorConnector("wss://nodejs-production-89c8.up.railway.app")
+      new EditorConnector("ws://192.168.11.113:3000/")
       </script>
       </head>`
 

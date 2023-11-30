@@ -21,9 +21,9 @@ console.log(cssFilePath)
 console.log(typeof color)
   let colorData = ''
   for (let key in color) {
-    colorData += `$${key}: ${color[key]};`
+    colorData += `$${key}: ${color[key]}`
   }
-  writeFileSync(customVariablesPath, colorData)
+  writeFileSync(customVariablesPath, `$primary: cyan;`)
   
   const bootstrapSourceCodePath = path.resolve(__dirname, "../bootstrap/scss/bootstrap.scss");
   console.log('sass.compile')
