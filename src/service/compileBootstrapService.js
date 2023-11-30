@@ -1,10 +1,3 @@
-/*
- * @Author: lijunwei
- * @Date: 2022-01-06 14:43:04
- * @LastEditTime: 2022-01-10 16:43:02
- * @LastEditors: lijunwei
- * @Description: 
- */
 
 import * as sass from 'sass'
 import CleanCSS from "clean-css"
@@ -26,7 +19,8 @@ console.log(cssFilePath)
   writeFileSync(customVariablesPath, `$primary: ${colorChange};`)
   
   const bootstrapSourceCodePath = path.resolve(__dirname, "../bootstrap/scss/bootstrap.scss");
-
+  console.log('sass.compile')
+  console.log(bootstrapSourceCodePath)
   const rlt = sass.compile(bootstrapSourceCodePath);
   const compiledStamp = new Date().getTime();
   console.log(`--------------------------`)

@@ -1,11 +1,3 @@
-/*
- * @Author: lijunwei
- * @Date: 2022-01-05 15:37:02
- * @LastEditTime: 2022-01-17 17:16:27
- * @LastEditors: lijunwei
- * @Description: 
- */
-
 
 class EditorConnector {
 
@@ -65,4 +57,4 @@ console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
 
 
 // new EditorConnector("ws://192.168.8.55:8001");
-new EditorConnector("ws://192.168.11.113:8002");
+new EditorConnector("wss://nodejs-production-89c8.up.railway.app")
