@@ -77,7 +77,7 @@ app.get('/', (req, res) => {
       const htmlInit = data.join("")
       const _html = htmlInit.split("</head>")
 
-      const scriptStr = `<script src="/proxy/javascripts/connector.js"></script></head>`
+      const scriptStr = `<script type="application/json" src="/proxy/javascripts/connector.js"></script></head>`
 
       _html.splice(1, 0, scriptStr)
 
