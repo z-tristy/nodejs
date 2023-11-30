@@ -3,12 +3,13 @@ import https from "https"
 import ejs from "ejs"
 import express from "express"
 import { cpSync, writeFileSync, readFileSync } from "fs"
-const PORT = 3000;
+const PORT = 3000
 
-import { fileURLToPath } from 'url';
-import path,{ dirname } from 'path';
-import { WebSocketServer } from "ws";
-import { insertBeforeLine, insertAfterLine } from './src/service/fileService.js';
+import { fileURLToPath } from 'url'
+import path,{ dirname } from 'path'
+import { WebSocketServer } from "ws"
+import { socketMessageHandler } from "./src/service/socketMessageHandler.js"
+import { insertBeforeLine, insertAfterLine } from './src/service/fileService.js'
 
 const __filename = fileURLToPath(import.meta.url); // 将文件URL解码为路径字符串
 const __dirname = dirname(__filename); 
@@ -107,7 +108,7 @@ ws.on('connection', function connection(socket) {
   console.log('服务端接收到信号')
   socket.on('message', (data)=>{
     console.log(data)
-    // socketMessageHandler({ data, ws, socket });
+    socketMessageHandler({ data, ws, socket });
   });
 
   socket.send('Socket connected asdasdasdasd');
