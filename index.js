@@ -110,7 +110,7 @@ app.get('/', (req, res) => {
               const msg = JSON.parse(e.data);
               console.log(msg)
               console.log('msg')
-              if (msg && msg.colorChange) {
+              if (msg) {
                 this.flushCustomedBootstrapCss();
               }
             }

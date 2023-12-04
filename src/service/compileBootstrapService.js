@@ -11,14 +11,14 @@ const __dirname = dirname(__filename);
 export function compileBootstrap(cssFilePath, param) {
   const startStamp = new Date().getTime();
   
-  const { colorChange } = param;
+  const { general } = param;
   console.log('========================')
-  console.log(colorChange);
+  console.log(general);
 console.log(cssFilePath)
 
   // 处理 custom-variables
   const customVariablesPath = path.resolve(__dirname, "../bootstrap/scss/_custom-variables.scss");
-  writeFileSync(customVariablesPath, `$primary: ${colorChange};`)
+  writeFileSync(customVariablesPath, `${general}`)
   
   const bootstrapSourceCodePath = path.resolve(__dirname, "../bootstrap/scss/bootstrap.scss");
   console.log('sass.compile')
