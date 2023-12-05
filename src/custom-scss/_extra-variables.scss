@@ -1,31 +1,162 @@
-$header-h: 4rem!default;
-$header-h-sm: 3.5rem!default;
+$header-h: 4rem !default;
+$header-h-sm: 3.5rem !default;
 
-$height-increment: 5rem!default;
+$height-increment: 5rem !default;
 
 $ellipsis-numbers: (
   "1": 1,
   "2": 2,
   "3": 3
-)!default;
+) !default;
 
 $icon-sizes: (
   "sm": 16,
   "md": 24,
   "lg": 32,
   "xl": 48
-)!default;
+) !default;
 
 $big-icon-sizes: (
   "sm": 3rem,
   "md": 4rem,
   "lg": 6rem
-)!default;
+) !default;
+
+$product-badge-height: (
+  "sm": 2rem,
+  "md": 3rem,
+  "lg": 4rem
+) !default;
 
 $enable-animation: true !default;
 $animation-transform-distance: 60px !default;
 $animation-transform-duration: .6s !default;
-$animation-transform-timing-function: cubic-bezier(0.26, 0.67, 0.48, 0.91) !default;
+$animation-transform-timing-function: cubic-bezier(.26, .67, .48, .91) !default;
 
 $animation-opacity-duration: .6s !default;
 $animation-opacity-timing-function: linear !default;
+
+// Scale Change
+// scss-docs-start
+// 响应规则，各个屏幕断点下缩小的百分比
+// $responsive-scales: (
+//   xs: .65,
+//   sm: .65,
+//   md: .85,
+//   lg: .85,
+//   xl: .85,
+//   xxl: 1
+// ) !default;
+// scss-docs-end
+
+// 重写Bootstrap Spacing响应规则，新的间距设计规范Design Elements：https://www.figma.com/file/S1v15QIZ1MRCmAbUG0Lw8J/Design-Elements?node-id=10%3A11
+// scss-docs-start
+// key值对应$spacers的key值
+// $responsive-spacers: (
+//   // Spacers
+//   5: $responsive-scales,
+//   6: $responsive-scales,
+//   7: $responsive-scales,
+//   8: $responsive-scales,
+//   9: $responsive-scales,
+//   n5: $responsive-scales,
+//   n6: $responsive-scales,
+//   n7: $responsive-scales,
+//   n8: $responsive-scales,
+//   n9: $responsive-scales,
+//   // Gutter
+//   medium: $responsive-scales,
+//   large: $responsive-scales,
+// ) !default;
+// scss-docs-end
+
+$enable-customize-spacer: true !default;
+$spacer-phone-breakpoint: md !default;
+$spacer-desktop-breakpoint: xxl !default;
+$spacer-breakpoints: (
+  md: 768px,  // 768px
+  xxl: 1600px,  // 1600px
+);
+
+//mob移动端的spacers
+$spacer-base-phone-value: 1rem !default;
+$spacers-base-phone-value: (
+  0: 0,
+  1: $spacer-base-phone-value * .25, // 4
+  2: $spacer-base-phone-value * .5, // 8
+  3: $spacer-base-phone-value, //16
+  4: $spacer-base-phone-value * 1.25, //20
+  5: $spacer-base-phone-value * 1.5, //24
+  6: $spacer-base-phone-value * 2, //32
+  7: $spacer-base-phone-value * 2.5, //49
+  8: $spacer-base-phone-value * 3, //48
+  9: $spacer-base-phone-value * 4, //64
+) !default;
+
+// Font Size
+// 间距设计规范Design Elements：https://www.figma.com/file/bV7qQDpcW9Ivy42F5gxvMG/Section%E8%AE%BE%E8%AE%A1%E7%A8%BF%E6%B1%87%E6%80%BB?type=design&node-id=3693-69573&t=MjL04bjHtDh6xqYi-0
+// 在桌面端屏幕断点以上和移动端屏幕断点以下保持一个字号大小，其余屏幕断点线形变化
+$font-size-phone-breakpoint: mob !default;
+$font-size-desktop-breakpoint: pc !default;
+$font-size-breakpoints: (
+  mob: 768px,  // 768px
+  pc: 1600px,  // 1600px
+);
+
+// scss-docs-start
+$et-font-size-body-lead: px2rem(18px) !default;
+$et-font-size-body1: px2rem(16px) !default;
+$et-font-size-body2: px2rem(14px) !default;
+$et-font-size-button: px2rem(16px) !default;
+$et-font-size-description1: px2rem(12px) !default;
+$et-font-size-description2: px2rem(10px) !default;
+// scss-docs-end
+
+// <h1>至<h6>、.h1至.h6、.fs-1至.fs-6的基值，防止数值在较小的屏幕上变得太小
+$font-sizes-base-value: (
+  1: px2rem(32px),
+  2: px2rem(28px),
+  3: px2rem(24px),
+  4: px2rem(20px),
+  5: px2rem(18px),
+  6: px2rem(18px),
+) !default;
+
+// .display-1至.display-6的基值，防止数值在较小的屏幕上变得太小
+$display-font-sizes-base-value: (
+  1: px2rem(64px),
+  2: px2rem(56px),
+  3: px2rem(48px),
+  4: px2rem(40px),
+  5: px2rem(36px),
+  6: px2rem(28px),
+) !default;
+// scss-docs-end
+
+// $layout-columns-gutter: (
+//   default: $columns-gutter,
+//   small: (
+//     xs: map-get($spacers, 4),
+//     sm: map-get($spacers, 4),
+//     md: map-get($spacers, 4),
+//     lg: map-get($spacers, 4),
+//     xl: map-get($spacers, 4),
+//     xxl: map-get($spacers, 4),
+//   ),
+//   medium: (
+//     xs: map-get($spacers, 5),
+//     sm: map-get($spacers, 5),
+//     md: map-get($spacers, 5),
+//     lg: map-get($spacers, 5),
+//     xl: map-get($spacers, 5),
+//     xxl: map-get($spacers, 5),
+//   ),
+//   large: (
+//     xs: map-get($spacers, 6),
+//     sm: map-get($spacers, 6),
+//     md: map-get($spacers, 6),
+//     lg: map-get($spacers, 6),
+//     xl: map-get($spacers, 6),
+//     xxl: map-get($spacers, 6),
+//   )
+// ) !default;
