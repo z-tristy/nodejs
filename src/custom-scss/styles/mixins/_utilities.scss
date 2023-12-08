@@ -1,0 +1,142 @@
+@use "sass:string";
+@mixin gernerate-utility-styles($property-class, $property-class-modifier, $properties, $value, $infix: '') {
+  @if $value != null {
+    .#{$property-class + $infix + $property-class-modifier} {
+      @each $property in $properties {
+        #{$property}: $value if($enable-important-utilities, !important, null);
+      }
+    }
+  }
+}
+
+// 处理$utility变量，变量格式形如：
+// "margin-x": (
+//   responsive-maps: (
+//     ...其它内容
+//     8: (
+//       xs: 0.65,
+//       sm: 0.65,  // 576px
+//       md: 0.85,  // 768px
+//       lg: 0.85, // 1152px
+//       xl: 0.85, // 1280px
+//       xxl: 1 // 1440px
+//     ),
+//     9: (
+//       xs: 0.65,
+//       sm: 0.65,  // 576px
+//       md: 0.85,  // 768px
+//       lg: 0.85, // 1152px
+//       xl: 0.85, // 1280px
+//       xxl: 1 // 1440px
+//     )
+//   ),
+//   scale-type: percentage,
+//   property: margin-right margin-left,
+//   class: mx,
+//   values: map-merge($spacers, (auto: auto))
+// )
+// 
+// 可在@content中使用下述变量：
+// $property-class：类名前缀，即.m-0，m为类名前缀
+// $property-class-modifier：类名修饰符，即.m-0，-0为类名修饰符
+// $properties：生成样式所需的CSS属性，即.m-0{margin:0;}，margin为$properties
+// $responsive-maps：map-get($utility, responsive-maps)值
+// $scale-type: 在响应过程中，值通过什么方式计算，接受percentage和integer两种参数。若传递percentage，值为 $value * $percentage；否则，值为 $integer
+// $key：遍历$utility.values map数据后的key值
+// $value：遍历$utility.values map数据后的value值
+@mixin process-utility($utility) {
+  $values: map-get($utility, values);
+
+  // If the values are a list or string, convert it into a map
+  @if type-of($values) == "string" or type-of(nth($values, 1)) != "list" {
+    $values: zip($values, $values);
+  }
+
+  @each $key, $value in $values {
+    $properties: map-get($utility, property);
+
+    // Multiple properties are possible, for example with vertical or horizontal margins or paddings
+    @if type-of($properties) == "string" {
+      $properties: append((), $properties);
+    }
+
+    // Use custom class if present
+    $property-class: if(map-has-key($utility, class), map-get($utility, class), nth($properties, 1));
+    $property-class: if($property-class == null, "", $property-class);
+
+    // Don't prefix if value key is null (eg. with shadow class)
+    $property-class-modifier: if($key, if($property-class == "", "", "-") + $key, "");
+
+    $responsive-maps: if(map-has-key($utility, responsive-maps), map-get($utility, responsive-maps), "");
+
+    $scale-type: if(map-has-key($utility, scale-type), map-get($utility, scale-type), "");
+
+    @content($property-class, $property-class-modifier, $properties, $responsive-maps, $scale-type, $key, $value);
+  }
+}
+
+// 生成不带断点修饰符样式，且每个断点 infix 下 x 的间距值为map-get($spacers, x) * map-get($responsive-values-with-breakpoints, infix)
+// 可能部分间距的间距值不会随着屏幕断点变化而变化，形如：
+// .mb-3 {margin-bottom: 1rem !important;}
+// .mb-4 {margin-bottom: 1.5rem !important;}
+// 部分间距的间距值会随着屏幕断点变化而变化，形如：
+// $spacer-5: map-get($spacers, 5); // 2rem
+// .mb-5 {margin-bottom: 1.3rem !important;}
+// @media (min-width: 576px) {.mb-5 {margin-bottom: 1.3rem !important;}}
+// @media (min-width: 768px) {.mb-5 {margin-bottom: 1.7rem !important;}}
+// @media (min-width: 1152px) {.mb-5 {margin-bottom: 1.7rem !important;}}
+// @media (min-width: 1280px) {.mb-5 {margin-bottom: 1.7rem !important;}}
+// @media (min-width: 1440px) {.mb-5 {margin-bottom: 2rem !important;}}
+@mixin generate-customize-utility($utility) {
+  @include process-utility($utility) using($property-class, $property-class-modifier, $properties, $responsive-maps, $scale-type, $key, $value) {
+    @if type-of($responsive-maps) == "map" and map-has-key($responsive-maps, $key) {
+      // $responsive-values-with-breakpoints存储每个断点下，间距值需要缩小的百分比，值形如(xs: 0.65,sm: 0.65,md: 0.85,lg: 0.85,xl: 0.85,xxl: 1)
+      $responsive-values-with-breakpoints: map-get($responsive-maps, $key);
+      @each $breakpoint, $responsive-value in $responsive-values-with-breakpoints {
+        @include media-breakpoint-up($breakpoint) {
+          $final-value: if($scale-type == percentage, $value * $responsive-value, $responsive-value);
+          @include gernerate-utility-styles($property-class, $property-class-modifier, $properties, $final-value, '');
+        }
+      }
+    } @else {
+      @include gernerate-utility-styles($property-class, $property-class-modifier, $properties, $value, '');
+    }
+  }
+}
+
+// 兼容旧写法，生成带断点修饰符的样式，以保证不会影响现有布局。
+// 形如mb-5 mb-lg-7，即lg以上为space7，其它情况space5
+@mixin generate-with-infix-customize-utility($utility) {
+  @include process-utility($utility) using($property-class, $property-class-modifier, $properties, $responsive-maps, $scale-type, $key, $value) {
+    // 遍历$grid-breakpoints
+    @each $breakpoint in map-keys($grid-breakpoints) {
+      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+      $infix: if($property-class == "" and str-slice($infix, 1, 1) == "-", str-slice($infix, 2), $infix);
+    
+      // Don't prefix if value key is null (eg. with shadow class)
+      $property-class-modifier: if($key, if($property-class == "" and $infix == "", "", "-") + $key, "");
+  
+      @if $infix != '' {
+        // 间距池中只有部分间距在不同断点下响应为不同的值
+        @if type-of($responsive-maps) == "map" and map-has-key($responsive-maps, $key) {
+          $responsive-values-with-breakpoints: map-get($responsive-maps, $key);
+          $tmp-breakpoint: $breakpoint;
+          @each $breakpoint, $responsive-value in $responsive-values-with-breakpoints {
+            @if $tmp-breakpoint == $breakpoint {
+              $tmp-breakpoint: breakpoint-next($breakpoint, $grid-breakpoints);
+              @include media-breakpoint-up($breakpoint) {
+                $final-value: if($scale-type == percentage, $value * $responsive-value, $responsive-value);
+                @include gernerate-utility-styles($property-class, $property-class-modifier, $properties, $final-value, $infix);
+              }
+            }
+          }
+        } @else {
+          @include media-breakpoint-up($breakpoint) {
+            @include gernerate-utility-styles($property-class, $property-class-modifier, $properties, $value, $infix);
+          }
+        }
+      }
+    }
+  }
+}

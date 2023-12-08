@@ -1,0 +1,41 @@
+@import "../../styles/base";
+
+.stairs {
+  .stairs-wrapper {
+    width: calc(100% - var(--sideClip, 50%));
+    @include media-breakpoint-down(sm) {
+      width: calc(100% - var(--sideClip, 10%));
+    }
+  }
+  .no-rounded {
+    .stair-picture {
+      border-radius: 0 !important;
+    }
+  }
+  .fits-viewport {
+    width: 100%;
+    height: 100vh;
+  }
+  .stair-picture {
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-color: $black;
+      will-change: opacity;
+      opacity: var(--overlayOpacity, 0);
+    }
+  }
+  .stair-img {
+    width: 100vw;
+    margin-left: calc(-1 * (100vw - 100%) / 2);
+  }
+  .stair-contents-container {
+    padding-bottom: var(--paddingBottom);
+  }
+  .stair-text {
+    will-change: transform;
+    transform: translateY(var(--copyY, 0px));
+  }
+}

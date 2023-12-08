@@ -1,0 +1,29 @@
+.mini-cart-container {
+  width: 25rem;
+  .link {
+    color: $body-color;
+  }
+  .text-inverse {
+    color: $white;
+    .link,
+    .list-group-item {
+      color: $white;
+    }
+    .text-muted {
+      color: $white if($enable-important-utilities, !important, null);
+    }
+    hr {
+      color: var(--header-line-default-color);
+    }
+  }
+}
+.mini-cart {
+  .mini-cart-content {
+    max-height: 25rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .list-group-item:first-child {
+    @extend .pt-0;
+  }
+}

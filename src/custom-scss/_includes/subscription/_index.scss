@@ -1,0 +1,27 @@
+@import "../../styles/base";
+
+.subscription-section {
+  .input-group {
+    .form-control {
+      @if $enable-rounded {
+        border-radius: valid-radius($input-border-radius)!important;
+      }
+    }
+    .input-group-text {
+      position: absolute;
+      right: $input-border-width;
+      top: $input-border-width;
+      bottom: $input-border-width;
+      border-radius: valid-radius($input-border-radius);
+      z-index: 3;
+    }
+  }
+  .text-light {
+    .form-control {
+      color: $gray-400;
+    }
+  }
+  .invalid-feedback {
+    font-size: 12px;
+  }
+}

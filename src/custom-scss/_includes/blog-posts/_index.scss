@@ -1,0 +1,91 @@
+.blog-posts {
+  //卡片带背景颜色
+  .blog-posts-card-with-bg {
+    .card-bg-dark {
+      background-color: $gray-900;
+    }
+
+    .card-bg-light {
+      background-color: $gray-100;
+    }
+
+    .card-text-dark {
+      .post-author-date {
+        color: $gray-600;
+      }
+
+      .post-title,
+      .post-content {
+        color: $gray-900;
+      }
+    }
+
+    .card-text-light {
+      .post-author-date {
+        color: $gray-100;
+      }
+
+      .post-title,
+      .post-content {
+        color: $white;
+      }
+    }
+
+    .post-link {
+      z-index: 2;
+    }
+  }
+  // 卡片不带背景颜色
+  .blog-posts-card-without-bg {
+    .post-link {
+      z-index: 2;
+    }
+
+    .post-author-date,
+    .post-content,
+    .post-link {
+      font-size: $font-size-sm;
+    }
+
+    .post-title {
+      font-size: $font-size-base * .875;
+    }
+
+    .post-style-one {
+      .post-author-date,
+      .post-link,
+      .post-content {
+        @include media-breakpoint-up(md) {
+          font-size: $h6-font-size;
+        }
+      }
+
+      .post-title {
+        @include media-breakpoint-up(md) {
+          font-size: $lead-font-size;
+        }
+      }
+    }
+
+    .post-style-two {
+      .post-author-date {
+        @include media-breakpoint-up(md) {
+          font-size: $font-size-sm;
+        }
+      }
+
+      .post-content {
+        @include media-breakpoint-up(md) {
+          font-size: $font-size-base * .875;
+        }
+      }
+
+      .post-title,
+      .post-link {
+        @include media-breakpoint-up(md) {
+          font-size: $h6-font-size;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+.hero-video {
+  --calculate-height: 100vh;
+
+  z-index: 1;
+  font-size: 0;
+  margin-bottom: -1px;
+}
+
+.h-adapt-to-screen {
+  @include media-breakpoint-down(md) {
+    height: var(--calculate-height);
+  }
+}
+
+.h-md-adapt-to-screen {
+  @include media-breakpoint-up(md) {
+    min-height: 0;
+    // 通过 js 自定义变量设置
+    height: var(--calculate-height) !important;
+  }
+}
+
+.h-md-auto {
+  @include media-breakpoint-up(md) {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+}

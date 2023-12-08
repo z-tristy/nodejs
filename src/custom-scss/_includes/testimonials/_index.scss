@@ -1,0 +1,23 @@
+@import "../../styles/base";
+
+.testimonials {
+  @import "../../../node_modules/swiper/swiper";
+  @import "../../../node_modules/swiper/modules/pagination/pagination";
+  @import "../../styles/swiper-pagination";
+
+  .swiper-horizontal > .swiper-pagination-bullets,
+  .swiper-pagination-bullets.swiper-pagination-horizontal {
+    bottom: 0;
+  }
+  .swiper {
+    &.pagination-active {
+      position: relative;
+    }
+  }
+  .swiper-pagination {
+    display: flex;
+    justify-content: center;
+    left: 0;
+    right: 0;
+  }
+}

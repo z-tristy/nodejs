@@ -1,0 +1,168 @@
+@use "sass:math";
+@import "../../styles/base";
+@import '../../styles/slider-mixins';
+@import '../../styles/slider-functions';
+
+.highlight-cards {
+  .highlight-cards-container {
+    --indicator-position: 50%;
+    @import '../../../node_modules/swiper/swiper';
+    .swiper-control-container {
+      &:hover {
+        .swiper-button-next, .swiper-button-prev {
+          opacity: 0.8;
+        }
+      }
+    }
+    .swiper-indicator {
+      .swiper-button-prev,
+      .swiper-button-next {
+        @include render-indicator;
+        position: absolute;
+        top: 50%;
+        z-index: 1;
+        transform: translateY(-50%);
+        color: rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        opacity: 0;
+        transition: opacity 0.7s cubic-bezier(0.15, 0, 0.2, 1) 0.1s;
+        &:hover {
+          opacity: 1 !important;
+        }
+        &.swiper-button-disabled {
+          opacity: 0 !important;
+          cursor: default;
+        }
+      }
+      .swiper-button-prev {
+        left: 1.5rem;
+      }
+      .swiper-button-next {
+        right: 1.5rem;
+      }
+    }
+    .swiper-control-container {
+      @include media-breakpoint-down(md) {
+        padding-right: 0;
+        padding-left: 0;
+        .swiper {
+          overflow: visible;
+          margin: 0 0 0 1rem;
+        }
+      }
+    }
+    // 初始化轮播样式，计算轮播页宽度
+    @mixin generate-swiper-img-width() {
+      @for $index from 2 through 4 {
+        .swiper-slide-card-#{$index} {
+          .swiper-slide {
+            width: calc(100vw / 1.5);
+            @if $index == 4 or $index == 3 {
+              @include media-breakpoint-up(md) {
+                width: calc(100vw / 2.5);
+              }
+            }
+            @include media-breakpoint-up(lg) {
+            $max-width: get-value('lg', $container-max-widths) - rem2px(get-value('lg', $containers-padding-x));
+              width: calc(calc(100vw - (100vw - $max-width)/2) / ($index + .8));
+              // width: calc(calc(100vw) / ($index + .5));
+            }
+            @include media-breakpoint-up(xl) {
+              $max-width: get-value('xl', $container-max-widths) - rem2px(get-value('xl', $containers-padding-x));
+              width: calc(calc(100vw - (100vw - $max-width)/2) / ($index + .8));
+              // width: calc(calc(100vw) / ($index + .5));
+              }
+              @include media-breakpoint-up(xxl) {
+                $max-width: get-value('xxl', $container-max-widths) - rem2px(get-value('xxl', $containers-padding-x));
+                width: calc(calc(100vw - (100vw - $max-width)/2) / ($index + .8));
+                // width: calc(calc(100vw) / ($index + .5));
+                }
+          }
+          //在container里面
+          // &.is-container {
+          //   .swiper-slide {
+          //     width: calc(100vw / 1.5);
+          //     @if $index == 4 or $index == 3 {
+          //       @include media-breakpoint-up(md) {
+          //         $max-width: get-value('md', $container-max-widths) - rem2px(get-value('md', $containers-padding-x) * 2);
+          //         width: calc($max-width / 2.5);
+          //       }
+          //     }
+          //     @include media-breakpoint-up(lg) {
+          //     $max-width: get-value('lg', $container-max-widths) - rem2px(get-value('lg', $containers-padding-x) * 2);
+          //       // width: calc(calc(100vw - (100vw - $max-width)/2) / ($index + .8));
+          //       width: calc($max-width / ($index + .5));
+          //     }
+          //     @include media-breakpoint-up(xl) {
+          //       $max-width: get-value('xl', $container-max-widths) - rem2px(get-value('xl', $containers-padding-x) * 2);
+          //       // width: calc(calc(100vw - (100vw - $max-width)/2) / ($index + .8));
+          //       width: calc($max-width / ($index + .5));
+          //     }
+          //     @include media-breakpoint-up(xxl) {
+          //       $max-width: get-value('xxl', $container-max-widths) - rem2px(get-value('xxl', $containers-padding-x) * 2);
+          //       // width: calc(calc(100vw - (100vw - $max-width)/2) / ($index + .8));
+          //       width: calc($max-width / ($index + .5));
+          //     }
+          //   }
+          // }
+        }
+      }
+    }
+    @include generate-swiper-img-width();
+
+    // .swiper-card-wrapper {
+    //   @include media-breakpoint-up(lg) {
+    //     $max-width: get-value('lg', $container-max-widths) - rem2px(get-value('lg', $containers-padding-x));
+    //     transform: translateX(calc((100vw - $max-width)/2));
+    //   }
+    //   @include media-breakpoint-up(xl) {
+    //     $max-width: get-value('xl', $container-max-widths) - rem2px(get-value('xl', $containers-padding-x));
+    //     transform: translateX(calc((100vw - $max-width)/2));
+    //   }
+
+    //   @include media-breakpoint-up(xxl) {
+    //     $max-width: get-value('xxl', $container-max-widths) - rem2px(get-value('xxl', $containers-padding-x));
+    //     transform: translateX(calc((100vw - $max-width)/2));
+    //   }
+    // }
+    .highlight-cards-shadow {
+      // margin: 0 .75rem;
+      transition: all .3s cubic-bezier(0,0,.5,1);
+      box-shadow: 2px 4px .75rem rgb(0 0 0 / 8%);
+      @include media-breakpoint-up(lg) {
+        &:hover {
+          transform: scale3d(1.01,1.01,1.01);
+          box-shadow: 2px 4px 1rem rgb(0 0 0 / 16%);
+        }
+      }
+
+    }
+
+    .swiper-slide-frist {
+      @include media-breakpoint-up(lg) {
+        $max-width: get-value('lg', $container-max-widths) - rem2px(get-value('lg', $containers-padding-x));
+        margin-left: calc((100vw - $max-width)/2);
+      }
+      @include media-breakpoint-up(xl) {
+        $max-width: get-value('xl', $container-max-widths) - rem2px(get-value('xl', $containers-padding-x));
+        margin-left: calc((100vw - $max-width)/2);
+      }
+      @include media-breakpoint-up(xxl) {
+        $max-width: get-value('xxl', $container-max-widths) - rem2px(get-value('xxl', $containers-padding-x));
+        margin-left: calc((100vw - $max-width)/2);
+      }
+      @media (min-width: 1920px) {
+        $max-width: get-value('xxl', $container-max-widths) - rem2px(get-value('xxl', $containers-padding-x));
+        margin-left: calc((1920px - $max-width)/2);
+      }
+    }
+
+    .swiper-slide {
+      strong {
+        font-weight: $font-weight-semibold;
+      }
+    }
+
+  }
+}
+

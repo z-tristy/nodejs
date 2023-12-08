@@ -1,0 +1,72 @@
+.cart-notification {
+  position: fixed;
+  top: $header-h;
+  right: map-get($spacers, 3);
+  // 防止被页头的下拉菜单遮罩挡住
+  z-index: calc(#{$zindex-sticky} + 1);
+
+  @media (min-width: 1952px) {
+    right: calc((100vw - 1920px) / 2);
+  }
+
+  @include media-breakpoint-down(md) {
+    position: fixed;
+    top: 0;
+    right: 0;
+    // 保证覆盖国家选择Toolbar
+    z-index: $zindex-fixed + 2;
+  }
+
+  .cart-notification-shadow {
+    box-shadow: rgba(0, 0, 0, .1) 0 0 10px 2px;
+  }
+
+  &.animate {
+    .dropdown-menu {
+      transition: transform 100ms ease, visibility 0s 100ms ease;
+      transform: translateY(-100%);
+      visibility: hidden;
+    }
+  }
+  &.show {
+    .dropdown-menu {
+      transform: translateY(0);
+      transition: transform 200ms ease, visibility 0s;
+      visibility: visible;
+    }
+    .modal-backdrop {
+      display: block;
+      @include media-breakpoint-up(md) {
+        display: none;
+      }
+    }
+  }
+  .icon-close {
+    width: 3.5rem;
+    height: 3.5rem;
+    > svg {
+      display: block;
+    }
+  }
+  .dropdown-menu {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    max-width: 25rem;
+    @include media-breakpoint-down(md) {
+      max-width: none;
+      border: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+  .cart-items-list {
+    max-height: 20rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .modal-backdrop {
+    display: none;
+    z-index: 1;
+  }
+}

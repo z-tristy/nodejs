@@ -1,0 +1,157 @@
+@import "./base";
+
+// // Bootstrap utilities
+// @import "../../bootstrap/scss/utilities";
+
+// // Extra utilities
+// @import "./utilities";
+
+// @debug $utilities;
+
+// 定制spacers
+// @import "./mixins/utilities";
+
+// 针对项目
+// @import "./customize/utilities";
+
+// Include all of Bootstrap
+// @import "../../bootstrap/scss/bootstrap";
+// Layout & components
+// 后续会删除一些没有用到的components
+@import "../../bootstrap/scss/root";
+@import "../../bootstrap/scss/reboot";
+@import "../../bootstrap/scss/type";
+@import "../../bootstrap/scss/images";
+@import "../../bootstrap/scss/containers";
+@import "../../bootstrap/scss/grid";
+@import "../../bootstrap/scss/tables";
+@import "../../bootstrap/scss/forms";
+@import "../../bootstrap/scss/buttons";
+@import "../../bootstrap/scss/transitions";
+@import "../../bootstrap/scss/dropdown";
+@import "../../bootstrap/scss/button-group";
+@import "../../bootstrap/scss/nav";
+@import "../../bootstrap/scss/navbar";
+@import "../../bootstrap/scss/card";
+@import "../../bootstrap/scss/accordion";
+@import "../../bootstrap/scss/breadcrumb";
+@import "../../bootstrap/scss/pagination";
+@import "../../bootstrap/scss/badge";
+@import "../../bootstrap/scss/alert";
+@import "../../bootstrap/scss/progress";
+@import "../../bootstrap/scss/list-group";
+@import "../../bootstrap/scss/close";
+@import "../../bootstrap/scss/toasts";
+@import "../../bootstrap/scss/modal";
+@import "../../bootstrap/scss/tooltip";
+@import "../../bootstrap/scss/popover";
+@import "../../bootstrap/scss/carousel";
+@import "../../bootstrap/scss/spinners";
+@import "../../bootstrap/scss/offcanvas";
+@import "../../bootstrap/scss/placeholders";
+
+// Helpers
+@import "../../bootstrap/scss/helpers";
+
+// Utilities
+@import "../../bootstrap/scss/utilities/api";
+@import "./root";
+@import "./containers";
+@import "./functions";
+// @import "./mixins";
+@import "./appendix";
+@import "./button";
+@import "./dropdown";
+@import "./grid";
+@import "./color-schema";
+@import "./reboot";
+
+// 后续将一些非公共样式抽离
+@import "../_includes/announcement-bar/index.scss";
+@import "../_includes/header/index.scss";
+@import "../_includes/header/v2/index.scss";
+@import "../_includes/header/v3/index.scss";
+@import "../_includes/search/predictive-search/index.scss";
+@import "../_includes/search/search-modal/index.scss";
+@import "../_includes/header/v4/index";
+
+// @import "../_includes/slideshow/index";
+
+@import "../_includes/modal-newsletter/index.scss";
+@import "../_includes/notify-me/index.scss";
+@import "../_includes/image-with-text/index.scss";
+@import "../_includes/elevator/index.scss";
+@import "../_includes/hero-video/index.scss";
+@import "../_includes/breadcrumb/index.scss";
+@import "../_includes/footer/index.scss";
+@import "../_includes/footer-v2/_index.scss";
+@import "../_includes/footer-v3/_index.scss";
+@import "../_includes/text-columns-with-icons/index.scss";
+@import "../_includes/multicolumn/index.scss";
+@import "../_includes/price/index.scss";
+@import "../_includes/product/index";
+@import "../_includes/collection/index";
+@import "../_includes/blog/index";
+@import "../_includes/404/index";
+@import "../_includes/page/index";
+@import "../_includes/blog-posts/index";
+@import "../_includes/product-details/index.scss";
+@import "../_includes/quantity-input/index";
+// @import "../_includes/featured-product/index.scss";
+@import "../_includes/faq/index.scss";
+@import "../_includes/cart/mini-cart/_index.scss";
+@import "../_includes/cart/drawer-cart/_index.scss";
+@import "../_includes/cart/notification/_index.scss";
+@import "../_includes/faq/list/index.scss";
+@import "../_includes/image-banner/index";
+@import "../_includes/image-grid/index";
+@import "../_includes/sticky-box/index";
+@import "../_includes/search/search-banner/index";
+@import "../_includes/sticky-navbar/index";
+@import "../_includes/text-tip-cards/index";
+@import "../_includes/partner-form/index";
+@import "../_includes/card-video/index";
+@import "../_includes/store-locator/index";
+@import "../_includes/social-video/index";
+@import "../_includes/category-tab/index";
+@import "../_includes/facets/index";
+@import "../_includes/search/results/index";
+@import "../_includes/marquee/index";
+@import "../_includes/sales-channel-modal/index";
+@import "./cart";
+@import "./customize/customize";
+//cookie bar 样式定制 
+@import "./cookiebar";
+
+//customers
+@import "../_includes/customers/index.scss";
+@import "../_includes/customers/account/index.scss";
+
+//customers-v2 
+@import "../_includes/customers-v2/index.scss";
+
+.no-last-margin {
+  & > :last-child {
+    margin-bottom: 0 !important;
+  }
+
+  tr:last-child p {
+    margin-bottom: 0 !important;
+  }
+}
+
+.btn-sm {
+  & > svg {
+    display: block;
+    // 这么小都用了 line-height-base 那 lg 用在哪儿了？
+    width: $font-size-sm * $line-height-base;
+    height: $font-size-sm * $line-height-base;
+  }
+}
+
+.btn {
+  & > svg,
+  & > span {
+    pointer-events: none;
+  }
+}

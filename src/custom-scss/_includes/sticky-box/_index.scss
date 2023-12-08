@@ -1,0 +1,32 @@
+$sticky-box-transform-buffer: 150px;
+.sticky-box {
+  .sticky-box-height {
+    height: calc(var(--sticky-box-height, 100vh));
+  }
+  .sticky-box-wrap {
+    opacity: 0;
+    transition: all 0.8s ease;
+    .sticky-box-text {
+      z-index: 1;
+      opacity: 0;
+      transition: all .8s ease;
+      transform: translateY($sticky-box-transform-buffer);
+      will-change: transform;
+    }
+    &.is-active {
+      opacity: 1;
+    }
+    &.is-text-active {
+      .sticky-box-text {
+        opacity: 1;
+        transform: translateY(0px);
+      }
+    }
+    &.is-text-exit {
+      .sticky-box-text {
+        opacity: 0;
+        transform: translateY(-$sticky-box-transform-buffer);
+      }
+    }
+  }
+}

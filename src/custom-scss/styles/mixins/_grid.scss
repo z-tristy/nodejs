@@ -1,0 +1,129 @@
+@mixin make-row($columns-gutter: $columns-gutter) {
+  @each $breakpoint, $column-gutter in $columns-gutter {
+    @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+      --#{$prefix}gutter-x: #{$column-gutter};
+    }
+  }
+  --#{$prefix}gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  // TODO: Revisit calc order after https://github.com/react-bootstrap/react-bootstrap/issues/6039 is fixed
+  margin-top: calc(-1 * var(--#{$prefix}gutter-y)); // stylelint-disable-line function-disallowed-list
+  margin-right: calc(-.5 * var(--#{$prefix}gutter-x)); // stylelint-disable-line function-disallowed-list
+  margin-left: calc(-.5 * var(--#{$prefix}gutter-x)); // stylelint-disable-line function-disallowed-list
+}
+
+// Gutters
+//
+// Make use of `.g-*`, `.gx-*` or `.gy-*` `row > *` utilities to change spacing between the columns.
+@mixin generate-grid-columns($breakpoints: $grid-breakpoints, $gutters: $gutters) {
+  // `row > *` utilities to change spacing between the columns
+  @each $breakpoint, $column-gutter in $columns-gutter {
+    @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+      @each $key, $value in $gutters {
+        @if $value == $column-gutter {
+          .row {
+            --#{$prefix}gutter-x: var(--#{$prefix}spacer-#{$key});
+          }
+        }
+      }
+    }
+  }
+
+  @each $breakpoint in map-keys($breakpoints) {
+    $infix: breakpoint-infix($breakpoint, $breakpoints);
+
+    @include media-breakpoint-up($breakpoint, $breakpoints) {
+      @each $key, $value in $gutters {
+        .g#{$infix}-#{$key},
+        .gx#{$infix}-#{$key} {
+          --#{$prefix}gutter-x: var(--#{$prefix}spacer-#{$key});
+        }
+
+        .g#{$infix}-#{$key},
+        .gy#{$infix}-#{$key} {
+          --#{$prefix}gutter-y: var(--#{$prefix}spacer-#{$key});
+        }
+      }
+    }
+  }
+}
+
+// @mixin common-layout-grid-column-style(
+//   $infix,
+//   $size,
+//   $responsive-spacers,
+//   $column-gutter
+// ) {
+//   .g#{$infix}-#{$size},
+//   .gx#{$infix}-#{$size} {
+//     @if map-has-key($responsive-spacers, $size) {
+//       --#{$prefix}gutter-x: calc(#{$column-gutter} * var(--#{$prefix}scale));
+//     }
+//     @else {
+//       --#{$prefix}gutter-x: #{$column-gutter};
+//     }
+//   }
+//   .g#{$infix}-#{$size},
+//   .gy#{$infix}-#{$size} {
+//     @if map-has-key($responsive-spacers, $size) {
+//       --#{$prefix}gutter-y: calc(#{$column-gutter} * var(--#{$prefix}scale));
+//     }
+//     @else {
+//       --#{$prefix}gutter-y: #{$column-gutter};
+//     }
+//   }
+// }
+
+// Layout容器的Gutters
+// @mixin make-layout-grid-column($breakpoints: $grid-breakpoints, $layout-columns-gutter: $layout-columns-gutter, $responsive-spacers: $responsive-spacers) {
+//   @each $size, $columns-gutter in $layout-columns-gutter {
+//     @each $inner-breakpoint, $column-gutter in $columns-gutter {
+//       @include media-breakpoint-up($inner-breakpoint, $breakpoints) {
+//         @include common-layout-grid-column-style('', $size, $responsive-spacers, $column-gutter);
+//       }
+//     }
+//   }
+//   @each $size, $columns-gutter in $layout-columns-gutter {
+//     @each $breakpoint in map-keys($breakpoints) {
+//       $infix: breakpoint-infix($breakpoint, $breakpoints);
+      
+//       @if $infix != '' {
+//         $current-breakpoint: $breakpoint;
+//         @each $inner-breakpoint, $column-gutter in $columns-gutter {
+//           @if $inner-breakpoint == $current-breakpoint {
+//             $current-breakpoint: breakpoint-next($current-breakpoint, $grid-breakpoints);
+//             @include media-breakpoint-up($inner-breakpoint, $breakpoints) {
+//               @include common-layout-grid-column-style($infix, $size, $responsive-spacers, $column-gutter);
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+// @mixin make-cssgrid($columns: $grid-columns, $breakpoints: $grid-breakpoints) {
+//   @each $breakpoint in map-keys($breakpoints) {
+//     $infix: breakpoint-infix($breakpoint, $breakpoints);
+
+//     @include media-breakpoint-up($breakpoint, $breakpoints) {
+//       @if $columns > 0 {
+//         @for $i from 1 through $columns {
+//           .g-col#{$infix}-#{$i} {
+//             grid-column: auto / span $i;
+//           }
+//         }
+
+//         // Start with `1` because `0` is and invalid value.
+//         // Ends with `$columns - 1` because offsetting by the width of an entire row isn't possible.
+//         @for $i from 1 through ($columns - 1) {
+//           .g-start#{$infix}-#{$i} {
+//             grid-column-start: $i;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+

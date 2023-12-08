@@ -1,0 +1,23 @@
+$block-width: px2rem(24px);
+$block-radius: 4px;
+$bg-countdown: #FFC700;
+
+.countdown {
+  .bg-countdown {
+    background: $bg-countdown;
+  }
+
+  .countdown-block-width {
+    width: $block-width;
+    height: $block-width;
+    border-radius: $block-radius;
+  }
+
+  .countdown-time {
+    transition: opacity .15s;
+
+    &.inactive {
+      opacity: 0;
+    }
+  }
+}

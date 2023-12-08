@@ -1,0 +1,83 @@
+.card-video-wrap {
+  .youtube-btn {
+    svg {
+      width: 4rem !important;
+      height: 4rem !important;
+
+      @include media-breakpoint-down(md) {
+        width: 2.5rem !important;
+        height: 2.5rem !important;
+      }
+    }
+  }
+
+  .canvas-btn {
+    svg {
+      width: 2rem !important;
+      height: 2rem !important;
+
+      @include media-breakpoint-down(md) {
+        width: 1.5rem !important;
+        height: 1.5rem !important;
+      }
+    }
+  }
+
+  .ratio-youtube-poster {
+    --se-aspect-ratio: 56.25%;
+
+    @include media-breakpoint-down(md) {
+      --se-aspect-ratio: 75%;
+    }
+  }
+
+  // .youtube-modal{
+  //   svg{
+  //    width: auto;
+  //    height: auto;
+  //   }
+  // }
+  // .offcanvas-bottom{
+  //   height: 100vh !important;
+  //   background-color: #202223 !important;
+  //   // border-top: 0px;
+  // }
+
+  // .iframe-container{
+  //   max-width: 960px !important;
+  // }
+
+  // @media (min-width: 1920px) {
+  //   .iframe-container{
+  //       max-width: 1200px !important;
+  //   }
+  // }
+
+  .video-control-full {
+    z-index: 10;
+
+    .play {
+      display: none;
+    }
+
+    .pause,
+    .play {
+      bottom: 2rem;
+      right: 2rem;
+    }
+
+    &.play {
+      .pause {
+        display: none;
+      }
+
+      .play {
+        display: block;
+      }
+    }
+  }
+
+  // .card-video-canvas{
+  //   z-index: 1050;
+  // }
+}

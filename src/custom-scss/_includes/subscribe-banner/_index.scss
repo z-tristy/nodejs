@@ -1,0 +1,96 @@
+@use "sass:math";
+@import "../../styles/base";
+.subscribe-banner {
+  .form-control {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 1rem;
+    background-color: transparent;
+  }
+  .input-text-white {
+    border-color: $white;
+    color: $white;
+    &::placeholder {
+      color: $gray-200;
+    }
+  }
+  .input-text-black {
+    border-color: $black;
+    color: $black;
+    &::placeholder {
+      color: $gray-800;
+    }
+  }
+  .input-padding-icon {
+    padding-right: 5.625rem;
+  }
+  .input-padding-button {
+    @include media-breakpoint-down(md) {
+      padding-right: $input-padding-x !important;
+    }
+    
+  }
+  .richtext-link-light {
+    @include media-breakpoint-up(md) {
+      font-size: 1.125rem;
+    }
+  }
+  .richtext-link-default {
+    @include media-breakpoint-up(md) {
+      font-size: 1.125rem;
+    }
+  }
+  .submit-btn {
+    .btn-content {
+      opacity: 1;
+    }
+    .btn-loading {
+      display: none !important;
+    }
+    &.loading {
+      .btn-content {
+        opacity: 0;
+      }
+      .btn-loading {
+        display: flex !important;
+      }
+    }
+    @include media-breakpoint-down(md) {
+      &.btn-primary:hover {
+        background-color: $primary;
+      }
+      &.btn-light:hover {
+        background-color: $light;
+        color: $black;
+      }
+      &.btn-dark:hover {
+        background-color: $black;
+      }
+    }
+  }
+  .split-submit-btn {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+  }
+  .form-wrapper {
+    max-width: 31.25rem;
+  }
+  .button-wrapper {
+    top: 1px;
+  }
+
+  .form-check-input {
+    $form-check-input-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$black}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/></svg>");
+    background-color: transparent;
+    &.checkbox-white {
+      border-color: $white !important;
+    }
+    &.checkbox-black {
+      &:checked[type=checkbox] {
+        background-image: escape-svg($form-check-input-checked-bg-image);
+      }
+      border-color: $black !important;
+    }
+  }
+
+}

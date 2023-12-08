@@ -1,0 +1,57 @@
+.search-result-tab-container {
+  .tab-content {
+    margin: 0 -0.75rem;
+  }
+  .tab-item {
+    margin: 0 0.75rem;
+    font-size: 1.125rem;
+    text-decoration: none;
+    padding: 0;
+    &.active {
+      font-weight: $font-weight-bold;
+      text-decoration: underline;
+      text-underline-offset: 0.3rem;
+      text-decoration-thickness: 0.125rem;
+      text-decoration-color: $primary;
+    }
+  }
+}
+
+.result-count {
+  color: $gray-600;
+}
+
+.search-form-content {
+  .search-form {
+    .form-control {
+      &:focus {
+        background-color: #fff;
+      }
+    }
+  }
+}
+
+.search-results {
+  .results-margin {
+    @extend .my-3;
+    @extend .my-md-4;
+    @extend .my-lg-7;
+  }
+  .no-results {
+    .no-results-title {
+      font-size: 1.125rem;
+      font-weight: bold;
+    }
+  }
+  .content-expert {
+    strong {
+      color: $body-color;
+    }
+  }
+}
+
+.content-result-container {
+  .content-title {
+    font-size: 1.125rem;
+  }
+}

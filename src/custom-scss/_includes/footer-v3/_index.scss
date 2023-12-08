@@ -1,0 +1,54 @@
+.site-footer-v3 {
+  // 浅色
+  &.light {
+    .link-footer {
+      color: $black;
+      opacity: .6;
+      &:hover {
+        opacity: 1;
+      }
+    }
+  
+    .text-footer {
+      color: $black;
+      opacity: .6;
+      a {
+        color: $black;
+        opacity: .6;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  // 深色
+  &.dark {
+    background-color: $black;
+    color: $gray-300;
+    .text-footer {
+      color: $white;
+      opacity: .6;
+      a {
+        color: $white;
+        opacity: .6;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    .link-footer {
+      color: $white;
+      opacity: .6;
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    hr {
+      color: $white;
+      opacity: .2;
+    }
+  }
+}

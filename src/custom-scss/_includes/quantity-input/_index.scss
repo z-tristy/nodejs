@@ -1,0 +1,56 @@
+// input number
+$disabled-color: $gray-400;
+
+.quantity {
+  .quantity-btn {
+    @extend .btn;
+    @extend .icon-wrap-sm;
+    @extend .d-flex;
+    @extend .text-muted;
+
+    min-width: auto;
+    padding: px2rem(12px); // 该处写死为 12px, 跟设计师统一过后决定之后所有项目都用该值
+    border: $border-width solid $border-color;
+
+    @if $enable-rounded {
+      border-radius: $btn-border-radius;
+    }
+
+    &[name="minus"] {
+      border-right-color: transparent !important;
+    }
+
+    &[name="plus"] {
+      border-left-color: transparent !important;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      border-color: $border-color;
+      color: $body-color !important;
+    }
+
+    &:disabled {
+      border-color: $border-color;
+      color: $disabled-color !important;
+      opacity: 1;
+    }
+  }
+
+  .form-control-number {
+    @extend .p-0;
+
+    max-width: px2rem(40px);
+    width: px2rem(40px);
+    border: $border-width solid $border-color;
+    border-left: none;
+    border-right: none;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      appearance: none;
+      margin: 0;
+    }
+  }
+}

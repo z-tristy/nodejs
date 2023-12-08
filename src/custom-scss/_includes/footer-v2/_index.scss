@@ -1,0 +1,121 @@
+.site-footer-v2 {
+  .invalid-feedback {
+    font-size: .75rem;
+  }
+  .subscribe-width {
+    @include media-breakpoint-up(md) {
+      width: 352px;
+    }
+    @include media-breakpoint-up(lg) {
+      width: 320px;
+    }
+  }
+
+  // 浅色
+  &.light {
+    .form-wrapper {
+      background-color: $gray-100;
+      .form-control {
+        color: $gray-600;
+      }
+      // .form-check-input {
+      //   border-color: $gray-600;
+      //   background-color: transparent;
+      // }
+    }
+    .link-footer {
+      color: $gray-600;
+      &:hover {
+        color: $black;
+      }
+    }
+
+    .text-footer {
+      color: $gray-600;
+
+      a {
+        color: $gray-600;
+
+        &:hover {
+          color: $gray-800;
+        }
+      }
+    }
+  }
+
+  // 深色
+  &.dark {
+    background-color: $black;
+    color: $gray-300;
+
+    .form-wrapper {
+      background-color: $gray-900;
+
+      .form-control {
+        border: 0;
+        color: $gray-600;
+      }
+
+      .form-check-input {
+        // border-color: $gray-600;
+        // background-color: transparent;
+        &:checked {
+          border-color: currentColor;
+        }
+      }
+    }
+    .text-footer {
+      color: $gray-500;
+
+      a {
+        color: $gray-500;
+
+        &:hover {
+          color: $gray-600;
+        }
+      }
+    }
+
+    .link-footer {
+      color: $gray-500;
+
+      &:hover {
+        color: $gray-600;
+      }
+    }
+
+    hr {
+      color: $gray-700;
+    }
+  }
+
+  .logo-max-height{
+    max-height: 2.5rem;
+  }
+  .logo-opacity {
+    opacity: 0.4;
+  }
+}
+.footnotes {
+  &.dark {
+    background-color: $gray-900;
+    color: $gray-500;
+    .link-footer {
+      color: $gray-300;
+
+      &:hover {
+        color: $gray-600;
+      }
+    }
+  }
+  &.light {
+    color: $gray-600;
+    .link-footer {
+      color: $gray-900;
+
+      &:hover {
+        color: $gray-600;
+      }
+    }
+  }
+}

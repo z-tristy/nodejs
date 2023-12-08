@@ -1,0 +1,9 @@
+@import "../../styles/base";
+
+.text-list {
+  .description {
+    @include media-breakpoint-down(lg) {
+      font-size: $font-size-base;
+    }
+  }
+}

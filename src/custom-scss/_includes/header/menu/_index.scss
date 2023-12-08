@@ -1,0 +1,98 @@
+// 普通下拉菜单，形如Bootstrap Dropdown组件，可支持配置到第三级菜单
+@include media-breakpoint-up(lg) {
+  .with-default-dropdown {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    .default-dropdown {
+      position: absolute;
+      top: 100%;
+      left: var(--header-nav-link-padding-x);
+      margin-bottom: 0;
+      min-width: $dropdown-min-width;
+      max-width: 10.5rem;
+      max-height: 0;
+      border-radius: 0 0 var(--dropdown-bottom-radius) var(--dropdown-bottom-radius);
+      opacity: 0;
+      transition: opacity var(--header-transition-duration) var(--header-transition-timing-function);
+      overflow: hidden;
+      &.user-dropdown {
+        left: auto;
+      }
+      &.text-inverse {
+        hr {
+          color: transparent;
+          box-shadow: var(--header-underline);
+        }
+      }
+      .menu {
+        &:first-child {
+          padding-top: .5rem;
+        }
+        &:last-child {
+          padding-bottom: .5rem;
+        }
+      }
+    }
+    .menu-item {
+      display: block;
+      padding: .5rem 1rem;
+      white-space: normal;
+      font-size: var(--header-nav-link-font-size);
+      color: var(--header-nav-link-default-color);
+      text-decoration: none;
+      svg {
+        width: 1rem;
+        height: 1rem;
+        transition: transform .2s;
+      }
+      
+      &:hover {
+        text-decoration: underline;
+        svg {
+          transform: rotate(180deg);
+        }
+      }
+    }
+    .menu {
+      .sub-menu {
+        opacity: 0;
+        max-height: 0;
+      }
+      &:hover {
+        .sub-menu {
+          opacity: 1;
+          max-height: 100vh;
+          transition: opacity .1s linear,max-height .1s linear;
+        }
+      }
+    }
+  }
+
+  .with-mini-cart-dropdown {
+    .mini-cart-container {
+      top: 100%;
+      border-radius: 0 0 var(--dropdown-bottom-radius) var(--dropdown-bottom-radius);
+    }
+  }
+
+  [open] {
+    .default-dropdown {
+      opacity: 1;
+      max-height: 100vh;
+    }
+    .mini-cart-container {
+      display: block;
+      opacity: 1;
+      max-height: 100vh;
+    }
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .with-default-dropdown {
+    .user-dropdown {
+      display: none;
+    }
+  }
+}

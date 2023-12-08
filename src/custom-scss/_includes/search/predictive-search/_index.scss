@@ -1,0 +1,181 @@
+.search-form-content {
+  --form-input-bg: rgba(0, 0, 0, 0.04);
+  --default-text-color: #{$body-color};
+  --default-mute-text-color: #{$gray-500};
+  &[data-show-overlay="1"] {
+    .search-form, .predictive-search-dropdown {
+      z-index: 2;
+    }
+    .search-form {
+      position: relative;
+    }
+  }
+  .search-form {
+    .form-control {
+      background-color: var(--form-input-bg);
+      border: none;
+      color: var(--default-text-color);
+      // 修复移动端focus状态放大输入框问题
+      font-size: 16px !important;
+    }
+    .search-icon {
+      @extend .position-absolute;
+      @extend .d-flex;
+      @extend .align-items-center;
+      top: $input-border-width;
+      left: $input-border-width;
+      @extend .bg-transparent;
+      // color: $input-placeholder-color;
+      border-radius: $input-border-radius;
+      @extend .h-100;
+      padding-left: $input-padding-x;
+      // &.active {
+      //   color: $input-color;
+      // }
+      & + .form-control {
+        padding-left: calc(#{$input-padding-x} + 0.5rem + 1.5rem);
+      }
+    }
+    .clear-btn {
+      @extend .position-absolute;
+      @extend .align-items-center;
+      top: $input-border-width;
+      right: $input-border-width;
+      @extend .bg-transparent;
+      border-radius: $input-border-radius;
+      @extend .h-100;
+      padding-right: $input-padding-x;
+    }
+    .clear-btn {
+      svg {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+      display: none;
+      &.active {
+        display: flex;
+      }
+    }
+    .input-text {
+      position: relative;
+      flex: 1 1 auto;
+      width: 1%;
+      min-width: 0;
+    }
+  }
+
+  .search-form-overlay {
+    &.show {
+      &::after {
+        position: fixed;
+        content: '';
+        background-color: rgb(#000, 0.4);
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1;
+      }
+    }
+  }
+  
+  .predictive-search-dropdown {
+    position: absolute;
+    top: calc(100% + .25rem);
+    width: 100%;
+    background: $input-bg;
+    border-radius: $input-border-radius;
+    padding: 1rem;
+    .loading {
+      display: none;
+      .loading-item {
+        color: var(--default-text-color);
+      }
+    }
+    &.loading {
+      .loading {
+        display: block;
+      }
+      .results {
+        display: none;
+      }
+    }
+    // .dropdown-menu {
+    //   width: 100%;
+    //   li {
+    //     &[aria-selected="true"] {
+    //       .dropdown-item {
+    //         color: $primary;
+    //       }
+    //     }
+    //   }
+    //   .dropdown-item {
+    //     font-size: 0.875rem;
+    //     &:hover {
+    //       color: $primary;
+    //     }
+    //     &:focus {
+    //       box-shadow: none;
+    //     }
+    //     &:active {
+    //       color: $dropdown-link-color;
+    //     }
+    //   }
+    // }
+    .predictive-search-title {
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+      color: var(--default-mute-text-color);
+    }
+    .predictive-search-content {
+      padding: 0;
+      margin-bottom: 0;
+      list-style: none;
+      li {
+        padding: 0.5rem 1rem;
+        position: relative;
+        &.search-for-btn {
+          padding: 0;
+          button {
+            color: $body-color;
+            font-weight: $font-weight-normal;
+          }
+        }
+        a {
+          text-decoration: none;
+          font-size: 0.875rem;
+        }
+        @media(hover :hover) {
+          &:hover, &[aria-selected="true"] {
+            a {
+              text-decoration: underline;
+            }
+            button {
+              text-decoration: underline;
+            }
+            .product-info {
+              .product-title {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+  
+      .product-info {
+        margin-left: 1rem;
+      }
+      .price {
+        font-size: 0.875rem;
+      }
+      .product-img {
+        width: 4rem;
+      }
+      .placeholder-svg {
+        width: 4rem;
+        height: 4rem;
+      }
+    }
+  }
+}

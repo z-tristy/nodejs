@@ -1,0 +1,124 @@
+
+// $btn-light-color: $black !default;
+// $btn-light-bg-color: $white !default;
+// $btn-light-hover-color: $white !default;
+// $btn-light-hover-bg-color: $primary !default;
+// $btn-light-active-color: $btn-light-hover-color !default;
+// $btn-light-active-bg-color: $btn-light-hover-bg-color !default;
+// $btn-light-disabled-color: $white !default;
+// $btn-light-disabled-bg-color: $gray-400 !default;
+
+// $btn-dark-color: $white !default;
+// $btn-dark-bg-color: $black !default;
+// $btn-dark-hover-color: $white !default;
+// $btn-dark-hover-bg-color: $primary !default;
+// $btn-dark-active-color: $btn-dark-hover-color !default;
+// $btn-dark-active-bg-color: $btn-dark-hover-bg-color !default;
+// $btn-dark-disabled-color: $white !default;
+// $btn-dark-disabled-bg-color: $gray-400 !default;
+
+// @mixin btn-variant(
+//   $color,
+//   $background,
+//   $border,
+//   $hover-color,
+//   $hover-background,
+//   $hover-border,
+//   $active-color,
+//   $active-background,
+//   $active-border,
+//   $disabled-color,
+//   $disabled-background,
+//   $disabled-border
+// ) {
+//   --#{$prefix}btn-color: #{$color};
+//   --#{$prefix}btn-bg: #{$background};
+//   --#{$prefix}btn-border-color: #{$border};
+//   --#{$prefix}btn-hover-color: #{$hover-color};
+//   --#{$prefix}btn-hover-bg: #{$hover-background};
+//   --#{$prefix}btn-hover-border-color: #{$hover-border};
+//   --#{$prefix}btn-active-color: #{$active-color};
+//   --#{$prefix}btn-active-bg: #{$active-background};
+//   --#{$prefix}btn-active-border-color: #{$active-border};
+//   --#{$prefix}btn-disabled-color: #{$disabled-color};
+//   --#{$prefix}btn-disabled-bg: #{$disabled-background};
+//   --#{$prefix}btn-disabled-border-color: #{$disabled-border};
+// }
+// @each $color, $value in $theme-colors {
+//   @if $color == "light" {
+//     .btn-#{$color} {
+//       @include btn-variant(
+//         $btn-light-color,
+//         $btn-light-bg-color,
+//         $btn-light-bg-color,
+//         $btn-light-hover-color,
+//         $btn-light-hover-bg-color,
+//         $btn-light-hover-bg-color,
+//         $btn-light-active-color,
+//         $btn-light-active-bg-color,
+//         $btn-light-active-bg-color,
+//         $btn-light-disabled-color,
+//         $btn-light-disabled-bg-color,
+//         $btn-light-disabled-bg-color
+//       )
+//     }
+//   } @else if $color == "dark" {
+//     .btn-#{$color} {
+//       @include btn-variant(
+//         $btn-dark-color,
+//         $btn-dark-bg-color,
+//         $btn-dark-bg-color,
+//         $btn-dark-hover-color,
+//         $btn-dark-hover-bg-color,
+//         $btn-dark-hover-bg-color,
+//         $btn-dark-active-color,
+//         $btn-dark-active-bg-color,
+//         $btn-dark-active-bg-color,
+//         $btn-dark-disabled-color,
+//         $btn-dark-disabled-bg-color,
+//         $btn-dark-disabled-bg-color
+//       )
+//     }
+//   }
+// }
+
+// // bootstrap _colored-links.scss
+// // 覆盖 bootstrap 样式
+// $link-light-color: $white !default;
+// $link-light-hover-color: $primary !default;
+
+// $link-dark-color: $black !default;
+// $link-dark-hover-color: $primary !default;
+
+// @each $color, $value in $theme-colors {
+//   @if $color == "light" {
+//     .link-#{$color} {
+//       color: $link-light-color !important;
+//       @if $link-shade-percentage != 0 {
+//         &:hover,
+//         &:focus {
+//           color: $link-light-hover-color!important;
+//         }
+//       }
+//     }
+//   } @else if $color == "dark" {
+//     .link-#{$color} {
+//       color: $link-dark-color !important;
+//       @if $link-shade-percentage != 0 {
+//         &:hover,
+//         &:focus {
+//           color: $link-dark-hover-color!important;
+//         }
+//       }
+//     }
+//   }
+//   //同时含有类名 .disabled 和 .link-* 的标签，覆盖其原本hover样式
+//   .link-#{$color} {
+//     @if $link-shade-percentage != 0 {
+//       &.disabled:hover,
+//       &.disabled:focus {
+//         color: $value !important;
+//       }
+//     }
+//   }
+// }

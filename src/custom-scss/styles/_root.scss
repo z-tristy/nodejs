@@ -1,0 +1,120 @@
+@use "sass:math";
+
+:root {
+  --#{$prefix}body-inverse-rgb: #{map-get($utilities-text, "body-inverse")};
+
+  // @each $breakpoint in map-keys($grid-breakpoints) {
+  //   @include media-breakpoint-up($breakpoint) {
+  //     $current-breakpoint-scale: map-get($responsive-scales, $breakpoint);
+  //     --#{$prefix}scale: #{$current-breakpoint-scale};
+  //   }
+  // }
+
+  // @each $key, $value in $utilities-all-spacers {
+  //   @if map-has-key($responsive-spacers, $key) {
+  //     --#{$prefix}spacer-#{$key}: calc(#{$value} * var(--#{$prefix}scale));
+  //   }
+
+  //   @else if $key == 4 {
+  //     --#{$prefix}spacer-#{$key}: #{$value};
+
+  //     @include media-breakpoint-down("sm") {
+  //       --#{$prefix}spacer-#{$key}: 1.125rem;
+  //     }
+  //   }
+
+  //   @else {
+  //     --#{$prefix}spacer-#{$key}: #{$value};
+  //   }
+  // }
+  @each $key, $value in $utilities-all-spacers {
+    @if type-of($value) == "map" {
+      $pc-spacer: map-get($value, pc);
+      $mob-pacer: map-get($value, mob);
+      --#{$prefix}spacer-#{$key}: #{$pc-spacer};
+
+      @include media-breakpoint-between($spacer-phone-breakpoint, $spacer-desktop-breakpoint, $spacer-breakpoints) {
+        $divisor: px2rem(map-get($spacer-breakpoints, $spacer-desktop-breakpoint) - map-get($spacer-breakpoints, $spacer-phone-breakpoint));
+
+        @if $key == 0 {
+          --#{$prefix}spacer-#{$key}: 0;
+        }
+
+        @else {
+          --#{$prefix}spacer-#{$key}: calc(#{math.div(($pc-spacer - $mob-pacer), $divisor)} * (100vw - #{map-get($spacer-breakpoints, $spacer-phone-breakpoint)}) + #{$mob-pacer});
+        }
+      }
+
+      @include media-breakpoint-down($spacer-phone-breakpoint) {
+        --#{$prefix}spacer-#{$key}: #{$mob-pacer};
+      }
+    }
+
+    @else {
+      --#{$prefix}spacer-#{$key}: #{$value};
+    }
+  }
+
+  // 字号的css变量 --se-fs-*
+  @each $key, $value in $utilities-font-size {
+    @if type-of($value) == "map" {
+      $pc-font-size: map-get($value, pc);
+      $mob-font-size: map-get($value, mob);
+      --#{$prefix}fs-#{$key}: #{$pc-font-size};
+
+      @include media-breakpoint-between($font-size-phone-breakpoint, $font-size-desktop-breakpoint, $font-size-breakpoints) {
+        $divisor: px2rem(map-get($font-size-breakpoints, $font-size-desktop-breakpoint) - map-get($font-size-breakpoints, $font-size-phone-breakpoint));
+        --#{$prefix}fs-#{$key}: calc(#{math.div(($pc-font-size - $mob-font-size), $divisor)} * (100vw - #{map-get($font-size-breakpoints, $font-size-phone-breakpoint)}) + #{$mob-font-size});
+      }
+
+      @include media-breakpoint-down($font-size-phone-breakpoint, $font-size-breakpoints) {
+        --#{$prefix}fs-#{$key}: #{$mob-font-size};
+      }
+    }
+
+    @else {
+      --#{$prefix}fs-#{$key}: #{$value};
+    }
+  }
+  // 字号的css变量 --se-display-*
+  @each $key, $value in $utilities-display-font-size {
+    @if type-of($value) == "map" {
+      $pc-font-size: map-get($value, pc);
+      $mob-font-size: map-get($value, mob);
+      --#{$prefix}display-#{$key}: #{$pc-font-size};
+
+      @include media-breakpoint-between($font-size-phone-breakpoint, $font-size-desktop-breakpoint, $font-size-breakpoints) {
+        $divisor: px2rem(map-get($font-size-breakpoints, $font-size-desktop-breakpoint) - map-get($font-size-breakpoints, $font-size-phone-breakpoint));
+        --#{$prefix}display-#{$key}: calc(#{math.div(($pc-font-size - $mob-font-size), $divisor)} * (100vw - #{map-get($font-size-breakpoints, $font-size-phone-breakpoint)}) + #{$mob-font-size});
+      }
+
+      @include media-breakpoint-down($font-size-phone-breakpoint, $font-size-breakpoints) {
+        --#{$prefix}display-#{$key}: #{$mob-font-size};
+      }
+    }
+
+    @else {
+      --#{$prefix}display-#{$key}: #{$value};
+    }
+  }
+
+  --carousel-indicator-active-bg: #ffffff;
+  --carousel-indicator-active-bg-rgb: 255, 255, 255;
+  --carousel-indicator-dark-active-bg: #000000;
+  --carousel-indicator-dark-active-bg-rgb: 0, 0, 0;
+  --carousel-indicator-opacity: .2;
+  --carousel-indicator-active-opacity: 1;
+
+  --carousel-indicator-dot-hit-area-height: 16px;
+  --carousel-indicator-dot-size: 8px;
+
+  --carousel-indicator-line-hit-area-height: 18px;
+  --carousel-indicator-line-horizontal-gap: 4px;
+  --carousel-indicator-line-width: 40px;
+  --carousel-indicator-line-height: 2px;
+
+  --carousel-indicator-circle-horizontal-gap: 8px;
+  --carousel-indicator-circle-size: 8px;
+  --carousel-indicator-circle-ring-width: 2px;
+  --carousel-indicator-circle-active-size: calc(var(--carousel-indicator-circle-size) + var(--carousel-indicator-circle-ring-width) * 2);
+}

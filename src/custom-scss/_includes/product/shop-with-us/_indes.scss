@@ -1,0 +1,54 @@
+.shop-with-us-wrap {
+  .recommendations-link::after {
+    z-index: 2;
+  }
+
+  .recommendations-card {
+    .selected-icon {
+      @extend .d-none;
+    }
+
+    &.picked {
+      border-color: $primary !important;
+      box-shadow: 0 0 0 1px $primary;
+
+      .selected-icon {
+        @extend .d-flex;
+      }
+    }
+  }
+
+  .recommendations-add-btn {
+    @extend .bg-transparent;
+    @extend .text-primary;
+
+    &.is-active {
+      @extend .bg-primary;
+      @extend .text-white;
+      @extend .cursor-default;
+    }
+  }
+
+  // .accessroy-title {
+  //   @include media-breakpoint-up(lg) {
+  //     font-size: 1.125rem;
+  //   }
+  // }
+
+  button[type="submit"] {
+    &.loading {
+      .add-to-cart-text {
+        visibility: hidden !important;
+      }
+
+      .loading-icon {
+        display: block !important;
+      }
+    }
+  }
+
+  .recommendations-img-wrap {
+    width: px2rem(64px);
+    height: px2rem(64px);
+  }
+}

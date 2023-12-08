@@ -1,0 +1,64 @@
+@use "sass:math";
+$notify-me-modal-gutter-x: 1.5rem;
+
+.notify-me-modal {
+  .modal-dialog {
+    max-width: 690px;
+    margin-left: auto;
+    margin-right: auto;
+    // 屏幕宽度小于等于本身弹窗宽度时
+    $sm-breakpoint: 690px + rem2px($notify-me-modal-gutter-x) * 2;
+
+    @include media-breakpoint-down(sm, (sm: $sm-breakpoint)) {
+      margin-left: $notify-me-modal-gutter-x;
+      margin-right: $notify-me-modal-gutter-x;
+    }
+  }
+
+  .richtext-with-link {
+    @include media-breakpoint-down(md) {
+      font-size: $small-font-size;
+    }
+  }
+
+  .notify-me-modal-wrap {
+    .success-wrap {
+      display: none;
+    }
+
+    .sucess-content {
+      z-index: 1;
+    }
+
+    &.success {
+      .form-wrap {
+        opacity: 0;
+      }
+
+      .success-wrap {
+        display: block;
+      }
+    }
+  }
+
+  .btn-modal-close {
+    position: absolute;
+    z-index: 1;
+    top: .5rem;
+    right: .5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: none;
+
+    > svg {
+      display: block;
+    }
+  }
+
+  .modal-img-top {
+    @if $enable-rounded {
+      border-top-right-radius: valid-radius($modal-content-border-radius);
+      border-top-left-radius: valid-radius($modal-content-border-radius);
+    }
+  }
+}

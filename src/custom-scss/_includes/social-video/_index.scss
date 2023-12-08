@@ -1,0 +1,36 @@
+.social-video-section{
+  .card-name{
+    color: #1a2633; 
+  }
+  .avatar-size{
+    width: 4rem;
+    height: 4rem;
+    @include media-breakpoint-down(md) {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+  }
+  .play-svg-position{
+    bottom: 1rem;
+    right: 1rem;
+  }
+  .object-fit-colver{
+    object-fit: cover;
+  }
+  .modal-header{
+    border-bottom: 0px;
+  }
+  .modal-dialog{
+    @include media-breakpoint-down(md) {
+      margin: 0rem !important;
+    }
+  }
+  .text-black p{
+    margin-bottom: 0px;
+  }
+  .heading-limit{
+    @include media-breakpoint-down(md) {
+      max-width: px2rem(380px);
+    }      
+  }
+}

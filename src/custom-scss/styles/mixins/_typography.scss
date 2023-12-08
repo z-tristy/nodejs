@@ -1,0 +1,25 @@
+@use "sass:math";
+// SCSS Typograhy mixin
+//
+// Automated responsive values for font size
+
+// Support $value with px、rem、em unit or $value is 0
+@mixin custom-fs($value, $property: font-size) {
+  @if type-of($value) == "string" {
+    #{$property}: $value;
+  }
+  @else if type-of($value) == "number" {
+    --#{$prefix}#{$property}: #{$value};
+    #{$property}: var(--#{$prefix}#{$property});
+  }
+}
+
+// Shorthand helper mixins
+@mixin font-size($value) {
+  @if $enable-rfs {
+    @include rfs($value);
+  }
+  @else {
+    @include custom-fs($value);
+  }
+}

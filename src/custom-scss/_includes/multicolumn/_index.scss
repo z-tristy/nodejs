@@ -1,0 +1,61 @@
+.multicolumn {
+  .richtext-with-link {
+    a {
+      position: relative;
+      z-index: 2;
+    }
+  }
+
+  .mob-scroll {
+    @include media-breakpoint-down(lg) {
+      overflow-x: scroll;
+      overflow-y: hidden;
+    }
+  }
+
+  .pe-scroll-2 {
+    padding-right: 20%;
+
+    @media (max-width: 413px) {
+      padding-right: 12%;
+    }
+  }
+
+  .pe-scroll-1 {
+    @include media-breakpoint-down(lg) {
+      padding-right: 20%;
+    }
+
+    @include media-breakpoint-down(md) {
+      padding-right: 35%;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    .big-icon-wrap-md-lg {
+      width: map-get($big-icon-sizes, "lg");
+      height: map-get($big-icon-sizes, "lg");
+    }
+
+    .big-icon-wrap-md-md {
+      width: map-get($big-icon-sizes, "md");
+      height: map-get($big-icon-sizes, "md");
+    }
+  }
+
+  &.split-multicolumn {
+    .pe-scroll-md {
+      padding-right: 0;
+
+      @include media-breakpoint-down(md) {
+        padding-right: 15%;
+      }
+    }
+
+    .mob-scroll-md {
+      @include media-breakpoint-down(md) {
+        overflow-x: scroll;
+      }
+    }
+  }
+}

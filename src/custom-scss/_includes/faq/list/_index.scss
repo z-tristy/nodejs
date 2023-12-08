@@ -1,0 +1,80 @@
+.faq-list {
+
+  .faq-list-flatted {
+    @include media-breakpoint-down(md) {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    .faq-list-flatted-row {
+      @include media-breakpoint-down(md) {
+        --se-gutter-x: 0;
+      }
+    }
+
+    .flatted-menu-mob {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+    }
+
+    .underline {
+      width: 2px;
+
+      .active-line {
+        transition: all .3s linear;
+      }
+    }
+  }
+
+  .tab-pane {
+    &.fade {
+      transition: opacity 80ms linear;
+    }
+  }
+
+  .accordion-collapse {
+    transition: all .3s ease !important;
+  }
+
+  .nav-link {
+    outline: none;
+
+    @include media-breakpoint-up(md) {
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    &.active {
+      color: $primary;
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  .accordion-button {
+    border-color: $gray-300;
+    align-items: start;
+    @include media-breakpoint-up(md) {
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
+  .mob-select-area {
+    transition: opacity .3s ease-in-out !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+    display: block;
+  }
+
+  .fade-out {
+    height: 0;
+    z-index: -2;
+    opacity: 0;
+  }
+
+  .fade-in {
+    height: auto;
+    z-index: 2;
+    opacity: 1;
+  }
+}

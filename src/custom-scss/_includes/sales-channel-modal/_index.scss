@@ -1,0 +1,36 @@
+@use "sass:math";
+
+.sales-channel-modal {
+  $sales-channel-modal-gutter-x: $spacer * .5;
+
+  .modal-dialog {
+    max-width: $spacer * 30;
+    margin-left: auto;
+    margin-right: auto;
+    // 屏幕宽度小于等于本身弹窗宽度时
+    $sm-breakpoint: $spacer * 30 + $sales-channel-modal-gutter-x * 2;
+
+    @include media-breakpoint-down(sm, (sm: $sm-breakpoint)) {
+      margin-left: $sales-channel-modal-gutter-x;
+      margin-right: $sales-channel-modal-gutter-x;
+    }
+  }
+
+  .btn-modal-close {
+    position: absolute;
+    z-index: 1;
+    top: $spacer * .5;
+    right: $spacer * .5;
+    width: $spacer * 1.5;
+    height: $spacer * 1.5;
+    background-image: none;
+
+    > svg {
+      display: block;
+    }
+  }
+
+  .logo-img {
+    height: $spacer * 2;
+  }
+}

@@ -1,0 +1,195 @@
+@use "sass:math";
+$newsletter-modal-gutter-x: 1.5rem;
+.newsletter-modal.modal {
+  z-index: 9999;
+}
+.newsletter-modal {
+  .modal-dialog {
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    // 屏幕宽度小于等于本身弹窗宽度时
+    $sm-breakpoint: 480px + rem2px($newsletter-modal-gutter-x) * 2;
+    @include media-breakpoint-down(sm, (sm: $sm-breakpoint)) {
+      margin-left: $newsletter-modal-gutter-x;
+      margin-right: $newsletter-modal-gutter-x;
+    }
+  }
+
+  .richtext-with-link {
+    @include media-breakpoint-down(md) {
+      font-size: $small-font-size;
+    }
+  }
+
+  .newsletter-modal-wrap {
+    .success-wrap {
+      display: none;
+    }
+    .sucess-content {
+      z-index: 1;
+    }
+    &.success {
+      .form-wrap {
+        opacity: 0;
+      }
+      .success-wrap {
+        display: block;
+      }
+    }
+  }
+  .btn-modal-close {
+    position: absolute;
+    z-index: 1;
+    top: .5rem;
+    right: .5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: none;
+    > svg {
+      display: block;
+    }
+  }
+  .modal-img-top {
+    @if $enable-rounded {
+      border-top-right-radius: valid-radius($modal-content-border-radius);
+      border-top-left-radius: valid-radius($modal-content-border-radius);
+    }
+  }
+  // .modal-inner-content {
+  //   padding: 4rem;
+  //   @include media-breakpoint-down(md) {
+  //     padding: 2.5rem 1.5rem;
+  //   }
+  // }
+}
+// 图文上下布局
+// .newsletter-modal-vertical {
+//   .modal-inner-content {
+//     padding: 2rem 2.5rem;
+//   }
+//  .form-wrap {
+//    padding-bottom: .5rem;
+//  }
+// }
+// 图文左右布局
+.newsletter-modal-horizontal {
+  .modal-dialog {
+    max-width: 960px;
+    // 屏幕宽度小于等于本身弹窗宽度时
+    $sm-breakpoint: 960px + rem2px($newsletter-modal-gutter-x) * 2;
+    @include media-breakpoint-down(md, (md: $sm-breakpoint)) {
+      margin-left: $newsletter-modal-gutter-x;
+      margin-right: $newsletter-modal-gutter-x;
+    }
+    @include media-breakpoint-down(md) {
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    // 屏幕宽度小于等于本身弹窗宽度时
+    $sm-breakpoint: 480px + rem2px($newsletter-modal-gutter-x) * 2;
+    @include media-breakpoint-down(sm, (sm: $sm-breakpoint)) {
+      margin-left: $newsletter-modal-gutter-x;
+      margin-right: $newsletter-modal-gutter-x;
+    }
+  }
+  .modal-body {
+    display: flex;
+    @include media-breakpoint-down(md) {
+      display: block;
+    }
+  }
+  .modal-inner-content {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    // padding: 2.5rem 4rem;
+    @include media-breakpoint-down(md) {
+      display: block;
+      width: 100%;
+    }
+  }
+  .form-wrap {
+    @include media-breakpoint-down(md) {
+      padding-bottom: .5rem;
+    }
+  }
+  .modal-img {
+    width: 50%;
+    @if $enable-rounded {
+      border-top-left-radius: valid-radius($modal-content-border-radius);
+      border-bottom-left-radius: valid-radius($modal-content-border-radius);
+    }
+    overflow: hidden;
+    @include media-breakpoint-down(md) {
+      width: 100%;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    .crop-img-wrap {
+      width: 480px;
+      position: relative;
+      margin-left: calc((100% - 480px) / 2);
+    }
+  }
+}
+// .newsletter-modal-vertical,
+// .newsletter-modal-horizontal {
+//   .modal-inner-content {
+//     @include media-breakpoint-down(md) {
+//       padding: px2rem(24px);
+//     }
+//   }
+// }
+
+// 侧边唤醒按钮
+$popup-icon-padding: 12px;
+$popup-icon-size: 24px;
+.subscribe-popup {
+  z-index: $zindex-modal-backdrop - 1;
+  transition: all .3s ease-out;
+  &.subscribe-open {
+    transform: translate(15px);
+    opacity: 0;
+  }
+  &.middle-left {
+    top: calc(50vh - #{math.div(($popup-icon-padding * 2 + $popup-icon-size), 2)});
+    left: px2rem(24px);
+    @include media-breakpoint-down(md) {
+      left: px2rem(16px);
+    }
+  }
+  &.middle-right {
+    top: calc(50vh - #{math.div(($popup-icon-padding * 2 + $popup-icon-size), 2)});
+    right: px2rem(24px);
+    @include media-breakpoint-down(md) {
+      right: px2rem(16px);
+    }
+  }
+  &.bottom-left {
+    left: px2rem(24px);
+    bottom: px2rem(48px);
+    @include media-breakpoint-down(md) {
+      left: px2rem(16px);
+      bottom: px2rem(32px);
+    }
+  }
+  &.bottom-right {
+    right: px2rem(24px);
+    bottom: px2rem(48px);
+    @include media-breakpoint-down(md) {
+      right: px2rem(16px);
+      bottom: px2rem(32px);
+    }
+  }
+  .subscribe-popup-icon {
+    padding: px2rem($popup-icon-padding);
+    .img,
+    svg {
+      display: block;
+      width: px2rem($popup-icon-size);
+      height: px2rem($popup-icon-size);
+    }
+  }
+}

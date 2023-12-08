@@ -1,0 +1,155 @@
+// 下拉蒙层
+.dropdown-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $zindex-sticky;
+  width: 100vw;
+  height: 0;
+  background-color: #000;
+  opacity: 0;
+  &.fade {
+    transition: opacity 0.1s linear, z-index 0.1s linear, height 0.01s linear;
+  }
+  &.show {
+    opacity: 0.15;
+    height: 100vh;
+    transition: opacity 0.1s linear, z-index 0.1s linear, height 0.01s linear;
+  }
+}
+
+.shopify-section-header {
+  &.expanded:not(.sticky-top) {
+    position: relative;
+    // 移动端展开菜单后，保证页头覆盖在国家选择Toolbar上
+    z-index: $zindex-fixed + 2;
+  }
+  &:not(.sticky-top) {
+    position: relative;
+    z-index: calc(#{$zindex-sticky} + 1);
+  }
+  &.dropdown-backdrop-show:not(.sticky-top) {
+    position: relative;
+    z-index: $zindex-sticky;
+  }
+  // &:not(.sticky-top) {
+  //   position: relative;
+  //   z-index: calc(#{$zindex-sticky} + 1);
+  // }
+  // &.dropdown-backdrop-show:not(.sticky-top) {
+  //   position: relative;
+  //   z-index: $zindex-sticky;
+  // }
+  &.animate {
+    transition: transform .15s ease-out;
+  }
+}
+.shopify-section-header-hidden {
+  transform: translateY(-100%);
+}
+
+// 页头购物车icon
+.cart-wrap {
+  .full-cart {
+    display: none;
+  }
+  .empty-cart {
+    display: block;
+  }
+  &.full {
+    .full-cart {
+      display: block;
+    }
+    .empty-cart {
+      display: none;
+    }
+  }
+  .full-cart {
+    position: relative;
+    .full-cart-dot {
+      position: absolute;
+      top: 0.1rem;
+      right: 0.125rem;
+      background: $primary;
+      border-radius: 50%;
+      width: .5rem;
+      height: .5rem;
+    }
+    .cart-count {
+      top: 0;
+      right: 0;
+      width: 1rem;
+      height: 1rem;
+      font-size: $font-size-sm;
+      text-align: center;
+      line-height: 1rem;
+      font-weight: $font-weight-bold;
+      color: $white;
+      &.exceeded {
+        text-align: left;
+        padding-left: .125rem;
+        &::before  {
+          content: '+';
+          position: absolute;
+          right: 0;
+          transform: scale(.8);
+          top: -.125rem;
+        }
+      }
+    }
+  }
+}
+
+// 导航
+.nav-link{
+  letter-spacing: -0.1px;
+  line-height: 1.5rem;
+  padding: 1rem 0;
+  color: $body-color;
+  white-space: nowrap;
+  @include media-breakpoint-down(lg) {
+    line-height: 1.1325rem;
+    white-space: normal;
+  }
+  // 下拉箭头
+  &.dropdown-toggle {
+    &::after {
+      display: none;
+    }
+    .dropdown-icon {
+      @include media-breakpoint-down(lg) {
+        float: right;   
+      }
+      svg {
+        transition: transform .1s ease;
+        @include media-breakpoint-up(lg) {
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+    }
+    &.show {
+      .dropdown-icon {
+        svg {
+          // transform: rotate(180deg);
+          transition: transform .1s ease;
+        }
+      }
+    }
+    @include media-breakpoint-down(lg) {
+      .dropdown-icon {
+        svg {
+          transition: transform .1s ease;
+        }
+      }
+      &.show {
+        .dropdown-icon {
+          svg {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+  }
+   
+}

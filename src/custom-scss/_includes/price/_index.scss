@@ -1,0 +1,40 @@
+.price {
+  align-items: flex-start;
+
+  dl {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+  }
+
+  dd {
+    margin-bottom: 0;
+  }
+
+  .price__sale {
+    display: none;
+  }
+
+  &.price--on-sale {
+    .price__regular {
+      display: none;
+    }
+
+    .price__sale {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+
+      @extend .mx-n1;
+
+      dd {
+        @extend .mx-1;
+      }
+
+      .price__compare {
+        color: var(--se-gray-400);
+      }
+    }
+  }
+}

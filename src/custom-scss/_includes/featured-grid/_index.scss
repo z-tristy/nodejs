@@ -1,0 +1,94 @@
+@use "sass:math";
+@import "../../styles/base";
+// @import '../../styles/slider-mixins';
+@import '../../styles/slider-functions';
+
+.featured-grid {
+  @include media-breakpoint-down(md) {
+    @import '../../../node_modules/swiper/swiper';
+    @import '../../../node_modules/swiper/modules/scrollbar/scrollbar.scss';
+    $scrollbar-height: px2rem(6px);
+    $scrollbar-radius: math.div($scrollbar-height, 2);
+    //$scrollbar-radius-sm要小1px
+    $scrollbar-radius-sm: math.div($scrollbar-height, 3);
+  .swiper-scrollbar {
+      bottom: 0 !important;
+      width: px2rem(720px) !important;
+      height: $scrollbar-height * 4 !important;
+      border-radius: $scrollbar-radius;
+      background-color: transparent;
+      @include media-breakpoint-down(md) {
+        max-width: px2rem(342px);
+        width: calc(100% - #{get-value('sm', $containers-padding-x)}) !important;
+      }
+      @include media-breakpoint-down(sm) {
+        max-width: none;
+        width: 100% !important;
+      }
+      &::before {
+        content: '';
+        background-color: #e6e6e6;
+        height: $scrollbar-height;
+        width: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        border-radius: $scrollbar-radius;
+      }
+    }
+
+    .swiper-scrollbar-drag {
+      height: $scrollbar-height;
+      top: $scrollbar-height * 1.5;
+      background-color: $gray-700;
+      border-radius: $scrollbar-radius-sm;
+    }
+    // .featured-grid-padding {
+    //   padding: 0;
+    // }
+    .swiper-slide {
+      padding-right: 1rem;
+      padding-left: 0;
+    }
+    // .first-swiper-slide {
+    //   padding-left: 0;
+    // }
+    .last-swiper-slide {
+      padding-right: 0;
+    }
+    .swiper-wrapper {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    
+  }
+  @include media-breakpoint-up(lg) {
+    .img-wrapper {
+      img {
+        transition: opacity .4s, transform .4s, -webkit-transform .4s;
+      }
+    }
+    .img-wrapper:hover {
+      img {
+        opacity: .7;
+        transform: scale(1.05);
+      }
+    }
+  }
+  //覆盖swiper-slide的width:100%;
+  .swiper-wrapper {
+    @include media-breakpoint-up(md) {
+      .col-md-8 {
+        width: 66.66666667%;
+      }
+      .col-md-6 {
+        width: 50%;
+      }
+      .col-md-4 {
+        width: 33.33333333%;
+      }
+    }
+  }
+}

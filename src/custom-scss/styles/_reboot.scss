@@ -1,0 +1,44 @@
+@if $enable-rfs {}
+@else {
+  @each $key in map-keys($font-sizes) {
+    h#{$key},
+    .h#{$key} {
+      --#{$prefix}font-size: var(--#{$prefix}fs-#{$key});
+    }
+    // h#{$key} {
+    //   @include margin-bottom(var(--#{$prefix}font-size));
+    // }
+  }
+  // Type display classes
+  @each $key in map-keys($display-font-sizes) {
+    .display-#{$key} {
+      --#{$prefix}font-size: var(--#{$prefix}display-#{$key});
+    }
+  }
+}
+
+// .fs-body {
+//   @include font-size(var(--#{$prefix}body-font-size));
+// }
+
+// .fs-small {
+//   @include font-size($et-font-size-body2);
+// }
+
+// .fs-footnote {
+//   @include font-size($et-font-size-description1);
+// }
+
+// .fs-footnote-sm {
+//   @include font-size($et-font-size-description2);
+// }
+
+// .fs-0 {
+//   @include font-size(0);
+// }
+
+// hr {
+//   color: var(--#{$prefix}hr-color, $hr-color);
+//   border-top-width: var(--#{$prefix}hr-border-width, $hr-border-width);
+//   opacity: var(--#{$prefix}hr-opacity, $hr-opacity);
+// }

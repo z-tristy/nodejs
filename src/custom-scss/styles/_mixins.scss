@@ -1,0 +1,167 @@
+// Font size
+@import "./mixins/typography";
+// Layout
+@import "./mixins/container";
+@import "./mixins/grid";
+
+@mixin render-outline-dynamic-btn(
+  $color,
+  $color-hover: color-contrast($color),
+  $active-background: $color,
+  $active-border: $color,
+  $active-color: color-contrast($active-background)
+) {
+  @include button-outline-variant($color);
+  &:hover {
+    &:not([disabled]) {
+      color: $color-hover;
+      background-color: $active-background;
+      border-color: $active-border;
+    }
+  }
+}
+
+@mixin render-solid-dynamic-btn(
+  $background,
+  $border,
+  $color: color-contrast($background),
+  $hover-background: if($color == $color-contrast-light, shade-color($background, $btn-hover-bg-shade-amount), tint-color($background, $btn-hover-bg-tint-amount)),
+  $hover-border: if($color == $color-contrast-light, shade-color($border, $btn-hover-border-shade-amount), tint-color($border, $btn-hover-border-tint-amount)),
+  $hover-color: color-contrast($hover-background),
+  $active-background: if($color == $color-contrast-light, shade-color($background, $btn-active-bg-shade-amount), tint-color($background, $btn-active-bg-tint-amount)),
+  $active-border: if($color == $color-contrast-light, shade-color($border, $btn-active-border-shade-amount), tint-color($border, $btn-active-border-tint-amount)),
+  $active-color: color-contrast($active-background),
+  $disabled-background: $background,
+  $disabled-border: $border,
+  $disabled-color: color-contrast($disabled-background)
+) {
+  @include button-variant($background, $border);
+  &:hover {
+    &:not([disabled]) {
+      color: $hover-color;
+      @include gradient-bg($hover-background);
+      border-color: $hover-border;
+    }
+  }
+}
+
+@mixin render-dynamic-btn($btn-theme-color, $is-outline-btn) {
+  @if $is-outline-btn {
+    @include render-outline-dynamic-btn($btn-theme-color);
+  } @else {
+    @include render-solid-dynamic-btn($btn-theme-color, $btn-theme-color);
+  }
+}
+
+// Detect a touch device with only CSS https://ferie.medium.com/detect-a-touch-device-with-only-css-9f8e30fa1134
+@mixin not-touch-device {
+  @media (hover: hover) {
+    @content;
+  }
+}
+
+@mixin is-touch-device {
+  @media (hover: none) and (pointer: coarse) {
+    @content;
+  }
+}
+
+// 处理生成.p*-section、 .m*-section、 .m*-nsection逻辑
+@mixin generate-section-vertical-space() {
+  $section-vertical-spacers: (
+    small: (
+      suffix: '-sm',
+      spacers: (
+        mobile: 3,
+        tablet: 4,
+        desktop: 5,
+      )
+    ),
+    default: (
+      suffix: '',
+      spacers: (
+        mobile: 4,
+        tablet: 5,
+        desktop: 6,
+      )
+    ),
+    large: (
+      suffix: '-lg',
+      spacers: (
+        mobile: 4,
+        tablet: 5,
+        desktop: 6,
+      )
+    )
+  );
+  $section-space-prefixs: 'py', 'pt', 'pb', 'my', 'mt', 'mb';
+  @each $section-type, $section-vertical-spacer in $section-vertical-spacers {
+    @each $prefix in $section-space-prefixs {
+      $suffix: map-get($section-vertical-spacer, suffix);
+      $spacers: map-get($section-vertical-spacer, spacers);
+
+      $type: str-slice($prefix, 1, 1);
+      $direction: str-slice($prefix, 2, 2);
+      @if $type == 'p' {
+        .#{$prefix}-section#{$suffix} {
+          @include generate-section-vertical-space-style($type, $direction, $spacers, $utilities-spacers-css-vars);
+        }
+      }
+
+      @if $type == 'm' {
+        .#{$prefix}-section#{$suffix} {
+          @include generate-section-vertical-space-style($type, $direction, $spacers, $utilities-spacers-css-vars);
+        }
+      }
+
+      @if $type == 'm' and $enable-negative-margins {
+        .#{$prefix}-nsection#{$suffix} {
+          @include generate-section-vertical-space-style($type, $direction, $spacers, $utilities-negative-spacers-css-vars, true);
+        }
+      }
+
+    }
+  }
+}
+
+// 生成.p*-section、 .m*-section、 .m*-nsection样式
+@mixin generate-section-vertical-space-style($type, $direction, $spacers, $css-vars, $is-negative: false) {
+  $property-prefix: if($type == 'p', padding, margin);
+  $desktop-space: if($is-negative, 'n#{map-get($spacers, desktop)}', map-get($spacers, desktop));
+  $tablet-space: if($is-negative, 'n#{map-get($spacers, tablet)}', map-get($spacers, tablet));
+  $mobile-space: if($is-negative, 'n#{map-get($spacers, mobile)}', map-get($spacers, mobile));
+  @if $direction == 't' {
+    #{$property-prefix}-top: map-get($css-vars, $mobile-space) if($enable-important-utilities, !important, null);
+  }
+  @if $direction == 'b' {
+    #{$property-prefix}-bottom: map-get($css-vars, $mobile-space) if($enable-important-utilities, !important, null);
+  }
+  @if $direction == 'y' {
+    #{$property-prefix}-top: map-get($css-vars, $mobile-space) if($enable-important-utilities, !important, null);
+    #{$property-prefix}-bottom: map-get($css-vars, $mobile-space) if($enable-important-utilities, !important, null);
+  }
+  @include media-breakpoint-up(lg) {
+    @if $direction == 't' {
+      #{$property-prefix}-top: map-get($css-vars, $tablet-space) if($enable-important-utilities, !important, null);
+    }
+    @if $direction == 'b' {
+      #{$property-prefix}-bottom: map-get($css-vars, $tablet-space) if($enable-important-utilities, !important, null);
+    }
+    @if $direction == 'y' {
+      #{$property-prefix}-top: map-get($css-vars, $tablet-space) if($enable-important-utilities, !important, null);
+      #{$property-prefix}-bottom: map-get($css-vars, $tablet-space) if($enable-important-utilities, !important, null);
+    }
+  }
+  @include media-breakpoint-up(md) {
+    @if $direction == 't' {
+      #{$property-prefix}-top: map-get($css-vars, $desktop-space) if($enable-important-utilities, !important, null);
+    }
+    @if $direction == 'b' {
+      #{$property-prefix}-bottom: map-get($css-vars, $desktop-space) if($enable-important-utilities, !important, null);
+    }
+    @if $direction == 'y' {
+      #{$property-prefix}-top: map-get($css-vars, $desktop-space) if($enable-important-utilities, !important, null);
+      #{$property-prefix}-bottom: map-get($css-vars, $desktop-space) if($enable-important-utilities, !important, null);
+    }
+  }
+}

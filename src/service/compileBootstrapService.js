@@ -17,10 +17,10 @@ export function compileBootstrap(cssFilePath, param) {
 console.log(cssFilePath)
 
   // 处理 custom-variables
-  const customVariablesPath = path.resolve(__dirname, "../bootstrap/scss/_custom-variables.scss");
+  const customVariablesPath = path.resolve(__dirname, "../custom-scss/styles/customize/_variables.scss");
   writeFileSync(customVariablesPath, `${general}`)
   
-  const bootstrapSourceCodePath = path.resolve(__dirname, "../bootstrap/scss/bootstrap.scss");
+  const bootstrapSourceCodePath = path.resolve(__dirname, "../custom-scss/styles/base.min.scss");
   console.log('sass.compile')
   console.log(bootstrapSourceCodePath)
   const rlt = sass.compile(bootstrapSourceCodePath);

@@ -1,0 +1,140 @@
+.site-footer {
+  .invalid-feedback {
+    font-size: .75rem;
+  }
+
+  // 移动端下拉
+  .footer-collapse-trigger {
+    svg {
+      transition: all 0.5s;
+    }
+
+    &[aria-expanded="true"] {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .subscribe-width {
+    @include media-breakpoint-up(md) {
+      width: 352px;
+    }
+    @include media-breakpoint-up(lg) {
+      width: 320px;
+    }
+  }
+
+  // 解决focus输入框时，没有包括input-group-text部分
+  .input-group {
+    .form-control {
+      @if $enable-rounded {
+        border-radius: valid-radius($input-border-radius)!important;
+      }
+    }
+    .input-group-text {
+      position: absolute;
+      right: $input-border-width;
+      top: $input-border-width;
+      bottom: $input-border-width;
+      border-radius: valid-radius($input-border-radius);
+      z-index: 3;
+    }
+  }
+
+  // 浅色
+  &.light {
+    .link-footer {
+      color: $gray-600;
+  
+      &:hover {
+        color: $black;
+      }
+    }
+  
+    .text-footer {
+      color: $gray-600;
+  
+      a {
+        color: $gray-600;
+  
+        &:hover {
+          color: $gray-800;
+        }
+      }
+    }
+
+    .input-group-text {
+      background-color: $white;
+    }
+  }
+
+  // 深色
+  &.dark {
+    background-color: $gray-900;
+    color: $gray-300;
+
+    .form-control {
+      background-color: transparent;
+      color: $gray-400;
+    }
+
+    .input-group-text {
+      background-color: transparent;
+      color: $white;
+    }
+
+    .form-check-input {
+      &:checked {
+        border-color: currentColor;
+      }
+    }
+
+    .text-footer {
+      color: $gray-500;
+
+      a {
+        color: $gray-500;
+
+        &:hover {
+          color: $gray-600;
+        }
+      }
+    }
+
+    .link-footer {
+      color: $gray-500;
+
+      &:hover {
+        color: $gray-600;
+      }
+    }
+
+    hr {
+      color: $gray-700;
+    }
+  }
+}
+.footnotes {
+  &.dark {
+    background-color: $gray-900;
+    color: $gray-500;
+    .link-footer {
+      color: $gray-300;
+
+      &:hover {
+        color: $gray-600;
+      }
+    }
+  }
+  &.light {
+    color: $gray-600;
+    .link-footer {
+      color: $gray-900;
+  
+      &:hover {
+        color: $gray-600;
+      }
+    }
+  }
+}

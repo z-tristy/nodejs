@@ -1,0 +1,45 @@
+.richtext-description {
+  a {
+    @extend .fw-bold;
+  }
+  figure,img {
+    height: auto;
+    vertical-align: middle;
+  }
+  figure,img,svg {
+    max-width: 100%;
+  }
+  iframe {
+    width: 100%;
+    border: 0;
+  }
+}
+
+// policy
+.shopify-policy__container{
+  @extend .container;
+  @extend .py-section;
+  a {
+    @extend .fw-bold;
+  }
+  .shopify-policy__title h1{
+      @extend .mb-6;
+  }
+  .shopify-policy__body, .shopify-policy__title{
+    @extend .col-md-8;
+    @extend .col-12;
+    @extend .mx-auto;
+    word-break: break-word;
+}
+  figure,img {
+    height: auto;
+    vertical-align: middle;
+  }
+  figure,img,svg {
+    max-width: 100%;
+  }
+  iframe {
+    width: 100%;
+    border: 0;
+  }
+}

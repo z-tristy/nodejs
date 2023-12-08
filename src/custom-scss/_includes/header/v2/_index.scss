@@ -1,0 +1,936 @@
+$nav-foot-weight: 400;
+.nav-fw {
+  font-weight: $nav-foot-weight;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// 下拉蒙层
+.dropdown-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $zindex-sticky;
+  width: 100vw;
+  height: 0;
+  background-color: #000;
+  opacity: 0;
+  &.fade {
+    transition: opacity 0.1s linear, z-index 0.1s linear, height 0.01s linear;
+  }
+  &.show {
+    opacity: 0.15;
+    height: 100vh;
+    transition: opacity 0.1s linear, z-index 0.1s linear, height 0.01s linear;
+  }
+}
+
+.site-header-v2 {
+  z-index: calc(#{$zindex-sticky} + 1);
+  position: relative;
+  &.site-header-box-shadow {
+    box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);
+  }
+  .site-header-box-shadow {
+  box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);
+  }
+  .site-header-container {
+    @include media-breakpoint-down(xl) {
+      max-width: 100%;
+    }
+    .nav-menu.nav-menu-padding-top {
+      @include media-breakpoint-up(lg) {
+        padding-top: 1rem;
+      }
+    }
+  }
+  // 移动端内容高度
+  .nav-height {
+    height: $header-h-sm;
+  }
+  // logo
+  .logo {
+    @include media-breakpoint-up(lg) {
+      margin-right: 2.75rem;
+    }
+    img {
+      max-width: 15rem;
+      max-height: 2.5rem;
+    }
+  }
+  // 下拉菜单 pc端
+  @include media-breakpoint-down(lg) {
+    .navbar-toggler {
+      padding: 0.75rem;
+      &:focus {
+        box-shadow: none;
+      }
+      // 菜单toggler
+      &:not(.collapsed) {
+        .hamburger-box:nth-child(1) {
+          transform: translateY(6px);
+          &::before {
+            transform: rotate(45deg);
+          }
+        }
+        .hamburger-box:nth-child(2) {
+          opacity: 0;
+        }
+        .hamburger-box:nth-child(3) {
+          transform: translateY(-6px);
+          &::before {
+            transform: rotate(-45deg);
+          }
+        }
+      }
+      .hamburger-box-wrapper {
+        // padding: 0.1875rem 0.375rem;
+        .hamburger-box {
+          display: block;
+          padding-top: 2px;
+          padding-bottom: 2px;
+          transition: all .25s ease;
+          &::before {
+            content: '';
+            display: block;
+            border-top: 2px solid;
+            width: 18px;
+            border-radius: 2px;
+            border-color: $body-color;
+            transition: transform .25s ease;
+          }
+        }
+      }
+    }
+
+    
+    .hide-sub-dropdown-menu {
+      display: none;
+    }
+    
+  }
+
+  // 个人中心
+  .nav-icon {
+    .nav-item {
+      padding: 0 .5rem;
+    }
+    &.icon-wrapper {
+      padding: 0.75rem;
+    }
+    @include media-breakpoint-down(lg) {
+      display: flex;
+      align-items: center;
+    }
+    .cart-icon-bubble-wrapper {
+      padding: 0;
+    }
+    .icon-btn {
+      transition: color 0.1s ease;
+    }
+  }
+
+  // 导航
+  .nav-link{
+    letter-spacing: -0.1px;
+    line-height: 1.5rem;
+    padding: 1rem 0;
+    color: $body-color;
+    white-space: nowrap;
+    @include media-breakpoint-down(lg) {
+      line-height: 1.1325rem;
+      white-space: normal;
+    }
+    // 下拉箭头
+    &.dropdown-toggle {
+      &::after {
+        display: none;
+      }
+      .dropdown-icon {
+        @include media-breakpoint-down(lg) {
+          float: right;   
+        }
+        svg {
+          transition: transform .1s ease;
+          @include media-breakpoint-up(lg) {
+            width: 1rem;
+            height: 1rem;
+          }
+        }
+      }
+      &.show {
+        .dropdown-icon {
+          svg {
+            // transform: rotate(180deg);
+            transition: transform .1s ease;
+          }
+        }
+      }
+      @include media-breakpoint-down(lg) {
+        .dropdown-icon {
+          svg {
+            transition: transform .1s ease;
+          }
+        }
+        &.show {
+          .dropdown-icon {
+            svg {
+              transform: rotate(180deg);
+            }
+          }
+        }
+      }
+    }
+     
+  }
+  // hover样式
+  .nav-item {
+    padding-left: .5rem;
+    @include media-breakpoint-up(lg) {
+      padding: 0 1.25rem;
+      @media (hover: hover) {
+        &:hover{
+          .nav-link {
+            &.nav-link-highlight {
+              color: $primary;
+            }
+            &.nav-link-outline {
+              box-shadow: inset 0px -2px 0px $primary;
+            }
+            &.nav-link-text-outline {
+              .text-outline{
+                text-decoration: underline;
+                text-underline-offset: 0.3rem;
+                text-decoration-color: $body-color;
+                  // box-shadow: inset 0px -1px 0px $body-color;
+                }
+            }
+          }
+        }
+      }
+    }
+    @include media-breakpoint-down(lg) {
+      border-bottom: 1px solid $border-color;
+    }
+  }
+
+  // 下拉列表子项 （抽1）
+  .dropdown-item{
+    padding: .5rem 0;
+    white-space: normal;
+    font-size: .875rem;
+    &:hover {
+      background-color: transparent;
+    }
+    &:focus {
+      background-color: transparent;
+      box-shadow: none;
+    }
+    @include media-breakpoint-up(lg) {
+      max-width: 14.5rem;
+      padding: .5rem 1rem;
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: .1rem;
+        text-decoration-color: $body-color;
+      }
+      &:focus {
+        box-shadow: none;
+      }
+    }
+    @include media-breakpoint-down(lg) {
+      font-size: .875rem;
+      // max-width: 11rem; 
+    }
+  }
+  .dropdown-item:active {
+    color: currentColor;
+    background-color: transparent;
+  }
+
+  //导航栏全屏展示，添加内边距
+  .nav-menu-pading {
+    @include media-breakpoint-up(lg) {
+      padding: 0 1.75rem;
+    }
+  }
+  .nav-menu{
+    display: flex;
+    will-change: height;
+    @include media-breakpoint-down(lg) {
+        overflow: hidden;
+        height: 0;
+        display: flex;
+        z-index: 1000;
+        background: $white;
+    }
+  }
+  &[data-expand="false"] {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    background: $white;
+    z-index: 1031;
+    .nav-menu{
+      @include media-breakpoint-down(lg) {
+          height: calc(100vh - #{$header-h-sm});
+          overflow-y: scroll;
+          &::-webkit-scrollbar {
+            display: none;
+          }
+      }
+    }
+    .hamburger-box:nth-child(1) {
+      transform: translateY(6px);
+      &::before {
+        transform: rotate(45deg);
+      }
+    }
+    .hamburger-box:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger-box:nth-child(3) {
+      transform: translateY(-6px);
+      &::before {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+  .nav-expand{
+    left: 0;
+  }
+
+  .cart-items-count {
+    right: 0;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    margin-top: 12px;
+    margin-right: 7px;
+    font-size: 12px;
+    @include media-breakpoint-down(lg){
+      margin-top: 6px;
+      margin-right: 0px;
+    }
+    &.show {
+      background-color: $primary;
+    }
+  }
+  //抽2
+  .dropdown-menu-center{
+    left: auto;
+    &.user-dropdown {
+      right: 0;
+    }
+    @include media-breakpoint-down(lg) {
+      // display: flex;
+      position: relative;
+      top: 0;
+      background: transparent;
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-top: 0;
+      box-shadow: none !important;
+      &.dropdown-menu-user{
+          font-size: .75rem;
+          // letter-spacing: 3px;
+          .dropdown-item{
+              line-height: 1.25rem;
+          }
+      }
+    }
+  }
+  .dropdown {
+    @include media-breakpoint-up(lg) {
+      position: static;
+    }
+    &:hover {
+      @include media-breakpoint-up(lg) {
+        .dropdown-menu {
+          border-top: 1px solid $gray-300 !important;
+          opacity: 1;
+          height: auto;
+          &.show {
+            display: block;
+          }
+        }
+        // .dropdown-menu-menu {
+        //   max-height: none;
+        // }
+        .nav-link {
+          // color: $primary;
+          &.dropdown-toggle{
+            .dropdown-icon {
+              svg {
+                transform: rotate(180deg);
+              }
+            }
+          }
+        }
+        .second-menu-wrapper {
+          opacity: 1;
+        }
+      }
+    }
+    
+  }
+  //抽3
+  .dropdown-menu {
+    border-radius: 0 0 $border-radius $border-radius;
+    @include media-breakpoint-up(lg) {
+      display: block;
+      top: calc(100%);
+      opacity: 0;
+      height: 0;
+      position: absolute;
+      transition: opacity .2s ease-in, height .2s ease-in;
+      &[data-bs-popper] { 
+        margin-top: 0;
+      }
+      &.show {
+        display: none;
+      }
+      .mega-dropdown-column {
+        &:hover {
+          .mega-item-figure {
+            .figure-caption {
+              color: $primary;
+            }  
+          }
+        }
+        .figure-img {
+          max-width: 160px;
+          max-height: 160px;
+        }
+      }
+    }
+    @include media-breakpoint-down(lg) {
+      // padding-left: 1.5rem;
+      width: 100%;
+      position: static;
+      .mega-dropdown-column {
+        .mega-menu-figure {
+          max-width: 104px;
+        }
+        .figure-img{
+          width: 104px;
+          height: 104px;
+          margin-bottom: 0;
+        }
+      }
+    }
+    &.mega-dropdown {
+      @include media-breakpoint-up(lg) {
+        left: 0;
+      }
+    }
+    .mega-item-figure {
+      .figure-caption {
+        color: $body-color;
+        @include media-breakpoint-up(lg) {
+          text-align: center;
+        }
+      }
+    }
+    ul{
+      list-style: none;
+    }
+
+    //menu menu样式
+    .third-menu-link:hover ~ div{
+        .third-menu-title {
+          @include media-breakpoint-up(lg) {
+            text-decoration: underline;
+            text-underline-offset: .1rem;
+            text-decoration-color: $body-color;
+          }
+        }
+    }
+    
+  }
+
+  // 二级菜单下拉箭头 抽4
+  .sub-nav-link {
+    &.sub-dropdown-toggle {
+      &::after {
+        display: none;
+      }
+      .sub-dropdown-text {
+        // padding-right: 1rem;
+      }
+      .sub-dropdown-icon {
+        @include media-breakpoint-down(lg) {
+          float: right;   
+        }
+        svg {
+          transition: transform .1s ease;
+          @include media-breakpoint-up(lg) {
+            width: 1rem;
+            height: 1rem;
+          }
+        }
+      }
+      @include media-breakpoint-down(lg) {
+        .sub-dropdown-icon {
+          svg {
+            transition: transform .1s ease;
+          }
+        }
+        &.show {
+          .sub-dropdown-icon {
+            svg {
+              transform: rotate(180deg);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // hover样式 抽5
+  .sub-nav-item {
+    @include media-breakpoint-up(lg) {
+      @media (hover: hover) {
+        &:hover{
+          .sub-nav-link {
+            text-decoration: underline;
+            text-underline-offset: .1rem;
+            text-decoration-color: $body-color;
+          }
+        }
+      }
+    }
+  }
+
+  //二级菜单 抽6
+  .sub-dropdown {
+    @include media-breakpoint-up(lg) {
+      position: static;
+    }
+    
+    // &:hover {
+    //   @include media-breakpoint-up(lg) {
+    //     .sub-dropdown-menu {
+    //       opacity: 1;
+    //       max-height: 100vh;
+    //       position: relative;
+    //       transition: opacity .1s linear, max-height .1s linear;
+    //       &.show {
+    //         display: block;
+    //       }
+    //     }
+    //     // color: $primary;
+    //     .sub-dropdown-toggle{
+    //       .sub-dropdown-icon {
+    //         svg {
+    //           transform: rotate(180deg);
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+
+    &.show {
+      @include media-breakpoint-up(lg) {
+        .sub-dropdown-menu {
+          opacity: 1;
+          height: auto;
+          position: relative;
+          transition: opacity .1s linear, height .1s linear;
+          display: block;
+          // &.show {
+          //   display: block;
+          // }
+        }
+        // color: $primary;
+        .sub-dropdown-toggle {
+          .sub-dropdown-icon {
+            svg {
+              transform: rotate(180deg);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //抽7
+  .sub-dropdown-menu {
+    .mega-item-figure {
+      .figure-caption {
+        color: $body-color;
+        @include media-breakpoint-up(lg) {
+          text-align: center;
+        }
+      }
+    }
+    @include media-breakpoint-up(lg) {
+      // display: none;
+      display: none;
+      top: calc(100%);
+      // visibility: hidden;
+      opacity: 0;
+      height: 0;
+      padding-top: .5rem;
+      // position: absolute;
+      transition: opacity .1s linear .1s, height .1s linear .1s;
+      &[data-bs-popper] { 
+        margin-top: 0;
+      }
+      &.show {
+        display: none;
+      }
+      .mega-dropdown-column {
+        &:hover {
+          .mega-item-figure {
+            .figure-caption {
+              color: $primary;
+            }  
+          }
+        }
+        .figure-img {
+          max-width: 160px;
+          max-height: 160px;
+        }
+      }
+    }
+    @include media-breakpoint-down(lg) {
+        width: 100%;
+        position: static;
+        .mega-dropdown-column {
+          .mega-menu-figure {
+            max-width: 104px;
+          }
+          .figure-img{
+            width: 104px;
+            height: 104px;
+            margin-bottom: 0;
+          }
+        }
+    }
+    &.mega-dropdown {
+      @include media-breakpoint-up(lg) {
+        left: 0;
+      }
+    }
+  }
+
+  // 二级下拉列表子项 抽8
+  .sub-dropdown-item{
+    display: block;
+    text-decoration: none;
+    padding: .5rem 0;
+    white-space: normal;
+    font-size: .875rem;
+    @include media-breakpoint-up(lg) {
+      padding: .5rem 1rem;
+      max-width: 10.5rem;
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: .1rem;
+        text-decoration-color: $body-color;
+      }
+      &:focus {
+        box-shadow: none;
+      }
+    }
+    @include media-breakpoint-down(lg) {
+      font-size: .875rem;
+    }
+  }
+
+  //抽9
+  .second-menu-wrapper-only-text {
+    padding: 0 0 1rem 1.5rem;
+    @include media-breakpoint-up(lg) {
+      padding: .5rem 0;
+    }
+  }
+  .third-menu-wrapper-only-text {
+    padding: 0 1rem;
+    @include media-breakpoint-up(lg) {
+      padding: 0 1rem;
+    }
+  }
+  .second-menu-wrapper {
+    padding: 0 0 1rem 1rem;
+    @include media-breakpoint-up(md) {
+      padding: 0 0 1rem 1.5rem;
+    }
+    @include media-breakpoint-up(lg) {
+      padding: 2.5rem 2rem;
+      opacity: 0;
+      transition: opacity .2s ease-in;
+    }
+    .second-menu-item {
+      @include media-breakpoint-up(lg) {
+        padding-bottom: 1.5rem;
+      }
+    }
+    .second-menu-title {
+      padding: .5rem 0;
+      font-size: .875rem;
+      @include media-breakpoint-up(lg) {
+        padding: 0; 
+        font-size: 1.125rem;
+        font-weight: $nav-foot-weight * 1.5 ;
+      }
+    }
+  }
+  .third-menu-wrapper {
+    padding: 1rem 0 0 0;
+    margin-right: -1.25rem;
+    margin-left: -1.25rem;
+    @include media-breakpoint-down(lg) {
+      padding: .5rem 0;
+      margin: 0 -.75rem;
+      scroll-snap-type: x mandatory;
+      &::-webkit-scrollbar {
+          display: none;
+        }
+      overflow-x: scroll;
+      
+    }
+    @include media-breakpoint-down(md) {
+      margin: 0 -.25rem;
+    }
+    .third-menu-item {
+      padding: 0 1.25rem;
+      @include media-breakpoint-down(lg) {
+        scroll-snap-align: start;
+        scroll-margin-left: 32px;
+        width: calc(33vw - 32px);
+        padding: 0 .75rem;
+      }
+      @include media-breakpoint-down(md) {
+          width: calc(50vw - 32px);
+          padding: 0 .25rem;
+      }
+    }
+    .third-menu-text {
+      padding: 1rem .25rem;
+      .third-menu-desp {
+        font-size: .75rem;
+      }
+    }
+  }
+  
+}
+
+
+
+// 反色处理
+.site-header-v2 {
+  &.text-inverse {
+    // icon
+    .nav-icon {
+      .icon-btn {
+        transition: color 0.1s ease;
+      }
+    }
+    .nav-link {
+      color: $white;
+    }
+    .sub-dropdown-item {
+      color: $white;
+      @include media-breakpoint-up(lg) {
+        &:hover {
+          text-decoration: underline;
+          text-underline-offset: .1rem;
+          text-decoration-color: $white;
+        }
+      }
+    }
+    .second-menu-item {
+      color: $white;
+    }
+    .sub-nav-item {
+      @include media-breakpoint-up(lg) {
+        @media (hover: hover) {
+          &:hover{
+            .sub-nav-link {
+              text-decoration: underline;
+              text-underline-offset: .1rem;
+              text-decoration-color: $white;
+            }
+          }
+        }
+      }
+    }
+    .dropdown-item {
+      @include media-breakpoint-up(lg) {
+        &:hover {
+          text-decoration: underline;
+          text-underline-offset: .1rem;
+          text-decoration-color: $white;
+        }
+      }
+    }
+    .third-menu-link:hover ~ div{
+      .third-menu-title {
+        @include media-breakpoint-up(lg) {
+          text-decoration: underline;
+          text-underline-offset: .1rem;
+          text-decoration-color: $white;
+        }
+      }
+    }
+    .nav-item {
+      @include media-breakpoint-up(lg) {
+        @media (hover: hover) {
+          &:hover{
+            .nav-link {
+              // &.nav-link-highlight {
+              //   color: $primary;
+              // }
+              // &.nav-link-outline {
+              //   box-shadow: inset 0px -2px 0px $primary;
+              // }
+              &.nav-link-text-outline {
+                .text-outline{
+                  text-decoration: underline;
+                  text-underline-offset: 0.3rem;
+                  text-decoration-color: $white;
+                    // box-shadow: inset 0px -1px 0px $body-color;
+                  }
+              }
+            }
+          }
+        }
+      }
+      @include media-breakpoint-down(lg) {
+        border-bottom: 1px solid $border-color;
+      }
+    }
+    // item list
+    .dropdown-menu{
+      .dropdown-item {
+        color: $white;
+        // &:hover {
+        //   color: $primary;
+        // }
+      }
+      .mega-item-figure {
+        .figure-caption {
+          color: $white;
+        }
+      }
+    }
+    //trigger
+    @include media-breakpoint-down(lg) {
+      .navbar-toggler {
+        .hamburger-box-wrapper {
+          .hamburger-box {
+            &::before {
+              border-color: $white;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.shopify-section-header {
+  &:not(.sticky-top) {
+    position: relative;
+    z-index: calc(#{$zindex-sticky} + 1);
+  }
+  &.dropdown-backdrop-show:not(.sticky-top) {
+    position: relative;
+    z-index: $zindex-sticky;
+  }
+  &.animate {
+    transition: transform .15s ease-out;
+  }
+}
+.shopify-section-header-hidden {
+  transform: translateY(-100%);
+}
+
+.cart-wrap {
+  .full-cart {
+    display: none;
+  }
+  .empty-cart {
+    display: block;
+  }
+  &.full {
+    .full-cart {
+      display: block;
+    }
+    .empty-cart {
+      display: none;
+    }
+  }
+  .full-cart {
+    position: relative;
+    .full-cart-dot {
+      position: absolute;
+      top: 0.1rem;
+      right: 0.125rem;
+      background: $primary;
+      border-radius: 50%;
+      width: .5rem;
+      height: .5rem;
+    }
+    .cart-count {
+      top: 0;
+      right: 0;
+      width: 1rem;
+      height: 1rem;
+      font-size: $font-size-sm;
+      text-align: center;
+      line-height: 1rem;
+      font-weight: $font-weight-bold;
+      color: $white;
+      &.exceeded {
+        text-align: left;
+        padding-left: .125rem;
+        &::before  {
+          content: '+';
+          position: absolute;
+          right: 0;
+          transform: scale(.8);
+          top: -.125rem;
+        }
+      }
+    }
+  }
+}
+
+.header-v2 + .cart-notification-container {
+  @include media-breakpoint-down(xl) {
+    max-width: 100%;
+  }
+}
+.header-v2.header-full-width + .cart-notification-container {
+  max-width: 100%;
+}
+
+.site-header-v2.is-open  {
+  @include media-breakpoint-up(lg) {
+    .mega-menu-dropdown {
+     transition: none !important;
+     opacity: 1;
+    }
+  }
+}
+.site-header-v2 .is-focused  {
+  @include media-breakpoint-up(lg) {
+    .mega-menu-dropdown {
+      transition: opacity .2s ease-in, height .2s ease-in !important;
+      opacity: 1;
+    }
+  }
+}

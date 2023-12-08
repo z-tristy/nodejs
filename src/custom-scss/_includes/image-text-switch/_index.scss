@@ -1,0 +1,115 @@
+@use "sass:math";
+
+@import "../../styles/base";
+// @import '../../styles/slider-mixins';
+@import "../../styles/slider-functions";
+@import "../../../node_modules/swiper/swiper";
+@import "../../../node_modules/swiper/modules/effect-fade/effect-fade.scss";
+@import "../../../node_modules/swiper/modules/pagination/pagination.scss";
+
+.image-text-switch {
+  .choose {
+    .choose-reasons {
+      max-width: px2rem(1920px);
+
+      .choose-reason-wrap {
+        .choose-reason {
+          cursor: pointer;
+          opacity: .4;
+          transition: all .4s ease;
+          margin-bottom: 0;
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+
+        .choose-reason-desc {
+          transition: all .4s ease;
+          height: 0;
+          opacity: 0;
+        }
+
+        .hide-choose-reason-desc {
+          position: absolute;
+          opacity: 0;
+          top: 0;
+          z-index: -1;
+        }
+
+        &.active {
+          .choose-reason {
+            opacity: 1;
+          }
+
+          .choose-reason-desc {
+            opacity: 1;
+            height: $spacer * 1.5;
+            margin-top: $spacer * .25;
+          }
+        }
+      }
+
+      .choose-reason-img {
+        opacity: 0;
+        position: absolute;
+        transition: opacity 600ms ease 0s;
+
+        &.active {
+          opacity: 1;
+        }
+      }
+    }
+
+    .text-swiper {
+      .swiper-wrapper {
+        flex-direction: column;
+
+        .swiper-slide {
+          flex-shrink: 1;
+
+          .swiper-reason {
+            cursor: pointer;
+            opacity: .3;
+            transition: all .4s ease;
+          }
+
+          .swiper-reason-desc {
+            // display: none;
+            opacity: 0;
+            height: 0;
+            transition: all .4s ease;
+          }
+
+          .hide-swiper-reason-desc {
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            z-index: -1;
+          }
+
+          &.swiper-slide-thumb-active {
+            margin-top: $spacer;
+            margin-bottom: $spacer;
+
+            .swiper-reason {
+              opacity: 1;
+            }
+
+            .swiper-reason-desc {
+              height: $spacer * 1.5;
+              opacity: 1;
+              margin-top: $spacer * .25;
+            }
+          }
+        }
+      }
+    }
+
+    .swiper-pagination {
+      .swiper-pagination-bullet {
+        background-color: var(--carousel-indicator-active-bg);
+      }
+    }
+  }
+}

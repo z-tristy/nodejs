@@ -1,6 +1,6 @@
 import http from "http"
 import https from "https"
-import ejs from "ejs"
+import fs from "fs"
 import express from "express"
 import { cpSync, writeFileSync, readFileSync } from "fs"
 const PORT = 3000
@@ -9,44 +9,32 @@ import { fileURLToPath } from 'url'
 import path,{ dirname } from 'path'
 import { WebSocketServer } from "ws"
 import { socketMessageHandler } from "./src/service/socketMessageHandler.js"
-import { insertBeforeLine, insertAfterLine } from './src/service/fileService.js'
+import { handleBootstrapScss } from './src/service/fileService.js'
 
 const __filename = fileURLToPath(import.meta.url); // 将文件URL解码为路径字符串
 const __dirname = dirname(__filename); 
 
-console.log('__filename')
-console.log(__filename)
-console.log('__dirname')
-console.log(__dirname)
-
-const nodeModulesPath = path.resolve(__dirname,"./node_modules");
-console.log('nodeModulesPath')
-console.log(nodeModulesPath)
-
-const srcPath = path.resolve(__dirname, "./src/bootstrap");
+const deleteBootstrapCssPath = path.resolve(__dirname, "./public/proxy/stylesheets/bootstrap/bootstrap.mini.css");
+fs.unlink(deleteBootstrapCssPath, (err) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log('文件已成功删除');
+});
 
 // copy bootstrap to workspace from node_modules
+// 抓取一次就好, 没必要每次都抓取
+const srcPath = path.resolve(__dirname, "./src/bootstrap")
+const nodeModulesPath = path.resolve(__dirname,"./node_modules")
 cpSync(path.resolve(nodeModulesPath, "bootstrap"), srcPath, {
   recursive: true,
   force: true,
 })
 
-console.log('bootstrap 文件被写入的位置')
-console.log(path.resolve(srcPath, "scss/bootstrap.scss"))
-
-insertBeforeLine( 
-  path.resolve(srcPath, "scss/bootstrap.scss"), 
-  `@import "functions";
-@import "../../custom-scss/functions";
-@import "custom-variables";
-@import "../../custom-scss/variables";
-@import "../../custom-scss/extra-variables";`
-);
-
-insertAfterLine(
-  path.resolve(srcPath, "scss/bootstrap.scss"), 
-  '@import "../../custom-scss/index";'
-)
+const baseMinPath = path.resolve(__dirname, "./src/custom-scss/styles/base.min.scss")
+const basePath = path.resolve(__dirname, "./src/custom-scss/styles/_base.scss")
+handleBootstrapScss(baseMinPath, basePath)
 
 // 创建一个 Express 应用程序实例
 const app = express()

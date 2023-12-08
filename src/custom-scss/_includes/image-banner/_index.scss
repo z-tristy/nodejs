@@ -1,0 +1,13 @@
+.image-with-text-overlay {
+  .adapt-to-image.responsive-height {
+    @include media-breakpoint-up(md) {
+      height: calc(var(--image-height) * 2 / 3);
+    }
+    @include media-breakpoint-up(xl) {
+      height: calc(var(--image-height) * 3 / 4);
+    }
+    @include media-breakpoint-up(xxl) {
+      height: var(--image-height);
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.announcement-bar {
+  position: relative;
+  z-index: 2;
+  @include media-breakpoint-up(lg) {
+    // 比页头高层级，保证不被页头下拉菜单遮罩层覆盖
+    z-index: calc(#{$zindex-sticky} + 1);
+  }
+  .no-last-margin {
+    p {
+      display: inherit;
+    }
+  }
+  .icon-width {
+    width: 1.5rem;
+    @include media-breakpoint-down(lg){
+      width: 1rem;
+    }
+  }
+}

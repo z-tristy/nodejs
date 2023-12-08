@@ -1,0 +1,146 @@
+.account-sidebar .account-sidebar__link {
+  color: $body-color;
+}
+
+.account-sidebar-new,
+.account-title,
+.account-content {
+  border: none;
+}
+
+.account-title {
+  @include media-breakpoint-down(lg) {
+    h2 {
+      font-size: 1.125rem !important;
+    }
+
+    .btn-primary {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      font-size: .875rem;
+    }
+  }
+}
+
+.default-tag {
+  color: $white;
+  background-color: $gray-900;
+  border-radius: .25rem;
+  padding-left: .25rem;
+  padding-right: .25rem;
+}
+
+#orders {
+  & + .account-orders {
+    display: block;
+  }
+
+  @include media-breakpoint-down(lg) {
+    & + .account-orders {
+      display: none;
+    }
+
+    &:target {
+      & + .account-orders {
+        display: block;
+
+        & + #sidebar {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+#new {
+  display: none;
+
+  &:target {
+    display: block;
+
+    & + #blank {
+      display: none;
+    }
+
+    & + #address-list {
+      display: none;
+    }
+  }
+}
+
+.item-img {
+  width: 6rem;
+
+  @include media-breakpoint-down(lg) {
+    width: 3.875rem;
+  }
+}
+
+.responsive-border {
+  @include media-breakpoint-down(lg) {
+    border: none;
+  }
+}
+
+#address_default_address_new {
+  cursor: pointer;
+
+  & + label {
+    cursor: pointer;
+  }
+}
+
+// ios端关闭弹窗后，去除删除按钮outline样式
+// ios端点击set default按钮出现outline样式
+.delete-btn,
+.delete-btn:focus,
+.set-default-btn:focus {
+  outline: none;
+}
+// 修复ios移动端，取消按钮选中状态
+.cancel-btn {
+  transition: none;
+}
+
+.containers-padding-x-mob {
+  @include media-breakpoint-down(lg) {
+    padding-left: map-get($containers-padding-x, "md");
+    padding-right: map-get($containers-padding-x, "md");
+  }
+
+  @include media-breakpoint-down(md) {
+    padding-left: map-get($containers-padding-x, "xs");
+    padding-right: map-get($containers-padding-x, "xs");
+  }
+}
+
+.account-sidebar-new {
+  @include media-breakpoint-down(md) {
+    border-radius: 0 !important;
+  }
+}
+
+.order-detail,
+.customer-addresses,
+.customer-account {
+  position: relative;
+
+  .card {
+    border-radius: 0;
+
+    @extend .containers-padding-x-mob;
+
+    @include media-breakpoint-up(lg) {
+      border-radius: var(--se-border-radius-lg);
+    }
+
+    @include media-breakpoint-down(lg) {
+      padding-top: map-get($spacers, 4);
+      padding-bottom: map-get($spacers, 4);
+    }
+  }
+
+  .breadcrumb-nav {
+    @extend .containers-padding-x-mob;
+  }
+}

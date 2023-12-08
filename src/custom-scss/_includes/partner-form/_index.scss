@@ -1,0 +1,94 @@
+.partner-form {
+  .opacity-0 {
+    opacity: 0;
+  }  
+  .disabled {
+    pointer-events: none;
+  }
+  .smaller {
+    font-size: .75rem;
+  }
+  .form-control {
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    height: 2.625rem;
+    border: 1px solid $gray-400;
+  }
+  //焦点
+  //checkbox
+  .form-check-input:checked {
+    background-color: $primary !important;
+  }
+  //下拉框
+  .form-select {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxNiAxNic+PHBhdGggZmlsbD0nbm9uZScgc3Ryb2tlPScjNDg0OTRBJyBzdHJva2UtbGluZWNhcD0ncm91bmQnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnIHN0cm9rZS13aWR0aD0nMicgZD0nTTIgNWw2IDYgNi02Jy8+PC9zdmc+);
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px 12px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 1px solid $gray-400;
+  }
+  //取消input[type="number"]浏览器默认input
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  // input自动填充文案
+  input:-internal-autofill-previewed,
+  input:-internal-autofill-selected {
+    -webkit-text-fill-color: $black!important;
+    transition: background-color 5000s ease-in-out 0s !important;
+  }
+  // 占位文案颜色
+  // .as-select-color {
+  //   color: $gray-400;
+  // }
+  .pf-textarea {
+    min-height: px2rem(80px);
+    resize: none;
+  }
+  #submit-btn:hover {
+    #submit-btn-label {
+      color: $white !important;
+    }
+  }
+  #share-btn-text {
+    line-height: px2rem(36px);
+  }
+  #loading-first {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-44%);
+    .spinner-border {
+      width: 1.25rem;
+      height: 1.25rem
+    }
+  }
+  #multiple-width {
+    min-width: px2rem(754px);
+    @include media-breakpoint-down(sm) {
+      min-width: 100%;
+    }
+  }
+  .one-row-limit {
+    max-width: 560px;
+  }
+  .two-row-limit {
+    max-width: 320px;
+  }
+  .as-phone-input {
+    .row {
+      margin-right: calc(-.25 * var(--se-gutter-x));
+      margin-left: calc(-.25 * var(--se-gutter-x));
+    }
+    .row > * {
+      padding-right: calc(var(--se-gutter-x) * .25);
+      padding-left: calc(var(--se-gutter-x) * .25);
+    }
+  }
+}

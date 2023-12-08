@@ -1,0 +1,28 @@
+// [Learn how to use api](https://getbootstrap.com/docs/5.1/utilities/api/#using-the-api)
+// Override $utilities
+// $utilities: map-merge($utilities, (
+//   "rigig-wrapper-max-width": (
+//     responsive: true,
+//     property: max-width,
+//     class: mw-text,
+//     values: (	
+//       1: 10rem,
+//       2: 15rem,
+//       3: 20rem,
+//       4: 25rem,
+//       5: 32.5rem,
+//     )
+//   )
+// ));
+// Modify $utilities
+// $utilities: map-merge($utilities, (
+//   "rigig-wrapper-max-width": map-merge(
+//     map-get($utilities, "rigig-wrapper-max-width"),
+//     (
+//       values: map-merge(
+//         map-get(map-get($utilities, "rigig-wrapper-max-width"), "values"),
+//         (4: 37.5rem),
+//       ),
+//     ),
+//   ),
+// ));

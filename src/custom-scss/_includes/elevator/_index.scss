@@ -1,0 +1,23 @@
+.elevator {
+  .elevator-wrap {
+    width: calc(100vw - var(--sideClip, 50vw));
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    @include media-breakpoint-down(sm) {
+      width: calc(100vw - var(--sideClip, 10vw));
+    }
+  }
+  &.no-rounded {
+    img {
+      transition-duration: .3s;
+      border-radius: 0 !important;
+    }
+  }
+  .container-fits-viewport-mask {
+    min-height: 40vh;
+    min-height: calc(var(--vh, 1vh) * 40);
+    max-height: 40vh;
+    max-height: calc(var(--vh, 1vh) * 40);
+  }
+}

@@ -1,0 +1,82 @@
+// 未经Swiper初始化时，初始化轮播
+@mixin initial-swiper-wrapper() {
+  $lower-max-witdth-breakpoint: get-value('sm', $container-max-widths) - 1px;
+  $half_image_gutter_width: math.div(swiper-slide-width('xxl', 10) + get-value('xxl', $columns-gutter), 2);
+  transform: translate3d(calc(50% - #{$half_image_gutter_width}), 0, 0);
+  @include media-breakpoint-down(xxl) {
+    $half_image_gutter_width: math.div(swiper-slide-width('xl', 10) + get-value('xl', $columns-gutter), 2);
+    transform: translate3d(calc(50% - #{$half_image_gutter_width}), 0, 0);
+  }
+  @include media-breakpoint-down(xl) {
+    $half_image_gutter_width: math.div(swiper-slide-width('lg', 10) + get-value('lg', $columns-gutter), 2);
+    transform: translate3d(calc(50% - #{$half_image_gutter_width}), 0, 0);
+  }
+  @include media-breakpoint-down(lg) {
+    $half_image_gutter_width: math.div(swiper-slide-width('md', 10) + get-value('md', $columns-gutter), 2);
+    transform: translate3d(calc(50% - #{$half_image_gutter_width}), 0, 0);
+  }
+  @include media-breakpoint-down(md) {
+    $half_image_gutter_width: math.div(swiper-slide-width('sm', 10) + get-value('sm', $columns-gutter), 2);
+    transform: translate3d(calc(50% - #{$half_image_gutter_width}), 0, 0);
+  }
+  @include media-breakpoint-down(md, (md: $lower-max-witdth-breakpoint)) {
+    $width: calc((100% - #{get-value('sm', $containers-padding-x) * 2} + #{get-value('sm', $columns-gutter)}) / #{$grid-columns} * 10);
+    transform: translate3d(calc((100% - #{$width}) / 2), 0, 0);
+  }
+  @include media-breakpoint-down(sm) {
+    transform: translate3d(#{get-value('xs', $containers-padding-x) - math.div(get-value('xs', $columns-gutter), 2)}, 0, 0);
+  }
+}
+
+// 计算每个swiper slide（内含图片）宽度，保证文案与图片对齐
+@mixin render-siwper-slide-width() {
+  $lower-max-witdth-breakpoint: get-value('sm', $container-max-widths) - 1px;
+  margin: 0 math.div(get-value('xxl', $columns-gutter), 2);
+  width: swiper-slide-width('xxl', 12);
+  @include media-breakpoint-down(xxl) {
+    margin: 0 math.div(get-value('xl', $columns-gutter), 2);
+    width: swiper-slide-width('xl', 12);
+  }
+  @include media-breakpoint-down(xl) {
+    margin: 0 math.div(get-value('lg', $columns-gutter), 2);
+    width: swiper-slide-width('lg', 12);
+  }
+  @include media-breakpoint-down(lg) {
+    margin: 0 math.div(get-value('md', $columns-gutter), 2);
+    width: swiper-slide-width('md', 12);
+  }
+  @include media-breakpoint-down(md) {
+    margin: 0 math.div(get-value('sm', $columns-gutter), 2);
+    width: swiper-slide-width('sm', 12);
+  }
+  @include media-breakpoint-down(md, (md: $lower-max-witdth-breakpoint)) {
+    width: calc((100% - #{get-value('sm', $containers-padding-x) * 2} + #{get-value('sm', $columns-gutter)}) / #{$grid-columns} * 12 - #{get-value('sm', $columns-gutter)});
+  }
+  @include media-breakpoint-down(sm) {
+    margin: 0 math.div(get-value('xs', $columns-gutter), 2);
+    width: px2rem(312px);
+  }
+}
+
+@mixin render-indicator() {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: currentColor;
+  transition: color .3s ease;
+  will-change: color;
+  cursor: pointer;
+  --#{$variable-prefix}text-opacity: .6;
+  @include not-touch-device {
+    &:hover {
+      --#{$variable-prefix}text-opacity: .8;
+    }
+  }
+  &.swiper-button-disabled {
+    --#{$variable-prefix}text-opacity: .2;
+    cursor: not-allowed;
+  }
+  svg {
+    display: block;
+  }
+}

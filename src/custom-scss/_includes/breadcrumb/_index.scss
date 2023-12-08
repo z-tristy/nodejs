@@ -1,0 +1,34 @@
+.breadcrumb-item + .breadcrumb-item::before{
+  float: none;
+}
+.breadcrumb{
+  @include media-breakpoint-up(md){
+    flex-wrap: nowrap;
+  }
+  @include media-breakpoint-down(md){
+    flex-wrap: wrap;
+  }
+}
+
+.breadcrumbs-wrap {
+  li{
+      /*文本不会换行*/
+      white-space: nowrap;
+      /*当文本溢出包含元素时，以省略号表示超出的文本*/
+      // text-overflow: ellipsis;
+  }
+  li:last-child{
+      overflow: hidden;
+      /*文本不会换行*/
+      white-space: nowrap;
+      /*当文本溢出包含元素时，以省略号表示超出的文本*/
+      text-overflow: ellipsis;
+  }
+  a {
+    text-decoration: none;
+    color:#747475
+  }
+  a:hover {
+      text-decoration:underline;
+  }
+}

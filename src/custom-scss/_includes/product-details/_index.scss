@@ -1,0 +1,12 @@
+.masonry {
+  column-gap: 0;
+  column-count: 2;
+  @include media-breakpoint-down(md) {
+    column-count: 1;
+  }
+
+}
+.masonry-item {
+  padding: 0 8px;
+  break-inside: avoid;
+}

@@ -1,0 +1,59 @@
+//password eye
+.visible-control {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  display: flex;
+  align-items: flex-start;
+  height: 100%;
+  .icon-eye {
+    display: block;
+  }
+  .icon-eye-off {
+    display: none;
+  }
+  &.content-invisible {
+    .icon-eye {
+      display: none;
+    }
+    .icon-eye-off {
+      display: block;
+    }
+  }
+}
+//submit btn style of challenge page
+.shopify-challenge__container {
+  @extend .py-5;
+  @extend .py-md-9;
+  form {
+    .shopify-challenge__button {
+      @extend .btn-primary
+    }
+  }
+}
+
+// edge 隐藏 浏览器password 自带显示密码的icon
+::-ms-reveal {
+  display: none;
+}
+
+#recover{
+  display: none;
+}
+#recover:target {
+  display: block;
+}
+#recover:target+div {
+  display: block;
+}
+#recover:target~#login{
+  display: none;
+}
+//hidden "Need help accessing your subscriptions?"
+#customer_login #rc_login {
+  display: none;
+}
+
+.scroll-to-top {
+  scroll-margin-top: calc(#{$header-h-sm} + 2.5rem);
+}

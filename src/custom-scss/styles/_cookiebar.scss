@@ -1,0 +1,127 @@
+.shopify-pc__banner__dialog {
+  @extend .p-4;
+  @extend .bg-white;
+
+  .shopify-pc__banner__wrapper {
+    @include media-breakpoint-up(sm) {
+      flex-direction: row;
+    }
+
+    .shopify-pc__banner__body {
+      @extend .me-sm-6;
+      @extend .small;
+      @extend .text-body;
+      @extend .mb-3;
+      @extend .mb-sm-0;
+
+      h2 {
+        @extend .h6;
+        @extend .mb-1;
+        @extend .text-body;
+      }
+
+      p {
+        @extend .text-body;
+
+        a {
+          @extend a;
+        }
+      }
+    }
+
+    .shopify-pc__banner__btns {
+      @extend .mt-n2;
+
+      min-width: auto;
+
+      @include media-breakpoint-down(lg) {
+        flex-direction: column;
+      }
+
+      @include media-breakpoint-up(sm) {
+        width: auto;
+      }
+
+      button {
+        @extend .text-nowrap;
+        @extend .btn;
+        @extend .btn-mw;
+        @extend .mt-2;
+        @extend .me-0;
+      }
+
+      .shopify-pc__banner__btn-accept {
+        @extend .btn-primary;
+        @extend .me-lg-2;
+      }
+
+      .shopify-pc__banner__btn-decline {
+        @extend .btn-outline-primary;
+      }
+    }
+  }
+}
+
+//深色主题覆盖样式
+// .shopify-pc__banner__dialog {
+//   @extend .p-4;
+//   @extend .bg-black;
+
+//   .shopify-pc__banner__wrapper {
+//     @include media-breakpoint-up(sm) {
+//       flex-direction: row;
+//     }
+
+//     .shopify-pc__banner__body {
+//       @extend .me-sm-6;
+//       @extend .small;
+//       @extend .text-body-inverse;
+//       @extend .mb-3;
+//       @extend .mb-sm-0;
+
+//       h2 {
+//         @extend .h6;
+//         @extend .mb-1;
+//         @extend .text-body-inverse;
+//       }
+
+//       p {
+//         @extend .text-body-inverse;
+
+//         a {
+//           @extend a;
+//         }
+//       }
+//     }
+
+//     .shopify-pc__banner__btns {
+//       @include media-breakpoint-down(lg) {
+//         flex-direction: column;
+//         min-width: auto;
+//       }
+
+//       @include media-breakpoint-up(sm) {
+//         width: auto;
+//       }
+
+//       @extend .mt-n2;
+
+//       button {
+//         @extend .text-nowrap;
+//         @extend .btn;
+//         @extend .btn-mw;
+//         @extend .mt-2;
+//         @extend .me-0;
+//       }
+
+//       .shopify-pc__banner__btn-accept {
+//         @extend .btn-primary;
+//         @extend .me-lg-2;
+//       }
+
+//       .shopify-pc__banner__btn-decline {
+//         @extend .btn-outline-primary;
+//       }
+//     }
+//   }
+// }

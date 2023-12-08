@@ -1,0 +1,13 @@
+.image-grid {
+  .full-page-width {
+    // border-radius: $border-radius-lg;
+    @include media-breakpoint-down(md) {
+      border-radius: 0;
+    }
+  }
+  .text-wrapper {
+    @include media-breakpoint-up(lg) {
+      width: 80% !important;
+    }
+  }
+}

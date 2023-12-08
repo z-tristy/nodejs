@@ -1,0 +1,33 @@
+@import "../../styles/base";
+
+//slideshow section
+.slideshow {
+  @import "../../styles/carousel";
+  .carousel-control-prev, .carousel-control-next {
+    width: auto;
+    @include media-breakpoint-up(md) {
+      padding-left: map-get($spacers, 3);
+      padding-right: map-get($spacers, 3);
+    }
+    @include media-breakpoint-up(lg) {
+      padding-left: map-get($spacers, 5);
+      padding-right: map-get($spacers, 5);
+    }
+  }
+  .carousel-control-prev-icon {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjM0IiB2aWV3Qm94PSIwIDAgMzQgMzQiIHdpZHRoPSIzNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtMzMgMTdjMC04LjgzNjU2LTcuMTYzNC0xNi0xNi0xNi04LjgzNjU2IDAtMTYgNy4xNjM0NC0xNiAxNiAwIDguODM2NiA3LjE2MzQ0IDE2IDE2IDE2IDguODM2NiAwIDE2LTcuMTYzNCAxNi0xNnoiIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iLjE1Ii8+PHBhdGggZD0ibTIwLjYxMzQgOS45NDY2MWMuNTIuNTE5OTkuNTIgMS4zNTk5OSAwIDEuODc5OTlsLTUuMTczMyA1LjE3MzMgNS4xNzMzIDUuMTczNGMuNTIuNTIuNTIgMS4zNiAwIDEuODhzLTEuMzYuNTItMS44OCAwbC02LjEyLTYuMTJjLS41Mi0uNTItLjUyLTEuMzYgMC0xLjg4bDYuMTItNi4xMjAwMmMuNTA2Ny0uNTA2NjcgMS4zNi0uNTA2NjcgMS44OC4wMTMzM3oiIGZpbGw9IiNmZmYiLz48cmVjdCBoZWlnaHQ9IjMzIiByeD0iMTYuNSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iLjE1IiB0cmFuc2Zvcm09Im1hdHJpeCgtMSAwIDAgMSAzNCAxKSIgd2lkdGg9IjMzIiB4PSIuNSIgeT0iLS41Ii8+PC9zdmc+);
+  }
+  .carousel-control-next-icon {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjM0IiB2aWV3Qm94PSIwIDAgMzQgMzQiIHdpZHRoPSIzNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtMSAxN2MwLTguODM2NTYgNy4xNjM0NC0xNiAxNi0xNiA4LjgzNjYgMCAxNiA3LjE2MzQ0IDE2IDE2IDAgOC44MzY2LTcuMTYzNCAxNi0xNiAxNi04LjgzNjU2IDAtMTYtNy4xNjM0LTE2LTE2eiIgZmlsbD0iIzAwMCIgZmlsbC1vcGFjaXR5PSIuMTUiLz48cGF0aCBkPSJtMTMuMzg2NiA5Ljk0NjYxYy0uNTIuNTE5OTktLjUyIDEuMzU5OTkgMCAxLjg3OTk5bDUuMTczMyA1LjE3MzMtNS4xNzMzIDUuMTczNGMtLjUyLjUyLS41MiAxLjM2IDAgMS44OHMxLjM2LjUyIDEuODggMGw2LjEyLTYuMTJjLjUyLS41Mi41Mi0xLjM2IDAtMS44OGwtNi4xMi02LjEyMDAyYy0uNTA2Ny0uNTA2NjctMS4zNi0uNTA2NjctMS44OC4wMTMzM3oiIGZpbGw9IiNmZmYiLz48cmVjdCBoZWlnaHQ9IjMzIiByeD0iMTYuNSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iLjE1IiB3aWR0aD0iMzMiIHg9Ii41IiB5PSIuNSIvPjwvc3ZnPg==)
+  }
+  .carousel-dark {
+    .carousel-control-next-icon, .carousel-control-prev-icon {
+      filter: none;
+    }
+  }
+  .carousel-indicators {
+    bottom: 1rem;
+    // margin-top: map-get($spacers, 4);
+    margin-bottom: 0;
+  }
+}

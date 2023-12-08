@@ -1,0 +1,14 @@
+// Override Bootstrap container mixin
+@mixin make-container($containers-padding-x: $containers-padding-x) {
+  @each $breakpoint, $container-padding-x in $containers-padding-x {
+    @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+      --#{$prefix}container-padding-x: #{$container-padding-x};
+    }
+  }
+  --#{$prefix}container-padding-y: 0;
+  width: 100%;
+  padding-right: var(--#{$prefix}container-padding-x);
+  padding-left: var(--#{$prefix}container-padding-x);
+  margin-right: auto;
+  margin-left: auto;
+}

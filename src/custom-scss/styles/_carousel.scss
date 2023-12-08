@@ -1,0 +1,163 @@
+@import "./functions";
+
+/*
+  --carousel-indicator-active-bg
+  --carousel-indicator-active-bg-rgb
+  --carousel-indicator-dark-active-bg
+  --carousel-indicator-dark-active-bg-rgb
+  --carousel-indicator-opacity
+  --carousel-indicator-active-opacity
+  --carousel-indicator-interval
+
+  --carousel-indicator-dot-hit-area-height
+  --carousel-indicator-dot-size
+
+  --carousel-indicator-line-hit-area-height
+  --carousel-indicator-line-horizontal-gap
+  --carousel-indicator-line-width
+  --carousel-indicator-line-height
+
+  --carousel-indicator-circle-horizontal-gap
+  --carousel-indicator-circle-size
+  --carousel-indicator-circle-active-size
+  --carousel-indicator-circle-ring-width
+*/
+
+// Reset Bootstrap Carousel indicators style
+.carousel-indicators [data-bs-target] {
+  background-color: var(--carousel-indicator-active-bg);
+  opacity: var(--carousel-indicator-opacity);
+}
+.carousel-indicators .active {
+  opacity: var(--carousel-indicator-active-opacity);
+}
+// Dark mode carousel
+.carousel-dark {
+  .carousel-indicators [data-bs-target] {
+    background-color: var(--carousel-indicator-dark-active-bg);
+  }
+}
+
+// Dots style
+$hit-area-without-dot-height: calc((var(--carousel-indicator-dot-hit-area-height) - var(--carousel-indicator-dot-size)) / 2);
+.carousel-indicators .indicator-dot {
+  border: $hit-area-without-dot-height solid transparent;
+  margin-left: 0;
+  margin-right: 0;
+  width: var(--carousel-indicator-dot-size);
+  height: var(--carousel-indicator-dot-size);
+  border-radius: 50%;
+}
+
+// Line style
+$hit-area-without-line-height: calc((var(--carousel-indicator-line-hit-area-height) - var(--carousel-indicator-line-height)) / 2);
+.carousel-indicators .indicator-line {
+  border-top-width: $hit-area-without-line-height;
+  border-bottom-width: $hit-area-without-line-height;
+  margin-left: var(--carousel-indicator-line-horizontal-gap);
+  margin-right: var(--carousel-indicator-line-horizontal-gap);
+  width: var(--carousel-indicator-line-width);
+  height: var(--carousel-indicator-line-height);
+}
+.indicators-auto-slide .indicator-line {
+  background-color: rgba(var(--carousel-indicator-active-bg-rgb), var(--carousel-indicator-opacity));
+  opacity: 1;
+  &::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 100%;
+  }
+  &.active::after {
+    width: 100%;
+    background-color: var(--carousel-indicator-active-bg);
+    @include media-breakpoint-up(md) {
+      transition: width var(--carousel-indicator-interval) linear;
+    }
+  }
+}
+.carousel-dark .indicators-auto-slide .indicator-line {
+  background-color: rgba(var(--carousel-indicator-dark-active-bg-rgb), var(--carousel-indicator-opacity));
+  &.active::after {
+    background-color: var(--carousel-indicator-dark-active-bg);
+  }
+}
+
+// Circle style
+.carousel-indicators .indicator-circle {
+  border: var(--carousel-indicator-circle-horizontal-gap) solid transparent;
+  margin-left: 0;
+  margin-right: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background-color: transparent;
+  opacity: 1;
+  .progress-ring {
+    display: block;
+    width: var(--carousel-indicator-circle-size);
+    height: var(--carousel-indicator-circle-size);
+    transform: rotate(-90deg) translateZ(0);
+  }
+  circle {
+    r: 0;
+    stroke-width: 0;
+  }
+  // 计算周长
+  $perimeter: #{calc(var(--carousel-indicator-circle-active-size) * 3.1415926)};
+  .progress-ring__circle {
+    stroke-dashoffset: $perimeter;
+    stroke-dasharray: $perimeter $perimeter;
+  }
+  .progress-ring__bg {
+    r: calc(var(--carousel-indicator-circle-size) / 2);
+    fill: rgba(var(--carousel-indicator-active-bg-rgb), var(--carousel-indicator-opacity));
+    cx: calc(var(--carousel-indicator-circle-size) / 2);
+    cy: calc(var(--carousel-indicator-circle-size) / 2);
+  }
+  &.active {
+    border-width: calc((var(--carousel-indicator-circle-size) + var(--carousel-indicator-circle-horizontal-gap) * 2 - var(--carousel-indicator-circle-active-size)) / 2);
+    .progress-ring {
+      width: calc(var(--carousel-indicator-circle-active-size));
+      height: calc(var(--carousel-indicator-circle-active-size));
+    }
+    circle {
+      r: calc((var(--carousel-indicator-circle-active-size) - var(--carousel-indicator-circle-ring-width)) / 2);
+      stroke-width: var(--carousel-indicator-circle-ring-width);
+      cx: calc(var(--carousel-indicator-circle-active-size) / 2);
+      cy: calc(var(--carousel-indicator-circle-active-size) / 2);
+    }
+    .progress-ring__circle {
+      stroke: var(--carousel-indicator-active-bg);
+      stroke-dashoffset: 0;
+    }
+    .progress-ring__bg {
+      fill: none;
+      stroke: rgba(var(--carousel-indicator-active-bg-rgb), var(--carousel-indicator-opacity));
+    }
+  }
+}
+.carousel-dark .carousel-indicators .indicator-circle {
+  background-color: transparent;
+  .progress-ring__bg {
+    fill: rgba(var(--carousel-indicator-dark-active-bg-rgb), var(--carousel-indicator-opacity));
+  }
+  &.active {
+    .progress-ring__circle {
+      stroke: var(--carousel-indicator-dark-active-bg);
+    }
+    .progress-ring__bg {
+      fill: none;
+      stroke: rgba(var(--carousel-indicator-dark-active-bg-rgb), var(--carousel-indicator-opacity));
+    }
+  }
+}
+.indicators-auto-slide .indicator-circle {
+  &.active {
+    .progress-ring__circle {
+      @include media-breakpoint-up(md) {
+        transition: stroke-dashoffset var(--carousel-indicator-interval) linear;
+      }
+    }
+  }
+}

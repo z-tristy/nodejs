@@ -1,0 +1,39 @@
+// @mixin generate-grid-styles($key, $value) {
+//   .g-#{$key},
+//   .gx-#{$key} {
+//     --#{$variable-prefix}gutter-x: #{$value};
+//   }
+
+//   .g-#{$key},
+//   .gy-#{$key} {
+//     --#{$variable-prefix}gutter-y: #{$value};
+//   }
+// }
+
+// @mixin generate-grid($breakpoints: $grid-breakpoints) {
+//   @each $key, $value in $spacers {
+//     @if type-of($responsive-spacers) == "map" and map-has-key($responsive-spacers, $key) {
+//       $responsive-spacers-percentage: map-get($responsive-spacers, $key);
+//       @each $breakpoint, $percentage in $responsive-spacers-percentage {
+//         @include media-breakpoint-up($breakpoint) {
+//           @include generate-grid-styles($key, $value * $percentage);
+//         }
+//       }
+//     } @else {
+//       @include generate-grid-styles($key, $value);
+//     }
+//   }
+// }
+
+// @if $enable-grid-classes {
+//   @include generate-grid();
+// }
+
+// Columns
+//
+// Common styles for small and large grid columns
+@if $enable-grid-classes {
+  @include generate-grid-columns();
+
+  // @include make-layout-grid-column();
+}

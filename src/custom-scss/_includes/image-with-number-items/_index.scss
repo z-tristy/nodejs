@@ -1,0 +1,21 @@
+@use "sass:math";
+
+@import "../../styles/base";
+
+.image-with-number-items {
+  .responsive-number-fs {
+    margin-top: 0;
+    margin-bottom: $headings-margin-bottom;
+    font-family: $headings-font-family;
+    font-style: $headings-font-style;
+    font-weight: $headings-font-weight;
+    line-height: $headings-line-height;
+    color: $headings-color;
+
+    @include font-size($h4-font-size);
+
+    @include media-breakpoint-down(lg) {
+      @include font-size($h2-font-size);
+    }
+  }
+}

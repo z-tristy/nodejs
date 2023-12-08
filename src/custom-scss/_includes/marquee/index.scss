@@ -1,0 +1,34 @@
+.marquee-section {
+  .marquee {
+    width: 100%;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+
+    @keyframes slider-animation {
+      from {
+        transform: translateX(0%);
+      }
+
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    .img-small {
+      height: px2rem(18px);
+    }
+
+    .img-large {
+      height: px2rem(56px);
+
+      @include media-breakpoint-down(md) {
+        height: px2rem(32px);
+      }
+    }
+
+    .marquee-content:hover li {
+      animation-play-state: paused !important;
+    }
+  }
+}

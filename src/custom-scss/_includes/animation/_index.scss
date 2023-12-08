@@ -1,0 +1,23 @@
+@import "../../styles/base";
+
+@if $enable-animation {
+  .anim {
+    transform: translateY($animation-transform-distance);
+    opacity: 0;
+    transition: transform $animation-transform-duration $animation-transform-timing-function, opacity $animation-opacity-duration $animation-opacity-timing-function;
+    will-change: opacity, transform;
+    &.animated {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  // 修复基础动效引起层叠上下文造成的层级问题
+  // 层叠上下文：https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context
+  .image-with-text-overlay {
+    .anim {
+      position: relative;
+      z-index: 1;
+    }
+  }
+}

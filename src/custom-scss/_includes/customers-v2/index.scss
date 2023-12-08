@@ -1,0 +1,247 @@
+//password eye
+.visible-control {
+  cursor: pointer;
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  display: flex;
+  align-items: flex-start;
+  height: 100%;
+
+  .icon-eye {
+    display: block;
+  }
+
+  .icon-eye-off {
+    display: none;
+  }
+
+  &.content-invisible {
+    .icon-eye {
+      display: none;
+    }
+
+    .icon-eye-off {
+      display: block;
+    }
+  }
+}
+
+// edge 隐藏 浏览器password 自带显示密码的icon
+::-ms-reveal {
+  display: none;
+}
+
+.user-waiting-list {
+  .user-ranking {
+    font-size: px2rem(100px);
+    line-height: 1;
+
+    @include media-breakpoint-down(lg) {
+      font-size: px2rem(60px);
+    }
+  }
+
+  hr {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    background-color: #d9d9d9;
+    opacity: 1;
+  }
+
+  .info {
+    text-transform: none;
+
+    @include media-breakpoint-down(md) {
+      margin-top: 1.25rem;
+    }
+  }
+}
+
+.user-invite-page {
+  .text-overlay {
+    padding: 1.25rem;
+
+    @include media-breakpoint-down(md) {
+      padding: px2rem(12px);
+    }
+  }
+
+  .text-content {
+    background-color: rgba(0, 0, 0, .05);
+    padding: 1.25rem;
+
+    @include media-breakpoint-down(md) {
+      padding: px2rem(12px);
+    }
+  }
+
+  .code-card-item {
+    & + .code-card-item {
+      margin-top: px2rem(38px);
+
+      @include media-breakpoint-down(md) {
+        margin-top: px2rem(30px);
+      }
+    }
+  }
+
+  .code {
+    font-size: px2rem(22px);
+    line-height: 1;
+    margin-bottom: px2rem(6px);
+  }
+
+  .status {
+    font-size: px2rem(14px);
+    line-height: 1;
+
+    svg {
+      margin-right: px2rem(8px);
+    }
+  }
+
+  .poster-figure {
+    --bs-aspect-ratio: 56.25%;
+
+    background-color: rgba(0, 0, 0, .05);
+
+    @include media-breakpoint-down(lg) {
+      --bs-aspect-ratio: 100%;
+    }
+  }
+
+  .shadow-overlay {
+    background: rgba(0, 0, 0, .2);
+  }
+
+  .copy-content {
+    position: relative;
+    display: inline-block;
+
+    .copied {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      background-color: white;
+      padding: px2rem(6px) px2rem(8px);
+      transform: translate(-50%, calc(-4px - 100%));
+      white-space: nowrap;
+    }
+  }
+}
+
+.download-image-modal {
+  background-color: rgba(0, 0, 0, .9);
+
+  .modal-content {
+    background-color: rgba(0, 0, 0, .9);
+  }
+
+  .btn-close {
+    position: absolute;
+    top: px2rem(10px);
+    right: px2rem(15px);
+    background-image: none;
+    width: auto;
+    height: auto;
+    font-size: 1.5rem;
+  }
+
+  .modal-body {
+    padding: px2rem(10px);
+    max-width: px2rem(184px);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+}
+
+.subnav-before-arrow.active {
+  position: relative;
+
+  &::before {
+    content: ">";
+    position: absolute;
+    left: -10px;
+    font-family: Ndot-55;
+  }
+}
+$nav-before-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'><path d='M0.58 8.4358L8.48 5.1494V4.1698L0.58 0.8834V1.9262L7.295 4.6754L0.58 7.4246V8.4358Z' fill='#929BA6'/></svg>");
+
+.nav-before-arrow.active {
+  color: $black;
+}
+
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+
+ul {
+  li {
+    a {
+      color: rgba(0, 0, 0, .5);
+      text-decoration: none;
+    }
+  }
+}
+
+.btn-facebook {
+  font-family: 'Roboto';
+  background-color: #3B5998;
+  border-color: #3B5998;
+
+  &:hover {
+    background-color: #3B5998;
+    border-color: #3B5998;
+    opacity: .9;
+  }
+
+  &:focus {
+    background-color: #3B5998;
+    border-color: #3B5998;
+    box-shadow: 0 0 0 .125rem rgba(59, 89, 152, .5);
+  }
+}
+
+.btn-apple {
+  font-family: 'Roboto';
+  background-color: #000000;
+  border-color: #000000;
+
+  &:hover {
+    background-color: #000000;
+    border-color: #000000;
+    opacity: .8;
+  }
+
+  &:focus {
+    background-color: #000000;
+    border-color: #000000;
+    box-shadow: 0 0 0 .125rem rgba(0, 0, 0, .5);
+  }
+}
+
+.btn-google {
+  font-family: 'Roboto';
+  background-color: #ffffff;
+  border-color: $gray-300;
+  color: black;
+
+  &:hover {
+    background-color: #ffffff;
+    border-color: $gray-300;
+    color: black;
+    opacity: .8;
+  }
+
+  &:focus {
+    background-color: #ffffff;
+    border-color: $gray-300;
+    color: black;
+    box-shadow: 0 0 0 .125rem rgba(255, 255, 255, .5);
+  }
+}

@@ -1,0 +1,195 @@
+// 自定义间距响应规则
+@import "./spacers/utilities";
+
+$utilities: map-merge($utilities, (
+  "font-size": (
+    property: font-size,
+    class: fs,
+    values: $utilities-font-size-css-vars
+  ),
+  "rigig-wrapper-min-height": (
+    responsive: true,
+    property: min-height,
+    class: h,
+    values: (
+      1: $height-increment,
+      2: $height-increment * 2,
+      3: $height-increment *3,
+      4: $height-increment * 4,
+      5: $height-increment * 5,
+      6: $height-increment * 6, // 480
+      7:  $height-increment * 7, //560
+      8: $height-increment * 8, // 640
+      9: $height-increment * 9, //720
+      10: $height-increment * 10, // 800
+      11: $height-increment * 11, //880,
+      12: $height-increment * 12 //960
+    )
+  ),
+  "rigig-wrapper-height": (
+    responsive: true,
+    property: height,
+    class: height,
+    values: (
+      1: $height-increment,
+      2: $height-increment * 2,
+      3: $height-increment *3,
+      4: $height-increment * 4,
+      5: $height-increment * 5,
+      6: $height-increment * 6, // 480
+      7:  $height-increment * 7, //560
+      8: $height-increment * 8, // 640
+      9: $height-increment * 9, //720
+      10: $height-increment * 10, // 800
+      11: $height-increment * 11, //880,
+      12: $height-increment * 12 //960
+    )
+  ),
+  "rigig-wrapper-width": (
+    responsive: true,
+    property: width,
+    class: w,
+    values: (
+      25: 25%,
+      30: 30%,
+      33: 33.3333%,
+      50: 50%,
+      75: 75%,
+      auto: auto
+    )
+  ),
+  "rigig-wrapper-max-width": (
+    responsive: true,
+    property: max-width,
+    class: mw-text,
+    values: (
+      1: 15rem, // 240px
+      2: 20rem, // 320px
+      3: 25rem, // 400px
+      4: 32.5rem, // 520px
+      5: 50rem, // 800
+    )
+  ),
+  "rigig-wrapper-gray-colors": (
+    responsive: false,
+    property: color,
+    class: gray,
+    values: (
+      100: $gray-100,
+      200: $gray-200,
+      300: $gray-300,
+      400: $gray-400,
+      500: $gray-500,
+      600: $gray-600,
+      700: $gray-700,
+      800: $gray-800,
+      900: $gray-900
+    )
+  ),
+  "rigig-wrapper-bg-gray-colors": (
+    responsive: false,
+    property: background-color,
+    class: bg-gray,
+    values: (
+      100: $gray-100,
+      200: $gray-200,
+      300: $gray-300,
+      400: $gray-400,
+      500: $gray-500,
+      600: $gray-600,
+      700: $gray-700,
+      800: $gray-800,
+      900: $gray-900
+    )
+  ),
+  "rounded-top-left": (
+    responsive: true,
+    property: border-top-left-radius,
+    class: rounded-top-left,
+    values: (
+      null: $border-radius,
+      0: 0,
+      1: $border-radius-sm,
+      2: $border-radius,
+      3: $border-radius-lg,
+      circle: 50%,
+      pill: $border-radius-pill
+    )
+  ),
+  "rounded-top-right": (
+    responsive: true,
+    property: border-top-right-radius,
+    class: rounded-top-right,
+    values: (
+      null: $border-radius,
+      0: 0,
+      1: $border-radius-sm,
+      2: $border-radius,
+      3: $border-radius-lg,
+      circle: 50%,
+      pill: $border-radius-pill
+    )
+  ),
+  "rounded-bottom-left": (
+    responsive: true,
+    property: border-bottom-left-radius,
+    class: rounded-bottom-left,
+    values: (
+      null: $border-radius,
+      0: 0,
+      1: $border-radius-sm,
+      2: $border-radius,
+      3: $border-radius-lg,
+      circle: 50%,
+      pill: $border-radius-pill
+    )
+  ),
+  "rounded-bottom-right": (
+    responsive: true,
+    property: border-bottom-right-radius,
+    class: rounded-bottom-right,
+    values: (
+      null: $border-radius,
+      0: 0,
+      1: $border-radius-sm,
+      2: $border-radius,
+      3: $border-radius-lg,
+      circle: 50%,
+      pill: $border-radius-pill
+    )
+  ),
+));
+
+@each $number, $value in $ellipsis-numbers {
+  .ellipsis-#{$number} {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: #{$value};
+    -webkit-box-orient: vertical;
+  }
+}
+
+@each $number, $value in $icon-sizes {
+  .icon-wrap-#{$number} {
+    svg,
+    img {
+      width: #{$value}px;
+      height: #{$value}px;
+    }
+  }
+}
+
+@each $number, $value in $big-icon-sizes {
+  .big-icon-wrap-#{$number} {
+    width: #{$value};
+    height: #{$value};
+  }
+}
+
+@each $number, $value in $product-badge-height {
+  .product-badge-#{$number} {
+    height: #{$value};
+  }
+}
+
