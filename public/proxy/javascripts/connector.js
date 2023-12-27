@@ -1,4 +1,3 @@
-
 class EditorConnector {
 
   ws = null;
@@ -24,7 +23,7 @@ class EditorConnector {
         const msg = JSON.parse(e.data);
         console.log(msg)
         console.log('msg')
-        if (msg && msg.colorChange) {
+        if (msg) {
           this.flushCustomedBootstrapCss();
         }
       }
@@ -55,5 +54,5 @@ console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
 
 }
 
-// new EditorConnector("wss://nodejs-production-89c8.up.railway.app")
-new EditorConnector("ws://192.168.11.113:3000/")
+new EditorConnector("wss://nodejs-production-89c8.up.railway.app")
+// new EditorConnector("ws://192.168.11.121:3000/")

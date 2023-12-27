@@ -1,9 +1,11 @@
 
 import { WebSocket } from "ws"
 import { compileBootstrap } from "./compileBootstrapService.js"
+import { httpsGetShopSiteContent } from "../../httpsGetShopSiteContent.js"
 
 import { fileURLToPath } from 'url'
 import path,{ dirname } from 'path'
+import express from "express"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -15,7 +17,8 @@ export const socketMessageHandler = (arg)=>{
   console.log('dataObj')
   const miniDistPath = path.resolve(__dirname, "../../public/proxy/stylesheets/bootstrap/bootstrap.mini.css");
   try {
-    compileBootstrap(miniDistPath, dataObj);
+    compileBootstrap(miniDistPath, dataObj)
+    const app = express()
   } catch (error) {
     console.log(error)
   }

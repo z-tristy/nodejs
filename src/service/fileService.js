@@ -15,7 +15,7 @@ export function handleBootstrapScss(baseMinPath, basePath) {
 function updateFiles (data) {
   // 删除 引用 bootstrap
   // const pattern = /^@import\s+"..\/..\/node_modules\/bootstrap\/scss.*?;\n/gm;
-  data = data.replaceAll('../../node_modules/bootstrap/scss/', '../../bootstrap/scss/')
+  data = data.replaceAll('../../node_modules/bootstrap/scss/', '../../bootstrap-scss/')
   // 删除 注释
   // const pattern2 = /^\/\/\s+.*?\n+/gm;
   // data = data.replace(pattern2, '')

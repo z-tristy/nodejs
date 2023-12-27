@@ -1,0 +1,27 @@
+
+@font-face {
+  font-family: "heading";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.shopify.com/s/files/1/0659/3930/8761/files/heading-medium.ttf");
+}
+@font-face {
+  font-family: "heading";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.shopify.com/s/files/1/0659/3930/8761/files/heading-bold.ttf");
+}
+@font-face {
+  font-family: "body";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.shopify.com/s/files/1/0659/3930/8761/files/body-medium.ttf");
+}
+
+:root {
+  --font-body-family: "body", sans-serif;
+  --font-heading-family: "heading", sans-serif;
+}
