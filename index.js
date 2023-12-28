@@ -11,6 +11,7 @@ import { WebSocketServer } from "ws"
 import { socketMessageHandler } from "./src/service/socketMessageHandler.js"
 import { handleBootstrapScss } from './src/service/fileService.js'
 import { httpsGetShopSiteContent } from './httpsGetShopSiteContent.js'
+import { getRoutes } from './Routes.js'
 
 const __filename = fileURLToPath(import.meta.url); // 将文件URL解码为路径字符串
 const __dirname = dirname(__filename); 
@@ -46,18 +47,19 @@ console.log('static')
 console.log(path.join(__dirname, 'public'))
 
 // 修改服务器的路由处理部分，使用 Express 的路由方法（如 app.get）来处理请求和响应：
-const roots = {
-  home: '/',
-  contact: '/pages/contact',
-  blogs: '/blogs/news',
-  article: '/blogs/news/article',
-}
-Object.values(roots).map(root => {
-  app.get(root, (req, res) => {
-    const shopSite = `https://iplayground.myshopify.com${root}`
+const routes = getRoutes()
+Object.values(routes).map(route => {
+  app.get(route, (req, res) => {
+    const shopSite = `https://iplayground.myshopify.com${route}`
     httpsGetShopSiteContent(shopSite, res)
   })
 })
+
+// 监听路由切换, 但是下面的代码打开之后页面会崩掉
+// app.use((req) => {
+  // console.log('Route changed to: ' + req.url);
+  // next();
+// });
 
 // window is not defined
 // const urlParams = new URLSearchParams(window.location.search)

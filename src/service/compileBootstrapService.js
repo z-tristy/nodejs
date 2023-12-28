@@ -2,7 +2,6 @@
 import * as sass from 'sass'
 import CleanCSS from "clean-css"
 import { writeFileSync } from "fs"
-import express from "express"
 
 import { fileURLToPath } from 'url'
 import path,{ dirname } from 'path'

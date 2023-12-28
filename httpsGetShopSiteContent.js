@@ -3,12 +3,33 @@ import path,{ dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { writeFileSync, readFileSync } from "fs"
 
+const clearCode = htmlInit => {
+  let html = htmlInit
+
+  let regex = /<script.*?assets\/customers-v1-global.*?<\/script>/gi;
+  html = html.replace(regex, "")
+
+  regex = /<script.*?checkouts\/internal\/preloads.*?<\/script>/gi;
+  html = html.replace(regex, "")
+
+  regex = /<script class=\"analytics[\s\S]*?<\/script>/gi;
+  html = html.replace(regex, "")
+
+  regex = /<script class=\"boomerang[\s\S]*?<\/script>/gi;
+  html = html.replace(regex, "")
+
+  regex = /<script id="web-pixels-manager-setup">[\s\S]*?"\/wpm"[\s\S]*?<\/script>/gi;
+  html = html.replace(regex, "")
+
+  regex = /<script>\(function\(\)[\s\S]*?<\/script>/gi;
+  html = html.replace(regex, "")
+
+  return html
+}
 
 export const httpsGetShopSiteContent = (shopSite, res)=>{
   const __filename = fileURLToPath(import.meta.url); // 将文件URL解码为路径字符串
   const __dirname = dirname(__filename); 
-console.log(__dirname)
-console.log('__dirname')
   https.get(shopSite, {
     headers: {
       "content-type": "text/html, application/javascript",
@@ -27,15 +48,14 @@ console.log('__dirname')
       const proxyConnectorJs = path.resolve(__dirname, "./public/proxy/javascripts/connector.js")
       const proxyFontCss = path.resolve(__dirname, "./public/proxy/stylesheets/font.css")
 
-      console.log('proxyHtmlPath')
-      console.log(proxyHtmlPath)
-      console.log('proxyConnectorJs')
-      console.log(proxyConnectorJs)
-
       let connectorJs = readFileSync(proxyConnectorJs).toString()
       let fontCss = readFileSync(proxyFontCss).toString()
 
-      const htmlInit = data.join("")
+      let htmlInit = data.join("")
+
+      // 排除 htmlInit 中 不需要的代码
+      htmlInit = clearCode(htmlInit)
+
       const _html = htmlInit.split("</head>")
 
       const scriptStr = `
