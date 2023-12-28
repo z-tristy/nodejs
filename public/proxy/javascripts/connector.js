@@ -54,5 +54,8 @@ console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
 
 }
 
-new EditorConnector("wss://nodejs-production-89c8.up.railway.app")
-// new EditorConnector("ws://192.168.11.121:3000/")
+if (window.location.href.indexOf("nodejs-production-89c8") > -1) {
+  new EditorConnector("wss://nodejs-production-89c8.up.railway.app")
+} else {
+  new EditorConnector("ws://192.168.11.121:3000/")
+}
