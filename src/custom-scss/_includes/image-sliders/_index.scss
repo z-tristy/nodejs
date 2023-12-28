@@ -4,7 +4,8 @@
 @import '../../styles/slider-functions';
 
 .image-sliders {
-  @import '../../../node_modules/swiper/swiper';
+  // @import '../../../node_modules/swiper/swiper';
+  @import '../../../swiper/swiper.scss';
   $image-slider-transition-duration: .3s;
   $image-slider-transition-timing-function: ease;
   .not-initialized {

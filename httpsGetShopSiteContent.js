@@ -2,6 +2,7 @@ import https from "https"
 import path,{ dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { writeFileSync, readFileSync } from "fs"
+// import { initCompileBootstrap } from "./src/service/compileBootstrapService"
 
 const clearCode = htmlInit => {
   let html = htmlInit
@@ -23,6 +24,9 @@ const clearCode = htmlInit => {
 
   regex = /<script>\(function\(\)[\s\S]*?<\/script>/gi;
   html = html.replace(regex, "")
+
+  // regex = /<link href="\/\/iplayground.myshopify.com[\s\S]*?milestone.min.css[\s\S]*?\/>/gi;
+  // html = html.replace('<link href="//iplayground.myshopify.com/cdn/shop/t/6/assets/milestone.min.css?v=131223138466315144061701938322" rel="stylesheet" type="text/css" media="all" />', "")
 
   return html
 }

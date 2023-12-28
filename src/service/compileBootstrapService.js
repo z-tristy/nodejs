@@ -49,4 +49,28 @@ console.log(cssFilePath)
 
 }
 
+export function initCompileBootstrap() {
+  const startStamp = new Date().getTime();
+  const miniDistPath = path.resolve(__dirname, "../../public/proxy/stylesheets/bootstrap/bootstrap.mini.css");
+console.log(miniDistPath)
+  
+  const bootstrapSourceCodePath = path.resolve(__dirname, "../custom-scss/styles/base.min.scss");
+  console.log('sass.compile')
+  console.log(bootstrapSourceCodePath)
+  const rlt = sass.compile(bootstrapSourceCodePath);
+  const compiledStamp = new Date().getTime();
+  console.log(`--------------------------`)
+  console.log(`Sass compiler cost  :${compiledStamp - startStamp} ms`)
+
+  const { styles: minicss } = new CleanCSS().minify(rlt.css)
+  // const minicss = new CleanCSS().minify(rlt.css)
+  // return minicss
+  writeFileSync(miniDistPath, minicss);
+
+  const rendStamp = new Date().getTime();
+  console.log(`Render cost total   :${ rendStamp - compiledStamp } ms`)
+  console.log(`Total cost          :${ rendStamp - startStamp } ms`)
+
+}
+
 
