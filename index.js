@@ -1,8 +1,7 @@
 import http from "http"
 import https from "https"
-import fs from "fs"
 import express from "express"
-import { cpSync } from "fs"
+import { cpSync, writeFileSync } from "fs"
 const PORT = 3000
 
 import { fileURLToPath } from 'url'
@@ -13,17 +12,20 @@ import { handleBootstrapScss } from './src/service/fileService.js'
 import { httpsGetShopSiteContent } from './httpsGetShopSiteContent.js'
 import { getRoutes } from './Routes.js'
 
+import { initCompileBootstrap } from './src/service/compileBootstrapService.js'
+
 const __filename = fileURLToPath(import.meta.url); // 将文件URL解码为路径字符串
 const __dirname = dirname(__filename); 
 
-// const deleteBootstrapCssPath = path.resolve(__dirname, "./public/proxy/stylesheets/bootstrap/bootstrap.mini.css");
-// fs.unlink(deleteBootstrapCssPath, (err) => {
-//   if (err) {
-//     console.error(err);
-//     return;
-//   }
-//   console.log('文件已成功删除');
-// });
+// 清空 自定义数据
+const customVariablesPath = path.resolve(__dirname, "./src/custom-scss/styles/customize/_variables.scss");
+writeFileSync(customVariablesPath, '')
+
+const customUtilitiesPath = path.resolve(__dirname, "./src/custom-scss/styles/customize/_utilities.scss");
+writeFileSync(customUtilitiesPath, '')
+
+const customBootstrapCssPath = path.resolve(__dirname, "./public/proxy/stylesheets/bootstrap/bootstrap.mini.css");
+writeFileSync(customBootstrapCssPath, '')
 
 // copy bootstrap scss to workspace from node_modules
 // 抓取一次就好, 没必要每次都抓取
@@ -43,8 +45,10 @@ handleBootstrapScss(baseMinPath, basePath)
 const app = express()
 
 app.use(express.static(path.join(__dirname, 'public')))
-console.log('static')
-console.log(path.join(__dirname, 'public'))
+
+// 初始化 bootstrap.mini.css
+// public/proxy/stylesheets/bootstrap/bootstrap.mini.css
+initCompileBootstrap()
 
 // 修改服务器的路由处理部分，使用 Express 的路由方法（如 app.get）来处理请求和响应：
 const routes = getRoutes()

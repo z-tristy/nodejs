@@ -25,6 +25,8 @@ const clearCode = htmlInit => {
   regex = /<script>\(function\(\)[\s\S]*?<\/script>/gi;
   html = html.replace(regex, "")
 
+  // ^asd(?!.*base\.min).*?min.*?zxc$
+
   // regex = /<link href="\/\/iplayground.myshopify.com[\s\S]*?milestone.min.css[\s\S]*?\/>/gi;
   // html = html.replace('<link href="//iplayground.myshopify.com/cdn/shop/t/6/assets/milestone.min.css?v=131223138466315144061701938322" rel="stylesheet" type="text/css" media="all" />', "")
 

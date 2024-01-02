@@ -480,7 +480,8 @@ $grid-breakpoints: (
   md: 768px,  // 768px
   lg: 1152px, // 1152px
   xl: 1280px, // 1280px
-  xxl: 1440px // 1440px
+  xxl: 1440px, // 1440px
+  xxxl: 1921px // 1921px
 ) !default;
 // scss-docs-end grid-breakpoints
 
@@ -499,7 +500,8 @@ $container-max-widths: (
   md: 768px, // >=md
   lg: 960px, // >=lg
   xl: 1080px, // >=xl
-  xxl: 1264px // >=xxl
+  xxl: 1248px, // >=xxl
+  xxxl: 1448px
 ) !default;
 // scss-docs-end container-max-widths
 
@@ -522,14 +524,23 @@ $gutters: $spacers !default;
 $container-padding-x: $grid-gutter-width * .5 !default;
 $containers-padding-x: (
   xs: map-get($spacers, 3),
-  md: map-get($spacers, 4),
-  lg: map-get($spacers, 5)
+  sm: map-get($spacers, 3),
+  md: map-get($spacers, 4), // >=768px 24px
+  lg: map-get($spacers, 4), // >=1152px 24px
+  xl: map-get($spacers, 4),
+  xxl: map-get($spacers, 4),
+  xxxl: map-get($spacers, 4),
 ) !default;
 
 // columns gutter
 $columns-gutter: (
   xs: map-get($spacers, 3),
-  lg: map-get($spacers, 4)
+  sm: map-get($spacers, 3),
+  md: map-get($spacers, 4),
+  lg: map-get($spacers, 4),
+  xl: map-get($spacers, 4),
+  xxl: map-get($spacers, 4),
+  xxxl: map-get($spacers, 4)
 ) !default;
 
 // Components

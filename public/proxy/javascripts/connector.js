@@ -29,6 +29,10 @@ class EditorConnector {
       }
 
     })
+
+    // 默认就替换一次, 因为要解决 slides 这种单独会有样式文件的问题
+    // 目前的解决方案是将所有的这种类型的文件都合并到 base.min 里面大宝
+    this.flushCustomedBootstrapCss()
   }
 
   flushCustomedBootstrapCss() {
