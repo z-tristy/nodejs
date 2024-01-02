@@ -34,7 +34,7 @@ const MultirowSwiper = class {
     if ($swiper === null) return
     const slideSize = $swiper.querySelectorAll('.as-swiper-slide').length
     if (slideSize <= 1) return
-    console.log(slideSize)
+    // console.log(slideSize)
     // eslint-disable-next-line no-new
     new Swiper($swiper, {
       slidesPerView: 'auto',

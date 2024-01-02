@@ -1,28 +1,53 @@
 @use "sass:math";
+
 @import "../../styles/base";
-@import '../../styles/slider-mixins';
-@import '../../styles/slider-functions';
+@import "../../styles/slider-mixins";
+@import "../../styles/slider-functions";
 
 .image-tab {
-  @import '../../../node_modules/swiper/swiper';
+  @import "../../../node_modules/swiper/swiper";
   $image-slider-transition-duration: .3s;
   $image-slider-transition-timing-function: ease;
-  .not-initialized {
-    .main-swiper-wrapper {
-      @include initial-swiper-wrapper;
+  $image-slider-mob-width: math.div(327px, 375px) * 100vw;
+  $image-slider-desktop-gap: var(--#{$prefix}spacer-4);
+  $image-slider-mob-gap: var(--#{$prefix}spacer-3);
+
+  .main-swiper {
+    overflow: visible;
+
+    @each $breakpoint, $container-max-width in $container-max-widths {
+      @if $breakpoint == sm or $breakpoint == xs {
+        @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+          max-width: $image-slider-mob-width;
+        }
+      }
+
+      @else {
+        @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+          $max-width: $container-max-width - rem2px(map-get($containers-padding-x, $breakpoint) * 2);
+          --max-width: #{$max-width};
+
+          max-width: var(--max-width);
+        }
+      }
     }
   }
-  .swiper-initialized {
-    @include media-breakpoint-down(sm) {
-      padding: 0 #{get-value('xs', $containers-padding-x) - math.div(get-value('xs', $columns-gutter), 2)};
-    }
-  }
+
   .main-swiper-slide {
+    margin-right: $image-slider-desktop-gap;
     transition: opacity $image-slider-transition-duration $image-slider-transition-timing-function;
     will-change: opacity;
     opacity: .4;
-    @include render-siwper-slide-width;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    @include media-breakpoint-down(lg) {
+      margin-right: $image-slider-mob-gap;
+    }
   }
+
   .swiper-slide-active {
     opacity: 1;
   }
@@ -32,23 +57,28 @@
     @include media-breakpoint-down(sm) {
       padding-left: 0;
       padding-right: 0;
+
       .row {
         margin-left: 0;
         margin-right: 0;
+
         > * {
           padding-left: 0;
           padding-right: 0;
         }
       }
+
       .swiper-indicators {
-        padding-left: map-get($containers-padding-x, 'xs');
-        padding-right: map-get($containers-padding-x, 'xs');
+        padding-left: var(--#{$prefix}container-padding-x);
+        padding-right: var(--#{$prefix}container-padding-x);
       }
     }
   }
+
   .swiper-indicators {
     margin-top: map-get($negative-spacers, n2);
   }
+
   .swiper-indicator {
     position: relative;
     padding-bottom: map-get($spacers, 1);
@@ -56,20 +86,25 @@
     margin-top: map-get($spacers, 2);
     width: auto;
     white-space: nowrap;
+    cursor: pointer;
+
     &:last-child {
       margin-right: 0;
     }
-    cursor: pointer;
+
     .dark {
       color: $text-muted;
     }
+
     .light {
       color: $light;
     }
+
     &.swiper-indicator-active {
       .dark {
         color: $body-color;
       }
+
       &::after {
         content: "";
         position: absolute;
@@ -91,22 +126,33 @@
 
   // 文案
   .swiper-desc-container {
+    .swiper-desc-item {
+      &:not(:first-child) {
+        visibility: hidden;
+      }
+    }
+
     &.not-initialized {
       display: flex;
+
       .swiper-desc-item {
         flex: 1 0 100%;
       }
     }
+
     &:not(.not-initialized) {
       .swiper-desc-item {
+        visibility: visible;
         transition: opacity $image-slider-transition-duration $image-slider-transition-timing-function;
         opacity: 0;
+
         &.active {
           position: relative;
           width: 100%;
           opacity: 1;
           z-index: 1;
         }
+
         &:not(.active) {
           position: absolute;
           top: 0;

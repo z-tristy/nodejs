@@ -1,37 +1,48 @@
 import Swiper, { Scrollbar } from 'swiper'
-Swiper.use([Scrollbar])
 
 const ImageCards = class {
   $swiperContainer: Element
-  constructor($swiperContainer: Element) {
+  constructor ($swiperContainer: Element) {
     this.$swiperContainer = $swiperContainer
-
-    this.initSwiper($swiperContainer)
   }
 
-  initSwiper($swiperContainer: Element) {
-    const $swiper = $swiperContainer.querySelector('.as-swiper')
-    const slideSize = $swiper && $swiper.querySelectorAll('.as-swiper-slide').length || 0
-    if ($swiperContainer && $swiper && slideSize <= 1) return
-    new Swiper($swiper, {
-      slidesPerView: 'auto',
-      scrollbar: {
-        el: $swiper?.querySelector('.as-swiper-scrollbar'),
-        draggable: true,
-        hide: false,
-      },
-      on: {
-        init: function (swiper) {
-          swiper.el.classList.remove('not-initialized')
+  init (): void {
+    this.initSwiper(this.$swiperContainer)
+  }
+
+  initSwiper ($swiperContainer: Element): void {
+    const $swiper = $swiperContainer?.querySelector('.as-swiper')
+    const $scrollBar = $swiperContainer?.querySelector('.as-swiper-scrollbar')
+    const slideSize = $swiper?.querySelectorAll('.as-swiper-slide').length ?? 0
+    if (slideSize <= 1) return
+    if ($swiper instanceof HTMLElement) {
+      let scrollBarOptions = {}
+      if ($scrollBar instanceof HTMLElement) {
+        scrollBarOptions = {
+          modules: [Scrollbar],
+          scrollbar: {
+            el: $scrollBar,
+            draggable: true,
+            hide: false
+          }
         }
       }
-    })
+      ;(() => new Swiper($swiper, {
+        ...scrollBarOptions,
+        slidesPerView: 'auto',
+        on: {
+          init: function (swiper) {
+            swiper.el.classList.remove('not-initialized')
+          }
+        }
+      }))()
+    }
   }
 }
 
 const $swiperContainers = document.querySelectorAll('.as-image-cards-container')
-$swiperContainers && $swiperContainers.forEach(($swiperContainer) => {
-  new ImageCards($swiperContainer)
+$swiperContainers?.forEach(($swiperContainer) => {
+  new ImageCards($swiperContainer).init()
 })
 
 export default ImageCards

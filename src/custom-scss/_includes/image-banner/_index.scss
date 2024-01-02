@@ -1,13 +1,54 @@
+@use "sass:math";
+
 .image-with-text-overlay {
+  .adapt-to-image {
+    --padding-bottom: var(--desktop-img-ratio-percentage);
+
+    @include media-breakpoint-down(lg) {
+      --padding-bottom: var(--tablet-img-ratio-percentage);
+    }
+
+    @include media-breakpoint-down(md) {
+      --padding-bottom: var(--mobile-img-ratio-percentage);
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      padding-bottom: var(--padding-bottom);
+      margin-left: -1px;
+      width: 1px;
+    }
+  }
+
   .adapt-to-image.responsive-height {
     @include media-breakpoint-up(md) {
-      height: calc(var(--image-height) * 2 / 3);
+      // 桌面端为模块高度设置一个最小值，为图片高度的 2/3
+      min-height: var(--desktop-tablet-min-height);
+      // 注意！！若配置Tablet和桌面端图片，Tablet端尺寸要求：原图1151px宽，图片核心内容安全区域768px宽，导出为2倍图。
+      // 注意！！若只配置桌面端图片，尺寸要求：原图1920px宽，图片核心安全区域为768/(2/3)=1152px宽，导出为2倍图。
+      height: var(--tablet-image-height, calc(var(--image-height) * 8 / 15));
     }
+
+    // 屏宽处于临界点1152px时，图片宽度=1152/(1440/1920)px，图片高度=图片宽度/1920*var(--image-height)
+    @include media-breakpoint-up(lg) {
+      height: calc(var(--image-height) * 4 / 5);
+    }
+
+    // 屏宽处于临界点1280px时，图片宽度=1280/(1440/1920)px，图片高度=图片宽度/1920*var(--image-height)
     @include media-breakpoint-up(xl) {
-      height: calc(var(--image-height) * 3 / 4);
+      height: calc(var(--image-height) * 8 / 9);
     }
+
+    // 屏宽处于临界点1440px时，图片宽度=1440/(1440/1920)px，图片高度=图片宽度/1920*var(--image-height)
     @include media-breakpoint-up(xxl) {
       height: var(--image-height);
+    }
+
+    // 注意！！若配置Tablet和桌面端图片，桌面端尺寸要求：原图1920px宽，图片核心内容安全区域1440px宽，导出为2倍图。
+    // 屏宽处于临界点1920px时，图片宽度=2560px，图片核心区域宽度=1920px，那么设计稿中图片的核心安全区域=1920/2560*1920=1440px
+    @include media-breakpoint-up(xxxl) {
+      height: calc(var(--image-height) * 4 / 3);
     }
   }
 }

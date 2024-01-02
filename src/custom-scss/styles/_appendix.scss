@@ -2,7 +2,7 @@
 .container-topic {
   @include make-container;
 
-  max-width: add(1920px, $grid-gutter-width * 2);
+  max-width: $container-max-width;
 }
 
 .min-vh {
@@ -116,7 +116,7 @@
 }
 
 .mt-nsection {
-  // @extend .mt-n9;
+  @extend .mt-n9;
 }
 
 // checkbox报错样式
@@ -451,7 +451,7 @@ input[type=number] {
 }
 
 body {
-  max-width: 2560px;
+  max-width: $container-max-width;
   margin-left: auto;
   margin-right: auto;
 }

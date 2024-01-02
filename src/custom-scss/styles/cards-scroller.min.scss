@@ -1,0 +1,77 @@
+@use "sass:math";
+@import "../styles/base";
+@import './slider-mixins';
+@import './slider-functions';
+
+.cards-scroller {
+  .cards-scroller-container {
+    --indicator-position: 30%;
+    @import '../../node_modules/swiper/swiper';
+    .swiper-indicator {
+      .swiper-button-prev,
+      .swiper-button-next {
+        @include render-indicator;
+        position: absolute;
+        top: var(--indicator-position);
+        z-index: 1;
+        color: rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        opacity: 0.8;
+        &.swiper-button-disabled {
+          opacity: 0 !important;
+          cursor: default;
+        }
+        &:hover {
+          opacity: 1;
+        }
+        transform: translateY(-50%);
+      }
+      .swiper-button-prev {
+        left: 1.5rem;
+      }
+      .swiper-button-next {
+        right: 1.5rem;
+      }
+    }
+    .swiper-control-container {
+      @include media-breakpoint-down(md) {
+        padding-right: 0;
+        padding-left: 0;
+        .swiper {
+          overflow: visible;
+          margin: 0 0 0 1rem;
+        }
+      }
+    }
+    // 初始化轮播样式，计算轮播页宽度
+    @mixin generate-swiper-img-width() {
+      @for $index from 4 through 6 {
+        .swiper-slide-card-#{$index} {
+          .swiper-slide {
+            $max-width: get-value('xxl', $container-max-widths) - rem2px(get-value('xxl', $containers-padding-x) * 2);
+            width: math.div($max-width - rem2px(1rem) * ($index - 0.5), $index + 0.5);
+            @include media-breakpoint-down(xxl) {
+              $max-width: get-value('xl', $container-max-widths) - rem2px(get-value('xl', $containers-padding-x) * 2);
+              width: math.div($max-width - rem2px(1rem) * ($index - 0.5), $index + 0.5);
+            }
+            @include media-breakpoint-down(xl) {
+              $max-width: get-value('lg', $container-max-widths) - rem2px(get-value('lg', $containers-padding-x) * 2);
+              width: math.div($max-width - rem2px(1rem) * ($index - 0.5), $index + 0.5);
+            }
+            @include media-breakpoint-down(lg) {
+              $max-width: get-value('md', $container-max-widths) - rem2px(get-value('md', $containers-padding-x) * 2);
+              width: math.div($max-width - rem2px(1rem) * 2.5, 3.5);
+            }
+            @include media-breakpoint-down(md) {
+              width: calc(calc(100vw - 16px * 3.5 ) / 2.5);
+            }
+            margin-right: 1rem;
+          }
+        }
+      }
+    }
+
+    @include generate-swiper-img-width();
+  }
+}
+

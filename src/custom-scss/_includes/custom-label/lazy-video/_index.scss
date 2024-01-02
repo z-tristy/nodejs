@@ -1,0 +1,13 @@
+.lazy-video {
+  &::before {
+    content: "";
+    display: block;
+    padding-bottom: var(--pc-padding-bottom);
+    margin-left: -1px;
+    width: 1px;
+
+    @include media-breakpoint-down(md) {
+      padding-bottom: var(--mob-padding-bottom);
+    }
+  }
+}

@@ -1,126 +1,95 @@
 @use "sass:math";
+
 @import "../../styles/base";
-@import '../../styles/slider-functions';
 
 .image-cards {
-  @import '../../../node_modules/swiper/swiper';
-  @import '../../../node_modules/swiper/modules/scrollbar/scrollbar.scss';
-  @mixin generate-swiper-img-width() {
-    @for $index from 3 through 5 {
-      .swiper-slide-card-#{$index} {
-        .img-wrapper {
-          $max-width: get-value('xxl', $container-max-widths) - rem2px(get-value('xxl', $containers-padding-x) * 2);
-          width: math.div($max-width + rem2px(get-value('xxl', $columns-gutter)), $index) - rem2px(get-value('xxl', $columns-gutter));
-          @include media-breakpoint-down(xxl) {
-            $max-width: get-value('xl', $container-max-widths) - rem2px(get-value('xl', $containers-padding-x) * 2);
-            width: math.div($max-width + rem2px(get-value('xl', $columns-gutter)), $index) - rem2px(get-value('xl', $columns-gutter));
-          }
-          @include media-breakpoint-down(xl) {
-            $max-width: get-value('lg', $container-max-widths) - rem2px(get-value('lg', $containers-padding-x) * 2);
-            width: math.div($max-width + rem2px(get-value('lg', $columns-gutter)), $index) - rem2px(get-value('lg', $columns-gutter));
-          }
-        }
-      }
-    }
-  }
-
-  .image-cards-container {
-    @include media-breakpoint-down(lg) {
-      padding-left: 0;
-      padding-right: 0;
-    }
-  }
-
-  // 处理PC端图片占位
-  @include generate-swiper-img-width();
+  @import "../../../node_modules/swiper/swiper";
+  @import "../../../node_modules/swiper/modules/scrollbar/scrollbar.scss";
+  $image-slider-tablet-width: var(--image-slider-tablet-width, #{px2rem(220px)});
+  $image-slider-desktop-gap: var(--#{$prefix}spacer-4);
+  $image-slider-mob-gap: var(--#{$prefix}spacer-3);
+  $image-slider-mob-width: math.div(282px, 375px) * 100vw;
 
   .swiper-wrapper {
     transform: translateZ(0);
     backface-visibility: hidden;
   }
 
+  .swiper {
+    &.swiper-default {
+      overflow: hidden;
+
+      @include media-breakpoint-down(md) {
+        overflow: visible;
+      }
+
+      @each $breakpoint, $container-max-width in $container-max-widths {
+        @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+          @if $breakpoint == md {
+            // 当屏宽>=768px，屏宽<=1151px时，每个卡片宽度为$image-slider-tablet-width
+            max-width: calc($image-slider-tablet-width * 3 + $image-slider-desktop-gap * 2);
+          }
+
+          @else if $breakpoint == sm or $breakpoint == xs {
+            // 容器全宽
+          }
+
+          @else {
+            $max-width: $container-max-width - rem2px(map-get($containers-padding-x, $breakpoint) * 2);
+            --max-width: #{$max-width};
+
+            max-width: var(--max-width);
+          }
+        }
+      }
+    }
+
+    &.swiper-rightwards {
+      overflow: visible;
+
+      @each $breakpoint, $container-max-width in $container-max-widths {
+        @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+          @if $breakpoint == sm or $breakpoint == xs {
+            // 容器全宽
+          }
+
+          @else {
+            $max-width: $container-max-width - rem2px(map-get($containers-padding-x, $breakpoint) * 2);
+            --max-width: #{$max-width};
+
+            margin-left: calc((100% - var(--max-width)) / 2);
+          }
+        }
+      }
+    }
+
+    &.swiper-fullpage {
+      overflow: visible;
+
+      @each $breakpoint, $container-max-width in $container-max-widths {
+        @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+          $max-width: $container-max-width - rem2px(map-get($containers-padding-x, $breakpoint) * 2);
+          --max-width: #{$max-width};
+        }
+      }
+    }
+  }
+
   .swiper-slide {
-    width: auto;
-    margin-right: get-value('xxl', $columns-gutter);
+    width: calc((var(--max-width) - $image-slider-desktop-gap * var(--gap-column-size)) / var(--image-per-row));
+    margin-right: $image-slider-desktop-gap;
+
     &:last-child {
       margin-right: 0;
     }
-    @include media-breakpoint-down(xxl) {
-      margin-right: get-value('xl', $columns-gutter);
-    }
-    @include media-breakpoint-down(xl) {
-      margin-right: get-value('lg', $columns-gutter);
-    }
+
     @include media-breakpoint-down(lg) {
-      margin-right: get-value('md', $columns-gutter);
+      width: $image-slider-tablet-width;
     }
+
     @include media-breakpoint-down(md) {
-      margin-right: get-value('sm', $columns-gutter);
-    }
-    @include media-breakpoint-down(sm) {
-      margin-right: get-value('xs', $columns-gutter);
-    }
-    // 处理iPad和Smartphones下图片占位
-    .img-wrapper {
-      // iPad下
-      @include media-breakpoint-down(lg) {
-        $max-width: get-value('md', $container-max-widths) - rem2px(get-value('md', $containers-padding-x) * 2);
-        width: math.div($max-width + rem2px(get-value('md', $columns-gutter)), 3) - rem2px(get-value('md', $columns-gutter));
-      }
-      // Smartphones
-      @include media-breakpoint-down(md) {
-        $max-width: get-value('sm', $container-max-widths) - rem2px(get-value('sm', $containers-padding-x) * 2);
-        width: math.div($max-width + rem2px(get-value('sm', $columns-gutter)), 3) - rem2px(get-value('sm', $columns-gutter));
-      }
-      @include media-breakpoint-down(sm) {
-        $max-width: get-value('xs', $container-max-widths) - rem2px(get-value('xs', $containers-padding-x) * 2);
-        width: math.div($max-width + rem2px(get-value('xs', $columns-gutter)), 2) - rem2px(get-value('xs', $columns-gutter));
-      }
-    }
-  }
-  
-  .swiper {
-    margin: 0 auto;
-    $max-width: get-value('xxl', $container-max-widths) - rem2px(get-value('xxl', $containers-padding-x) * 2);
-    max-width: $max-width;
-    @include media-breakpoint-down(xxl) {
-      $max-width: get-value('xl', $container-max-widths) - rem2px(get-value('xl', $containers-padding-x) * 2);
-      max-width: $max-width;
-    }
-    @include media-breakpoint-down(xl) {
-      $max-width: get-value('lg', $container-max-widths) - rem2px(get-value('lg', $containers-padding-x) * 2);
-      max-width: $max-width;
-    }
-    @include media-breakpoint-down(lg) {
-      $max-width: get-value('md', $container-max-widths) - rem2px(get-value('md', $containers-padding-x) * 2);
-      max-width: $max-width;
-    }
-    $half_max_width_remove_padding: math.div(get-value('sm', $container-max-widths) - rem2px(get-value('sm', $containers-padding-x) * 2), 2);
-    @include media-breakpoint-down(md) {
-      margin: 0 calc(50% - #{$half_max_width_remove_padding});
-    }
-    $lower-max-witdth-breakpoint: get-value('sm', $container-max-widths) - 1px;
-    @include media-breakpoint-down(md, (md: $lower-max-witdth-breakpoint)) {
-      margin: 0 get-value('sm', $containers-padding-x);
-    }
-    @include media-breakpoint-down(sm) {
-      margin: 0 get-value('xs', $containers-padding-x);
-    }
-  }
-  .swiper-default {
-    overflow: hidden;
-    @include media-breakpoint-down(lg) {
-      overflow: visible;
-    }
-  }
-  .swiper-rightwards {
-    overflow: visible;
-  }
-  .swiper-fullpage {
-    overflow: visible;
-    @include media-breakpoint-up(lg) {
-      max-width: 100%;
-      margin: 0 math.div(get-value('lg', $columns-gutter), 2);
+      margin-right: $image-slider-mob-gap;
+      width: $image-slider-mob-width;
     }
   }
 
@@ -128,6 +97,7 @@
   $scrollbar-radius: math.div($scrollbar-height, 2);
   //$scrollbar-radius-sm要小1px
   $scrollbar-radius-sm: math.div($scrollbar-height, 3);
+
   .swiper-scrollbar {
     bottom: 0 !important;
     left: 0 !important;
@@ -135,20 +105,24 @@
     height: $scrollbar-height * 4 !important;
     border-radius: $scrollbar-radius;
     background-color: transparent;
+
     @include media-breakpoint-down(lg) {
       width: px2rem(536px) !important;
     }
+
     @include media-breakpoint-down(md) {
       max-width: px2rem(342px);
-      width: calc(100% - #{get-value('sm', $containers-padding-x)}) !important;
+      width: calc(100% - #{map-get($containers-padding-x, "sm")}) !important;
     }
+
     @include media-breakpoint-down(sm) {
       max-width: none;
       width: 100% !important;
     }
+
     &::before {
-      content: '';
-      background-color: #e6e6e6;
+      content: "";
+      background-color: $gray-300;
       height: $scrollbar-height;
       width: 100%;
       display: block;
@@ -159,10 +133,11 @@
       border-radius: $scrollbar-radius;
     }
   }
+
   .swiper-scrollbar-drag {
     height: $scrollbar-height;
     top: $scrollbar-height * 1.5;
     background-color: $gray-700;
-    border-radius:  $scrollbar-radius-sm;
+    border-radius: $scrollbar-radius-sm;
   }
 }

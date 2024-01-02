@@ -3,7 +3,7 @@
   $breakpoint-names: (xs sm md lg xl xxl);
   $map-keys: map-keys($map);
   $n: index($map-keys, $name);
-  
+
   @while not $n {
     $index: index($breakpoint-names, $name);
     $name: nth($breakpoint-names, $index - 1);
@@ -11,21 +11,4 @@
   }
 
   @return map-get($map, $name);
-}
-
-@function px2rem($px) {
-  @return math.div($px, 16px) * 1rem;
-}
-
-@function rem2px($rem) {
-  @return math.div($rem, 1rem) * 16px;
-}
-
-// 计算在指定断点下swiper-slide宽度
-@function swiper-slide-width($breakpoint, $columns) {
-  $container-max-width: px2rem(get-value($breakpoint, $container-max-widths));
-  $padding-x: get-value($breakpoint, $containers-padding-x);
-  $gutter: get-value($breakpoint, $columns-gutter) * .5;
-  $width: math.div($container-max-width - $padding-x * 2 + $gutter * 2, $grid-columns) * $columns - $gutter * 2;
-  @return $width;
 }
